@@ -44,7 +44,7 @@ const Product = () => {
   return (
     <>
       <h2 className="head-text">
-        Explore <span>Our</span> Catalogue
+        Explore <span>Our</span> Collections
       </h2>
 
       <div className="app__work-filter">
@@ -66,7 +66,7 @@ const Product = () => {
         className="app__work-portfolio"
       >
         {filterProduct.map((prod, index) => (
-          <a href={prod.whatsappLink} target="_blank" rel="noreferrer"> 
+          <a href={prod.whatsappLink}> 
             <motion.div
                 whileInView={{ opacity: 1 }}
                 whileHover={{ scale: 1.05 }}
@@ -114,7 +114,7 @@ const Product = () => {
 
       <div>
         <h2 className="head-text mt-20 text-2xl lg:text-[2rem]">
-          For <span>Complete</span> Collections, <span>visit:</span> 
+          For <span>Complete</span> Catalogue, <span>visit:</span> 
         </h2>
         <div>
           <a href="https://wa.me/c/918383004856" target="_blank" rel="noreferrer"> <button className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl

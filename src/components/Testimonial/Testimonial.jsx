@@ -96,12 +96,10 @@ const Testimonial = () => {
       )}
       <div>
         <button
-          className="text-white text-center text-xl lg:text-3xl flex justify-center 
-              items-center mx-auto bg-[var(--secondary-color)] 
-              px-7 py-5 mt-4 mb-8 rounded-full p-text hover:scale-105"
+          className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-2xl
+          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800"
         >
-          <a href="/" target="_blank" rel="noreferrer">
-            {" "}
+          <a href="/">
             Write a Testimonial
           </a>
         </button>
