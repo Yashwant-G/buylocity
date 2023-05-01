@@ -1,0 +1,19 @@
+.app__about {
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 6rem;
+}
+
+.about_head{
+    margin-top: 2rem;
+    color: var(--secondary-color);
+}
+
+.about_text{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    color: var(--gray-color);
+    text-align: justify;
+}

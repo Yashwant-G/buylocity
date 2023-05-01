@@ -1,0 +1,18 @@
+.slogan_div {
+  margin: 5rem auto;
+  width: 80%;
+  @media screen and (max-width: 650px) {
+    margin-top: -2rem;
+  }
+}
+.h-text {
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--black-color);
+  text-transform: capitalize;
+
+  span {
+    color: var(--secondary-color);
+  }
+}
