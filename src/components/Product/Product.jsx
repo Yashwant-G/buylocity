@@ -117,8 +117,8 @@ const Product = () => {
           For <span>Complete</span> Collections, <span>visit:</span> 
         </h2>
         <div>
-          <button className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
-          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800">Whatsapp Store <AiOutlineWhatsApp/></button>
+          <a href="https://wa.link/f2n8dc" target="_blank" rel="noreferrer"> <button className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
+          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800">Whatsapp Store <AiOutlineWhatsApp/></button></a>
         </div>
       </div>
     </>
