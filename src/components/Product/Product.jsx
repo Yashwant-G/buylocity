@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { AiFillEye, AiFillGithub } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineWhatsApp } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 // import { AppWrap, MotionWrap } from "../../wrapper";
@@ -74,36 +74,53 @@ const Product = () => {
                 className="app__work-portfolio"
             >
                 <div className="app__work-item app__flex" key={index}>
-                <div className="app__work-img app__flex">
-                    <img src={urlFor(prod.productImage)} alt={prod.name} loading="lazy"/>
+                  <div className="app__work-img app__flex">
+                      <img src={urlFor(prod.productImage)} alt={prod.name} loading="lazy"/>
 
-                    <motion.div
-                    whileHover={{ opacity: [0, 1] }}
-                    transition={{
-                        duration: 0.25,
-                        ease: "easeInOut",
-                        staggerChildren: 0.5,
-                    }}
-                    className="app__work-hover app__flex"
-                    >
-                    
-                    </motion.div>
-                </div>
+                      <motion.div
+                      whileHover={{ opacity: [0, 1] }}
+                      transition={{
+                          duration: 0.25,
+                          ease: "easeInOut",
+                          staggerChildren: 0.5,
+                      }}
+                      className="app__work-hover app__flex"
+                      >
+                      
+                      </motion.div>
+                  </div>
 
-                <div className="app__work-content app__flex">
-                    <h4 className="bold-text text-black">{prod.name}</h4>
-                    <p className="p-text text-[#6b7688]" style={{ marginTop: 10 }}>
-                    {prod.description}
-                    </p>
-                </div>
-                <div className="app__work-content app__flex">
-                    <h4 className="bold-text text-black">Rs. {prod.price}</h4>
-                </div>
+                  <div className="app__work-content app__flex">
+                      <h4 className="bold-text text-black">{prod.name}</h4>
+                      <p className="p-text text-[#6b7688]" style={{ marginTop: 10 }}>
+                          {prod.description}
+                      </p>
+                  </div>
+                  <div className="app__work-content app__flex flex mt-[-15px] ">
+                      <h4 className="bold-text text-black flex gap-1">Rs.{prod.price}  
+                        <span className="line-through text-gray-500">{prod.mrp}</span> 
+                        <span className="text-green-500">
+                        {Math.round((prod.price/prod.mrp)*100)}% OFF</span>
+                      </h4>
+                  </div>
+                  <div>
+                    <button className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 py-1 rounded-lg mt-1">Add <AiOutlinePlus/></button>
+                  </div>
                 </div>
             </motion.div>
           </a>
         ))}
       </motion.div>
+
+      <div>
+        <h2 className="head-text mt-20 text-2xl lg:text-[2rem]">
+          For <span>Complete</span> Collections, <span>visit:</span> 
+        </h2>
+        <div>
+          <button className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
+          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800">Whatsapp Store <AiOutlineWhatsApp/></button>
+        </div>
+      </div>
     </>
   );
 };
