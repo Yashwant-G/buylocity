@@ -16,13 +16,13 @@ const Product = () => {
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
   useEffect(() => {
-    const query1 = '*[_type == "categories"] | order(_updatedAt desc)';
+    const query1 = '*[_type == "categories"] | order(title asc)';
 
     client.fetch(query1).then((data) => {
       setCategories(data);
     });
 
-    const query2 = '*[_type == "product"]';
+    const query2 = '*[_type == "product"] | order(_updatedAt desc)';
 
     client.fetch(query2).then((data) => {
       setProduct(data);

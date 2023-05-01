@@ -10,7 +10,7 @@ const Slider = () => {
   let [count, setCount] = useState(0);
 
   useEffect(() => {
-    const query = '*[_type == "slider"]';
+    const query = '*[_type == "slider"] | order(_updatedAt desc)';
 
     client.fetch(query).then((data) => {
       setSliderData(data);
