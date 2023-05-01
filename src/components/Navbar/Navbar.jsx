@@ -4,7 +4,6 @@ import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import {MdDarkMode,MdOutlineLightMode} from 'react-icons/md'
 import { motion } from 'framer-motion';
 
-// import { images } from '../../constants';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -59,7 +58,7 @@ const Navbar = () => {
 
   return (
     <nav className="app__navbar">
-      <div className="app__navbar-logo">
+      <div className="app__navbar-logo mr-3 lg:mr-0">
         <a href='/'><img src={logo.img} alt="logo"  /></a>
       </div>
       <ul className="app__navbar-links">

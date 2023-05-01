@@ -66,7 +66,7 @@ const Product = () => {
         className="app__work-portfolio"
       >
         {filterProduct.map((prod, index) => (
-          <a href={prod.whatsappLink}> 
+          <a href={prod.whatsappLink} key={index}> 
             <motion.div
                 whileInView={{ opacity: 1 }}
                 whileHover={{ scale: 1.05 }}
