@@ -29,7 +29,7 @@ const Contact = () => {
             <a href="https://instagram.com/buylocity?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer"> <FiInstagram   className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
             <a href="/" target="_blank" rel="noreferrer"> <FiFacebook className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
             <a href="/" target="_blank" rel="noreferrer"> <FiTwitter className="hover:scale-110"  style={{color:'var(--black-color)'}}/> </a>
-            <a href="https://wa.link/f2n8dc" target="_blank" rel="noreferrer"> <SiWhatsapp className="hover:scale-110" style={{color:'var(--black-color)'}}/> </a>
+            <a href="https://wa.me/c/918383004856" target="_blank" rel="noreferrer"> <SiWhatsapp className="hover:scale-110" style={{color:'var(--black-color)'}}/> </a>
             <a href="/" target="_blank" rel="noreferrer"> <FiLinkedin className="hover:scale-110" style={{color:'var(--black-color)'}}/> </a>
           </div>
         </div>
