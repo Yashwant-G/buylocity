@@ -17,7 +17,7 @@ const Serving = () => {
 
     const height = width < 640 ? 480 : 650;
   return (
-    <div className='app__flex mt-32 flex-col gap-8'>
+    <div className='app__flex mt-32 flex-col gap-8 w-full overflow-hidden'>
         <h2 className="head-text">
             Currently <span>Serving</span>
         </h2>
@@ -26,6 +26,8 @@ const Serving = () => {
             src="https://www.google.com/maps/d/u/0/embed?mid=19kkeX5tHnoNqDZFVB1i3MmxQ8hIIlok&ehbc=2E312F"
             width={width/1.2}
             height={height}
+            frameborder="0"
+            style={{border: "2px solid black", marginTop: "-150px"}}
           ></iframe>
     </div>
   )
