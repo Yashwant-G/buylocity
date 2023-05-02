@@ -143,7 +143,7 @@ const Product = () => {
           </a>
         ))}
       </motion.div>
-      <div className="h-[0.5px] w-full bg-black"></div>
+      <div className="h-[0.5px] w-full bg-[var(--black-color)]"></div>
       <div className="flex flex-wrap justify-between items-baseline mt-8 lg:w-5/6">
         <img
           src={one}
@@ -165,7 +165,7 @@ const Product = () => {
           className={`invert w-32 lg:w-44 ${light ? "invert-0" : "invert"}`}
         />
       </div>
-      <div className="h-[1px] w-full bg-black mt-6"></div>
+      <div className="h-[1px] w-full bg-[var(--black-color)] mt-6"></div>
 
       <div>
         <h2 className="head-text mt-20 text-2xl lg:text-[2rem]">
