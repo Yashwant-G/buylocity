@@ -23,12 +23,12 @@
   
   img {
     object-fit: cover;
-    width: 90px;
-    height: 60px;
+    // width: 90px;
+    // height: 60px;
 
     @media screen and (min-width: 2000px) {
-      width: 180px;
-      height: 40px;
+      // width: 180px;
+      // height: 40px;
     }
   }
 }

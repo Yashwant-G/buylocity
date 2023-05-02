@@ -55,7 +55,7 @@ const Testimonial = () => {
               </div>
             </div>
             <div className="app__testimonial-content">
-              <p className="p-text">{testimonials[currentIndex].testimonial}</p>
+              <p className="p-text">&quot;{testimonials[currentIndex].testimonial}&quot;</p>
               <div>
                 <h4 className="bold-text">{testimonials[currentIndex].name}</h4>
                 <h5 className="p-text">

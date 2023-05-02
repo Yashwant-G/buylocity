@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav className="app__navbar">
       <div className="app__navbar-logo mr-3 lg:mr-0">
-        <a href='/'><img src={logo.img} alt="logo"  /></a>
+        <a href='/'><img src={logo.img} alt="logo" height={logo.height} width={logo.width} /></a>
       </div>
       <ul className="app__navbar-links">
         {navList.map((item,index) => (
