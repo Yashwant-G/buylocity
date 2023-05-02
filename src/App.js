@@ -6,6 +6,7 @@ import Product from "./components/Product/Product";
 import About from "./components/About/About";
 import Testimonial from "./components/Testimonial/Testimonial";
 import Contact from "./components/Contact/Contact";
+import Serving from "./components/Serving/Serving";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Slider/>
       <Slogan/>
       <Product/>
+      <Serving/>
       <About/>
       <Testimonial/>
       <Contact/>

@@ -143,7 +143,7 @@ const Product = () => {
           </a>
         ))}
       </motion.div>
-      <div className="flex justify-between items-baseline mt-8 lg:w-5/6">
+      <div className="flex flex-wrap justify-between items-baseline mt-8 lg:w-5/6">
         <img
           src={one}
           alt=""
