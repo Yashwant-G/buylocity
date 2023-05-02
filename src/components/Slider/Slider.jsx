@@ -34,7 +34,7 @@ const Slider = () => {
   let direction1
   const scroll1 = () => {
     const { current } = scrollRef;
-    console.log(count);
+    // console.log(count);
     if(count===sz) direction1="left";
     if(count===0) direction1="right";
     

@@ -99,20 +99,18 @@ const Testimonial = () => {
           className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-2xl
           px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800"
         >
-          <a href="/">
-            Write a Testimonial
-          </a>
+          <a href="https://forms.gle/LMKQWXXYP9NKnQ8F8" target="_blank" rel="noreferrer">Write a Testimonial</a>
         </button>
       </div>
 
       <div>
-        <h1 className="text-[var(--black-color)] text-center text-3xl my-[5rem] mt-28 lg:text-6xl">
+        <h1 className="text-[var(--black-color)] text-center text-3xl my-[5rem] mt-28 lg:text-6xl coming-soon">
           <motion.div
             whileInView={{ x: [-100, 0], opacity: [0, 1], scale: [0, 1] }}
             transition={{ duration: 2 }}
             className=""
           >
-            <i>App Coming Soon....</i>
+            App Coming Soon....
           </motion.div>
         </h1>
       </div>

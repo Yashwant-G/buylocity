@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { client,urlFor } from '../../client';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import {MdDarkMode,MdOutlineLightMode} from 'react-icons/md'
 import { motion } from 'framer-motion';
+import { ToggleContext } from '../../context/context';
 
 import './Navbar.scss';
 
@@ -13,27 +14,9 @@ const Navbar = () => {
     height: "",
     width: "",
   });
-  const [light,setLight]=useState(true);
+  const {light, modeFunction}=useContext(ToggleContext)
   const [navList,setNavlist]=useState([]);
 
-  function handleMode(){
-    if(light){
-      setLight(false);
-      document.documentElement.style.setProperty('--primary-color', '#1e1e1e');
-      document.documentElement.style.setProperty('--secondary-color', '#6b75e0');
-      document.documentElement.style.setProperty('--black-color', '#ffffff');
-      document.documentElement.style.setProperty('--gray-color', '#a5b1c5');
-      document.documentElement.style.setProperty('--white-color', '#030303');
-    }else{
-      setLight(true);
-      document.documentElement.style.setProperty('--primary-color', '#edf2f8');
-      document.documentElement.style.setProperty('--secondary-color', '#1d2687');
-      document.documentElement.style.setProperty('--black-color', '#030303');
-      document.documentElement.style.setProperty('--gray-color', '#6b7688');
-      document.documentElement.style.setProperty('--white-color', '#ffffff');
-      
-    }
-  }
 
   useEffect(()=>{
     client
@@ -65,15 +48,15 @@ const Navbar = () => {
         {navList.map((item,index) => (
           <li className="app__flex p-text" key={index}>
             <div />
-            <a href={`${item.link}`}>{item.title}</a>
+            <a href={`${item.link}` } >{item.title}</a>
           </li>
         ))}
       </ul>
       <div className='app__navbar-mode'>
          {light ? 
-            <MdDarkMode className='hover:scale-105' style={{fontSize: '35px'}} onClick={()=>handleMode()} /> 
+            <MdDarkMode className='hover:scale-105' style={{fontSize: '35px'}} onClick={()=>modeFunction()} /> 
             : 
-            <MdOutlineLightMode className='hover:scale-105' style={{fontSize: '30px', color:'white'}} onClick={()=>handleMode()} />
+            <MdOutlineLightMode className='hover:scale-105' style={{fontSize: '30px', color:'white'}} onClick={()=>modeFunction()} />
          }   
       </div>
 

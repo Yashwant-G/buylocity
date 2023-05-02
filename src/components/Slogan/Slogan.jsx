@@ -13,7 +13,7 @@ const Slogan = () => {
           className=""
         >
           <i>
-            "Slogan-Jai <span>PiMata</span> Di."
+            "Slogan-You think <span>you'll come fast.</span> No, we'll <span>come fast</span>."
           </i>
         </motion.div>
       </h2>
