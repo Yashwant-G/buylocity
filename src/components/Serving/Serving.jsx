@@ -28,7 +28,6 @@ const Serving = () => {
           src="https://www.google.com/maps/d/u/0/embed?mid=19kkeX5tHnoNqDZFVB1i3MmxQ8hIIlok&ehbc=2E312F"
           width={width / 1.2}
           height={height}
-          frameborder="0"
           style={{
             border: "2px solid var(--secondary-color)",
             marginTop: "-150px",

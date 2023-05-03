@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import MotionWrap from "../../wrapper/MotionWrap";
 
 const About = () => {
-  const [abouts, setAbouts] = useState([]);
+  const [abouts, setAbouts] = useState(" ");
   const [rdMore, setRdMore] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
 

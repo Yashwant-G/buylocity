@@ -57,7 +57,6 @@ const Product = () => {
 
       <div className="app__work-filter">
         {categories.map((item, index) => (
-          <div>
             <div
               key={index}
               onClick={() => handleWorkFilter(item.category)}
@@ -67,12 +66,11 @@ const Product = () => {
             >
               {item.category}
               {/* <div>
-                {item.features.map((feature, index) => (
-                  <img src={urlFor(feature.featureimg).url()} alt=" " loading="lazy"/>
+                {item.features.map((feature, ind) => (
+                  <img src={urlFor(feature.featureimg).url() key={ind}} alt=" " loading="lazy"/>
                 ))}
             </div> */}
             </div>
-          </div>
         ))}
       </div>
       <motion.div
