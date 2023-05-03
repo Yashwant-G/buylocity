@@ -21,7 +21,7 @@ const Serving = () => {
       <h2 className="head-text mb-4">
         Currently <span>Serving</span>
       </h2>
-        <div className="h-0 w-full bg-[var(--secondary-color)] -mb-8"></div>
+      <div className="h-0.5 w-full bg-[var(--secondary-color)] -mb-8"></div>
       <div className="w-full overflow-hidden">
         <iframe
           title="gMaps"
