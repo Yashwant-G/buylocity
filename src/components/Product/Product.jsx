@@ -114,12 +114,12 @@ const Product = () => {
 
                 <div className="app__work-content app__flex">
                   <h4 className="bold-text text-black">{prod.name}</h4>
-                  <p
-                    className="p-text text-[#6b7688]"
+                  <pre
+                    className="p-text text-[#6b7688] break-all whitespace-pre-line"
                     style={{ marginTop: 10 }}
                   >
-                    {prod.description}
-                  </p>
+                    {prod.description}...
+                  </pre>
                 </div>
                 <div className="app__work-content app__flex flex mt-[-15px] ">
                   <h4 className="bold-text text-black flex gap-1">
@@ -134,7 +134,8 @@ const Product = () => {
                   </h4>
                 </div>
                 <div>
-                  <button className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 py-1 rounded-lg mt-1">
+                  <button className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
+                  py-1 rounded-lg mt-1 hover:bg-[#DDB34B]">
                     Add <AiOutlinePlus />
                   </button>
                 </div>
@@ -180,7 +181,7 @@ const Product = () => {
             {" "}
             <button
               className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
-          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800"
+          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-[#DDB34B]"
             >
               Whatsapp Store <AiOutlineWhatsApp />
             </button>

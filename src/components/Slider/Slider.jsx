@@ -56,7 +56,7 @@ const Slider = () => {
   };
 
   // Set up the interval timer
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(autoScroll, intervalTime);
 
     // Clear the interval when the component is unmounted

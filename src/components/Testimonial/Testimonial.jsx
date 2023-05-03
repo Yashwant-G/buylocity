@@ -25,7 +25,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="app__testimonial">
+    <div className="app__testimonial mt-20">
       <h2 className="head-text about_head mt-40">Our Testimonials</h2>
       {testimonials.length && (
         <>
@@ -97,7 +97,7 @@ const Testimonial = () => {
       <div>
         <button
           className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-2xl
-          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-800"
+          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-[#DDB34B]"
         >
           <a href="https://forms.gle/LMKQWXXYP9NKnQ8F8" target="_blank" rel="noreferrer">Write a Testimonial</a>
         </button>
