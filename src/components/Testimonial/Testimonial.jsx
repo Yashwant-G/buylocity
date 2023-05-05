@@ -242,7 +242,6 @@ const Testimonial = () => {
                   href="https://forms.gle/LMKQWXXYP9NKnQ8F8"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-500"
                 >
                   click here
                 </a>{" "}
