@@ -1,17 +1,8 @@
-.app__gallery {
+.app__slider {
     flex-direction: row;
-    /* height: 300px; */
-    /* background: var(--white-color); */
-    /* padding: 4rem 0 4rem 6rem; */
 }
-.flex__center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-
-.app__gallery-images {
+.app__slider-images {
     margin-top: 7rem;
     flex: 1;
     display: flex;
@@ -20,7 +11,7 @@
     position: relative;
 }
 
-.app__gallery-images_container {
+.app__slider-images_container {
     display: flex;
     flex-direction: row;
     width: max-content;
@@ -30,18 +21,18 @@
     margin-left: 10px;
 }
 
-.app__gallery-images_container::-webkit-scrollbar {
+.app__slider-images_container::-webkit-scrollbar {
     display: none;
 }
 
-.app__gallery-images_card {
+.app__slider-images_card {
     position: relative;
-    min-width: 100%;
+    min-width: 80%;
     height: 550px;
     margin-right: 2rem;
 }
 
-.app__gallery-images_card img {
+.app__slider-images_card img {
     border-radius: 10px;
     width: 100%;
     height: 100%;
@@ -50,12 +41,12 @@
     transition: .5s ease;
 }
 
-.app__gallery-images_card:hover img {
+.app__slider-images_card:hover img {
     opacity: .85;
-    scale: 0.9;
+    scale: 0.97;
 }
 
-.app__gallery-images_arrows {
+.app__slider-images_arrows {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -63,10 +54,10 @@
 
     padding: 0 1rem;
     position: absolute;
-    bottom: 0;
+    bottom: -7%;
 }
 
-.gallery__arrow-icon {
+.slider__arrow-icon {
     color: var(--white-color);
     font-size: 2rem;
     cursor: pointer;
@@ -74,52 +65,52 @@
     border-radius: 5px;
 }
 
-.gallery__arrow-icon:hover {
-    color: var(--secondary-color);
+.slider__arrow-icon:hover {
+    background: var(--secondary-color);
 }
 
 @media screen and (min-width: 2000px) {
 
-    .app__gallery-images_card {
+    .app__slider-images_card {
         min-width: 90%;
         height: 70%;
     }
 }
 
 @media screen and (max-width: 1150px) {
-    .app__gallery {
+    .app__slider {
         flex-direction: column;
     }
 
-    .app__gallery-images {
+    .app__slider-images {
         max-width: 100%;
         margin: 5rem 0;
     }
 }
 
 @media screen and (max-width: 850px) {
-    .app__gallery {
+    .app__slider {
         padding: 4rem 0 4rem 4rem;
     }
 }
 
 @media screen and (max-width: 650px) {
-    .app__gallery {
+    .app__slider {
         padding: 4rem 0 4rem 2rem;
     }  
     
 
-    .app__gallery-images_card {
-        min-width: 94%;
+    .app__slider-images_card {
+        min-width: 92%;
         height: 240px;
     }
 
-    .app__gallery-images_container{
+    .app__slider-images_container{
         margin-left: -0.5rem;
     }
-    .app__gallery-images_arrows{
+    .app__slider-images_arrows{
         /* display: none; */
-        bottom: -15%;
+        bottom: -17%;
         right: 2%;
         justify-content: center;
         gap: 20px;

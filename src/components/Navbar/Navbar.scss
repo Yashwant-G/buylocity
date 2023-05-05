@@ -1,19 +1,32 @@
 .app__navbar {
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   background: rgba(255, 255, 255, 0.25);
-//   background: black
-  // box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   position: fixed;
   z-index: 2;
+}
+
+.salesDiv{
+  animation: moving 30s linear infinite;
+}
+.salesDiv:hover{
+  animation-play-state: paused;
+}
+
+@keyframes moving {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .app__navbar-logo {
@@ -23,13 +36,6 @@
   
   img {
     object-fit: cover;
-    // width: 90px;
-    // height: 60px;
-
-    @media screen and (min-width: 2000px) {
-      // width: 180px;
-      // height: 40px;
-    }
   }
 }
 
@@ -50,16 +56,15 @@
     div {
       width: 5px;
       height: 5px;
-      background: transparent;
+      background: var(--secondary-color);
+      visibility: hidden;
       border-radius: 50%;
-
       margin-bottom: 5px;
     }
 
     a {
       color: var(--gray-color);
       text-decoration: none;
-      flex-direction: column;
 
       text-transform: uppercase;
       font-weight: 500;
@@ -73,7 +78,7 @@
 
     &:hover {
       div {
-        background: var(--secondary-color);
+        visibility: visible;
       }
     }
   }
@@ -85,8 +90,6 @@
 
 .app__navbar-mode{
     cursor: pointer;
-    
-
     @media screen and (max-width: 900px){
         // margin-left: auto;
         order: -1;

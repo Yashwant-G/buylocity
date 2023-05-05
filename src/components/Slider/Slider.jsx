@@ -48,7 +48,7 @@ const Slider = () => {
   };
 
   
-  const intervalTime = 3000; // 1 second
+  const intervalTime = 3000;
 
   // Define the function that will be called by the interval timer
   const autoScroll = () => {
@@ -69,18 +69,18 @@ const Slider = () => {
   }
 
   return (
-      <div className="app__gallery flex__center" id="home">
-        <div className="app__gallery-images">
-            <div className="app__gallery-images_container" ref={scrollRef}>
+      <div className="app__slider app__flex" id="home">
+        <div className="app__slider-images">
+            <div className="app__slider-images_container" ref={scrollRef}>
                 {SliderData.map((slide, index) => (
-                    <div className="app__gallery-images_card flex__center" key={`gallery_image-${index + 1}`}>
-                        <img src={urlFor(slide.imgUrl)} alt="gallery_image" loading="lazy"/>
+                    <div className="app__slider-images_card app__flex" key={`slider_image-${index + 1}`}>
+                        <img src={urlFor(slide.imgUrl)} alt="slider_image" loading="lazy"/>
                     </div>
                 ))}
             </div>
-            <div className="app__gallery-images_arrows">
-                <BsArrowLeftShort className="gallery__arrow-icon" onClick={() => scroll('left')} />
-                <BsArrowRightShort className="gallery__arrow-icon" onClick={() => scroll('right')} />
+            <div className="app__slider-images_arrows">
+                <BsArrowLeftShort className="slider__arrow-icon" onClick={() => scroll('left')} />
+                <BsArrowRightShort className="slider__arrow-icon" onClick={() => scroll('right')} />
             </div>
         </div>
     </div>

@@ -25,8 +25,8 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="app__testimonial mt-20">
-      <h2 className="head-text about_head mt-40">Our Testimonials</h2>
+    <div className="app__testimonial" id="testimonial">
+      <h2 className="head-text about_head">Our Testimonials</h2>
       {testimonials.length && (
         <>
           <div className="app__testimonial-item app__flex">

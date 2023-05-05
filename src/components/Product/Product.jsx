@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AiOutlinePlus, AiOutlineWhatsApp } from "react-icons/ai";
 import { motion } from "framer-motion";
-import one from "../../assets/1st.png";
-import two from "../../assets/2nd.png";
-import three from "../../assets/3rd.png";
-import { ToggleContext } from "../../context/context";
+import { ModeContext } from "../../context/context";
 
-// import { AppWrap, MotionWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
 import "./Product.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
@@ -14,14 +10,14 @@ import MotionWrap from "../../wrapper/MotionWrap";
 const Product = () => {
   const [categories, setCategories] = useState([]);
   const [product, setProduct] = useState([]);
-  //   const [works, setWorks] = useState([]);
+  const [features, setFeatures] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Clothing");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-  const { light } = useContext(ToggleContext);
+  const { light } = useContext(ModeContext);
 
   useEffect(() => {
-    const query1 = '*[_type == "categories"] | order(title asc)';
+    const query1 = '*[_type == "categories"] | order(_updatedAt asc)';
 
     client.fetch(query1).then((data) => {
       setCategories(data);
@@ -29,13 +25,18 @@ const Product = () => {
       // console.log(urlFor(categories[1].features[1].featureimg));
     });
 
-    const query2 = '*[_type == "product"] | order(_updatedAt desc)';
+    const query2 = '*[_type == "product"] | order(_updatedAt asc)';
 
     client.fetch(query2).then((data) => {
       setProduct(data);
       // console.log(urlFor(product[1].productImage));
       setFilterProduct(data.filter((prod) => prod.tags.includes("Clothing")));
     });
+
+    const query3='*[_type == "features"] | order(_updatedAt asc)';
+    client.fetch(query3).then((data)=>{
+      setFeatures(data);
+    })
   }, []);
 
   const handleWorkFilter = (item) => {
@@ -50,27 +51,27 @@ const Product = () => {
   };
 
   return (
-    <>
+    <section className="app__flex w-full flex-col" id="products">
       <h2 className="head-text">
         Explore <span>Our</span> Collections
       </h2>
 
       <div className="app__work-filter">
         {categories.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => handleWorkFilter(item.category)}
-              className={`app__work-filter-item app__flex p-text ${
-                activeFilter === item.category ? "item-active" : ""
-              }`}
-            >
-              {item.category}
-              {/* <div>
+          <div
+            key={index}
+            onClick={() => handleWorkFilter(item.category)}
+            className={`app__work-filter-item app__flex p-text ${
+              activeFilter === item.category ? "item-active" : ""
+            }`}
+          >
+            {item.category}
+            {/* <div>
                 {item.features.map((feature, ind) => (
-                  <img src={urlFor(feature.featureimg).url() key={ind}} alt=" " loading="lazy"/>
+                  <img src={urlFor(feature.featureimg).url()} key={ind} alt=" " loading="lazy"/>
                 ))}
             </div> */}
-            </div>
+          </div>
         ))}
       </div>
       <motion.div
@@ -116,7 +117,8 @@ const Product = () => {
                     className="p-text text-[#6b7688] break-all whitespace-pre-line"
                     style={{ marginTop: 10 }}
                   >
-                    {prod.description}...
+                    {prod.description}
+                    {/* {(prod.description).substring(0,10)} */}
                   </pre>
                 </div>
                 <div className="app__work-content app__flex flex mt-[-15px] ">
@@ -132,8 +134,10 @@ const Product = () => {
                   </h4>
                 </div>
                 <div>
-                  <button className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
-                  py-1 rounded-lg mt-1 hover:bg-[#DDB34B]">
+                  <button
+                    className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
+                  py-1 rounded-lg mt-1 hover:bg-[#DDB34B]"
+                  >
                     Add <AiOutlinePlus />
                   </button>
                 </div>
@@ -142,30 +146,17 @@ const Product = () => {
           </a>
         ))}
       </motion.div>
-      <div className="h-[0.5px] w-full bg-[var(--black-color)]"></div>
-      <div className="flex flex-wrap justify-between items-baseline mt-8 lg:w-5/6">
-        <img
-          src={one}
-          alt=""
-          className={`w-[6rem] ml-2 pb-0.5 lg:w-40 ${
-            light ? "invert-0" : "invert"
-          }`}
-        />
-        <img
-          src={two}
-          alt=""
-          className={`invert w-32 ml-2 lg:w-44 ${
-            light ? "invert-0" : "invert"
-          }`}
-        />
-        <img
-          src={three}
-          alt=""
-          className={`invert w-32 lg:w-44 ${light ? "invert-0" : "invert"}`}
-        />
+      <div className="flex flex-col w-full my-12">
+        <div className="h-[1px] w-full bg-[var(--black-color)]"></div>
+        <div className="flex flex-wrap justify-between items-baseline mt-8 mx-auto lg:w-5/6">
+          {features.map((feat,index)=>(
+            <img src={urlFor(feat.imgUrl)} alt={index}  className={`${
+              light ? "invert-0" : "invert"
+            }`} />
+          ))}
+        </div>
+        <div className="h-[1.5px] w-full bg-[var(--black-color)] mt-6"></div>
       </div>
-      <div className="h-[1px] w-full bg-[var(--black-color)] mt-6"></div>
-
       <div>
         <h2 className="head-text mt-20 text-2xl lg:text-[2rem]">
           For <span>Complete</span> Catalogue, <span>visit:</span>
@@ -186,7 +177,7 @@ const Product = () => {
           </a>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

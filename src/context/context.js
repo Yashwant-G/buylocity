@@ -1,10 +1,10 @@
 import React, { createContext, useState } from 'react';
 
 // Create a new context
-export const ToggleContext = createContext();
+export const ModeContext = createContext();
 
 // Define a component to provide the value of toggle state to the context
-export const ToggleContextProvider = ({ children }) => {
+export const ModeContextProvider = ({ children }) => {
   const [light,setLight]=useState(true);
 
   const modeFunction = () => {
@@ -26,8 +26,8 @@ export const ToggleContextProvider = ({ children }) => {
     }
   };
   return (
-    <ToggleContext.Provider value={{ light, setLight, modeFunction }}>
+    <ModeContext.Provider value={{ light, setLight, modeFunction }}>
       {children}
-    </ToggleContext.Provider>
+    </ModeContext.Provider>
   );
 };
