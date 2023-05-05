@@ -235,7 +235,7 @@ const Testimonial = () => {
               {!loading ? "Submit" : "Submitting..."}
             </button>
             <div className="flex justify-start w-[200px]">
-              <p className="p-text">
+              <p className="p-text text-gray-500">
                 If you are comfortable in sharing your image, please{" "}
                 <a
                   className=" text-blue-500"

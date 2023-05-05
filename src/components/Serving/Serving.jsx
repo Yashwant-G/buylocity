@@ -18,7 +18,7 @@ const Serving = () => {
   const height = width < 640 ? 480 : 650;
   return (
     <div className="app__flex mt-40 flex-col gap-8 " id="serving">
-      <h2 className="head-text mb-4">
+      <h2 className="head-text mb-4 text-3xl">
         Currently <span>Serving</span> Areas
       </h2>
       <div className="h-0.5 w-full bg-[var(--secondary-color)] -mb-8"></div>
