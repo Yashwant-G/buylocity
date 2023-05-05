@@ -15,7 +15,6 @@ import "./Testimonial.scss";
 const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
-  const [open, setOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -26,6 +25,7 @@ const Testimonial = () => {
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const { username, desig, email, test, rate } = formData;
 
@@ -161,9 +161,8 @@ const Testimonial = () => {
       <form
         onSubmit={handleSubmit}
         className={`fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] 
-      scale-1 z-10 bg-[#ffce53] app__flex flex-col gap-4 py-8 px-8 rounded-2xl scale-${
-        open ? "1" : "0"
-      }`}
+      scale-1 z-10 bg-[#ffce53] app__flex flex-col gap-4 py-8 px-8 
+      rounded-2xl ${!open ? "scale-0" : "scale-1"}`}
       >
         <div className="flex w-full justify-end items-center text-xl cursor-pointer mt-[-1rem]">
           <AiOutlineCloseCircle
@@ -236,9 +235,10 @@ const Testimonial = () => {
               {!loading ? "Submit" : "Submitting..."}
             </button>
             <div className="flex justify-start w-[200px]">
-              <p className="p-text ">
+              <p className="p-text">
                 If you are comfortable in sharing your image, please{" "}
                 <a
+                  className=" text-blue-500"
                   href="https://forms.gle/LMKQWXXYP9NKnQ8F8"
                   target="_blank"
                   rel="noreferrer"
@@ -252,13 +252,12 @@ const Testimonial = () => {
           <div className="h-text">Thank You For Your Testimonial..🙂</div>
         )}
       </form>
+
       <div
         onClick={() => {
           setOpen(false);
         }}
-        className={`fixed bg-[#5f5f5f83] top-0 left-0 right-0 bottom-0 opacity-${
-          open ? "1" : "0"
-        } scale-${open ? "1" : "0"}`}
+        className={`fixed bg-[#5f5f5f83] top-0 left-0 right-0 bottom-0 ${open? 'scale-1':'scale-0'}`}
       ></div>
 
       <div>
