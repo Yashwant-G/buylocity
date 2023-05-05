@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 
-.coming-soon{
-  font-family: 'Russo One', sans-serif;
+.coming-soon {
+  font-family: "Russo One", sans-serif;
 }
 
 .app__testimonial {
@@ -11,7 +11,7 @@
   margin-top: 7rem;
 }
 
-.app__testimonial-rating{
+.app__testimonial-rating {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,4 +136,10 @@
       }
     }
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

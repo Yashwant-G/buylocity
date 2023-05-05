@@ -148,12 +148,13 @@ const Product = () => {
       </motion.div>
       <div className="flex flex-col w-full my-12">
         <div className="h-[1px] w-full bg-[var(--black-color)]"></div>
-        <div className="flex flex-wrap justify-between items-baseline mt-8 mx-auto lg:w-5/6">
+        <div className="flex flex-wrap justify-evenly items-baseline mt-8 px-8 w-full">
           {features.map((feat,index)=>(
-            <img src={urlFor(feat.imgUrl)} alt={index}  className={`${
+            <img src={urlFor(feat.imgUrl)} alt={index} key={index}  className={`w-20 lg:w-40 ${
               light ? "invert-0" : "invert"
             }`} />
           ))}
+          
         </div>
         <div className="h-[1.5px] w-full bg-[var(--black-color)] mt-6"></div>
       </div>
