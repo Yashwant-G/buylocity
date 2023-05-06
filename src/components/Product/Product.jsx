@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import {
   AiOutlinePlus,
   AiOutlineWhatsApp,
-  AiOutlineLeft,
-  AiOutlineRight,
+  // AiOutlineLeft,
+  // AiOutlineRight,
 } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
@@ -12,13 +12,13 @@ import { urlFor, client } from "../../client";
 import "./Product.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
 
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { EffectCoverflow, Pagination, Navigation } from "swiper";
+// import "swiper/css";
+// import "swiper/css/effect-coverflow";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
+// import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 const Product = () => {
   const [categories, setCategories] = useState([]);
