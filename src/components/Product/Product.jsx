@@ -1,11 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AiOutlinePlus, AiOutlineWhatsApp } from "react-icons/ai";
+import {
+  AiOutlinePlus,
+  AiOutlineWhatsApp,
+  AiOutlineLeft,
+  AiOutlineRight,
+} from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
 import { urlFor, client } from "../../client";
 import "./Product.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 const Product = () => {
   const [categories, setCategories] = useState([]);
@@ -33,10 +46,10 @@ const Product = () => {
       setFilterProduct(data.filter((prod) => prod.tags.includes("Clothing")));
     });
 
-    const query3='*[_type == "features"] | order(_updatedAt asc)';
-    client.fetch(query3).then((data)=>{
+    const query3 = '*[_type == "features"] | order(_updatedAt asc)';
+    client.fetch(query3).then((data) => {
       setFeatures(data);
-    })
+    });
   }, []);
 
   const handleWorkFilter = (item) => {
@@ -74,6 +87,46 @@ const Product = () => {
           </div>
         ))}
       </div>
+
+      {/* <div className="container app__work-portolio">
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          loop={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2.5,
+          }}
+          pagination={{ el: ".swiper-pagination", clickable: true }}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+            clickable: true,
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation]}
+          className="swiper_container"
+        >
+          {filterProduct.map((prod, index) => (
+            <SwiperSlide>
+              <img src={urlFor(prod.productImage)} alt={index} />
+            </SwiperSlide>
+          ))}
+          <div className="slider-controler">
+            <div className="swiper-button-prev slider-arrow">
+              <AiOutlineLeft />
+            </div>
+            <div className="swiper-button-next slider-arrow">
+              <AiOutlineRight />
+            </div>
+            <div className="swiper-pagination"></div>
+          </div>
+        </Swiper>
+      </div> */}
+
       <motion.div
         animate={animateCard}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
@@ -112,7 +165,7 @@ const Product = () => {
                 </div>
 
                 <div className="app__work-content app__flex">
-                  <h4 className="bold-text text-black">{prod.name}</h4>
+                  <h4 className="bold-text text-[var(--black-color)]">{prod.name}</h4>
                   <pre
                     className="p-text text-[#6b7688] break-all whitespace-pre-line"
                     style={{ marginTop: 10 }}
@@ -122,7 +175,7 @@ const Product = () => {
                   </pre>
                 </div>
                 <div className="app__work-content app__flex flex mt-[-15px] ">
-                  <h4 className="bold-text text-black flex gap-1">
+                  <h4 className="bold-text text-[var(--black-color)] flex gap-1">
                     Rs.{prod.price}
                     <span className="line-through text-gray-500">
                       {prod.mrp}
@@ -146,18 +199,22 @@ const Product = () => {
           </a>
         ))}
       </motion.div>
+
       <div className="flex flex-col w-full my-12">
         <div className="h-[1px] w-full bg-[var(--black-color)]"></div>
         <div className="flex flex-wrap justify-evenly items-baseline mt-8 px-8 w-full">
-          {features.map((feat,index)=>(
-            <img src={urlFor(feat.imgUrl)} alt={index} key={index}  className={`w-20 lg:w-40 ${
-              light ? "invert-0" : "invert"
-            }`} />
+          {features.map((feat, index) => (
+            <img
+              src={urlFor(feat.imgUrl)}
+              alt={index}
+              key={index}
+              className={`w-20 lg:w-40 ${light ? "invert-0" : "invert"}`}
+            />
           ))}
-          
         </div>
         <div className="h-[1.5px] w-full bg-[var(--black-color)] mt-6"></div>
       </div>
+
       <div>
         <h2 className="head-text mt-20 text-2xl lg:text-[2rem]">
           For <span>Complete</span> Catalogue, <span>visit:</span>
