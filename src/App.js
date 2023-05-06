@@ -9,6 +9,7 @@ import Testimonial from "./components/Testimonial/Testimonial";
 import Contact from "./components/Contact/Contact";
 import { ModeContext } from "./context/context";
 import { useContext } from "react";
+import Features from "./components/Features/Features";
 
 
 
@@ -20,6 +21,7 @@ function App() {
       <Slider/>
       <Slogan/>
       <Product/>
+      <Features/>
       <Serving/>
       <About/>
       <Testimonial/>

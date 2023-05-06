@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AiOutlinePlus, AiOutlineWhatsApp, AiOutlineDoubleRight } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineDoubleRight } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
@@ -10,12 +10,12 @@ import MotionWrap from "../../wrapper/MotionWrap";
 const Product = () => {
   const [categories, setCategories] = useState([]);
   const [product, setProduct] = useState([]);
-  const [features, setFeatures] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Clothing");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [loading,setLoading]=useState(false);
   const { light } = useContext(ModeContext);
+
 
   useEffect(() => {
     const query1 = '*[_type == "categories"] | order(_updatedAt asc)';
@@ -32,11 +32,6 @@ const Product = () => {
       setProduct(data);
       // console.log(urlFor(product[1].productImage));
       setFilterProduct(data.filter((prod) => prod.tags.includes("Clothing")));
-    });
-
-    const query3 = '*[_type == "features"] | order(_updatedAt asc)';
-    client.fetch(query3).then((data) => {
-      setFeatures(data);
     });
 
   }, []);
@@ -160,42 +155,14 @@ const Product = () => {
       <div className="h-text text-2xl p-20 animate-pulse">loading....</div>
       }
 
-      {filterProduct.length>2 && <AiOutlineDoubleRight className="mt-4 text-3xl scrollRight" />}
-      <div className="flex flex-col w-full my-12">
-        <div className="h-[1.5px] w-full bg-[var(--black-color)]"></div>
-        <div className="flex flex-wrap justify-evenly items-baseline mt-8 px-8 w-full">
-          {features.map((feat, index) => (
-            <img
-              src={urlFor(feat.imgUrl)}
-              alt={index}
-              key={index}
-              className={`w-20 lg:w-40 ${light ? "invert-0" : "invert"}`}
-            />
-          ))}
-        </div>
-        <div className="h-[1.5px] w-full bg-[var(--black-color)] mt-6"></div>
-      </div>
-
-      <div>
-        <h2 className="head-text mt-20 text-2xl lg:text-[2rem]">
-          For <span>Complete</span> Catalogue, <span>visit:</span>
-        </h2>
-        <div>
-          <a
-            href="https://wa.me/c/918383004856"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {" "}
-            <button
-              className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
-          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-[#DDB34B]"
-            >
-              Whatsapp Store <AiOutlineWhatsApp />
-            </button>
-          </a>
-        </div>
-      </div>
+      {filterProduct.length > 2 && (
+        <AiOutlineDoubleRight
+          className={`mt-4 text-4xl scrollRight ${
+            light ? "invert-0" : "invert"
+          }`}
+        />
+      )}
+      
     </section>
   );
 };

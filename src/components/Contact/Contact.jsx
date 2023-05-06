@@ -48,7 +48,7 @@ const Contact = () => {
         <p className="p__opensans">2023 Buylocity. All Rights reserved.</p>
       </div>
 
-      <div className="footer__policies flex gap-8 mt-4 mb-[-2rem]">
+      <div className="footer__policies flex gap-8 mt-4 mb-[-0.5rem]">
         <p className="p__opensans text-[var(--secondary-color)] 
         cursor-pointer hover:underline">Terms & Conditions</p>
         <p className="p__opensans text-[var(--secondary-color)] 
