@@ -1,16 +1,20 @@
 .app {
   background-color: var(--primary-color);
   font-family: var(--font-base);
-  background: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=412&q=80');
-  // background: url('https://media.istockphoto.com/id/1268728034/photo/background-autumn-orange-yellow-green-pale-grunge-gradient-colorful-pattern-abstract-concrete.jpg?s=612x612&w=0&k=20&c=DYkNbrKYCl58JCN013J6DUivb7QiOPE2__EPAPnVWpQ=');
-  // background: url('https://media.istockphoto.com/id/925561778/photo/de-focused-green-background.jpg?s=612x612&w=0&k=20&c=AIjzEiCwDQ0SegZuxZGiw3lGz5nQH8DRNXWpxp5AER4=');
-  // background: url('https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbG9yJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60');
-  // background: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmxhY2slMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60');
-  background: url('https://images.unsplash.com/photo-1607743882420-4412ee605bac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJsYWNrJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60');
-  background: url('https://img.freepik.com/free-photo/abstract-luxury-blur-dark-grey-black-gradient-used-as-background-studio-wall-display-your-products_1258-54562.jpg?size=626&ext=jpg');
+}
+
+.background-light {
+  background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=412&q=80');
+  background-position: 0%;
   background-repeat: repeat-y;
-  background-position: center;
   background-size: cover;
+}
+
+.background-dark {
+  background-image: url('https://img.freepik.com/free-photo/abstract-luxury-blur-dark-grey-black-gradient-used-as-background-studio-wall-display-your-products_1258-54562.jpg?size=626&ext=jpg');
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-position: center;
 }
 
 

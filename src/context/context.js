@@ -17,6 +17,7 @@ export const ModeContextProvider = ({ children }) => {
       document.documentElement.style.setProperty('--white-color', '#030303');
     }else{
       setLight(true);
+      
       document.documentElement.style.setProperty('--primary-color', '#edf2f8');
       document.documentElement.style.setProperty('--secondary-color', '#1d2687');
       document.documentElement.style.setProperty('--black-color', '#030303');

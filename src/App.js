@@ -7,10 +7,15 @@ import Serving from "./components/Serving/Serving";
 import About from "./components/About/About";
 import Testimonial from "./components/Testimonial/Testimonial";
 import Contact from "./components/Contact/Contact";
+import { ModeContext } from "./context/context";
+import { useContext } from "react";
+
+
 
 function App() {
+  const { light } = useContext(ModeContext);
   return (
-    <div className="app">
+    <div className={`app ${light ? "background-light":"background-dark"}`}>
       <Navbar/>
       <Slider/>
       <Slogan/>
