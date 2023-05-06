@@ -5,7 +5,7 @@ import "./Slogan.scss";
 
 const Slogan = () => {
   return (
-    <div className="slogan_div">
+    <div className="slogan_div ">
       <h2 className="h-text">
         <motion.div
           whileInView={{ x: [-200, 0], opacity: [0, 1] }}

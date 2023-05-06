@@ -1,24 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  AiOutlinePlus,
-  AiOutlineWhatsApp,
-  // AiOutlineLeft,
-  // AiOutlineRight,
-} from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineWhatsApp } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
 import { urlFor, client } from "../../client";
 import "./Product.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
-
-// import { Swiper, SwiperSlide } from "swiper/react";
-
-// import "swiper/css";
-// import "swiper/css/effect-coverflow";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
-// import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 const Product = () => {
   const [categories, setCategories] = useState([]);
@@ -50,6 +37,7 @@ const Product = () => {
     client.fetch(query3).then((data) => {
       setFeatures(data);
     });
+
   }, []);
 
   const handleWorkFilter = (item) => {
@@ -64,7 +52,7 @@ const Product = () => {
   };
 
   return (
-    <section className="app__flex w-full flex-col" id="products">
+    <section className="app__flex w-full flex-col " id="products">
       <h2 className="head-text">
         Explore <span>Our</span> Collections
       </h2>
@@ -87,50 +75,12 @@ const Product = () => {
           </div>
         ))}
       </div>
-
-      {/* <div className="container app__work-portolio">
-        <Swiper
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          loop={true}
-          slidesPerView={"auto"}
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 2.5,
-          }}
-          pagination={{ el: ".swiper-pagination", clickable: true }}
-          navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-            clickable: true,
-          }}
-          modules={[EffectCoverflow, Pagination, Navigation]}
-          className="swiper_container"
-        >
-          {filterProduct.map((prod, index) => (
-            <SwiperSlide>
-              <img src={urlFor(prod.productImage)} alt={index} />
-            </SwiperSlide>
-          ))}
-          <div className="slider-controler">
-            <div className="swiper-button-prev slider-arrow">
-              <AiOutlineLeft />
-            </div>
-            <div className="swiper-button-next slider-arrow">
-              <AiOutlineRight />
-            </div>
-            <div className="swiper-pagination"></div>
-          </div>
-        </Swiper>
-      </div> */}
+      
 
       <motion.div
         animate={animateCard}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="app__work-portfolio"
+        className={`app__work-portfolio ${filterProduct.length===1 && 'justify-center'} ${filterProduct.length<4 && 'lg:justify-center'}`}
       >
         {filterProduct.map((prod, index) => (
           <a
@@ -143,7 +93,7 @@ const Product = () => {
               whileInView={{ opacity: 1 }}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.5, type: "tween" }}
-              className="app__work-portfolio"
+              className="app__work-portfolio "
             >
               <div className="app__work-item app__flex" key={index}>
                 <div className="app__work-img app__flex">
@@ -165,7 +115,9 @@ const Product = () => {
                 </div>
 
                 <div className="app__work-content app__flex">
-                  <h4 className="bold-text text-[var(--black-color)]">{prod.name}</h4>
+                  <h4 className="bold-text text-[var(--black-color)]">
+                    {prod.name}
+                  </h4>
                   <pre
                     className="p-text text-[#6b7688] break-all whitespace-pre-line"
                     style={{ marginTop: 10 }}

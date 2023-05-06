@@ -25,12 +25,12 @@ const Contact = () => {
             service of others.&quot;
           </p>
           <div className="app__footer-links_icons">
-            <a href="mailto: contactus@buylocity.in"> <FiMail  className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
-            <a href="https://instagram.com/buylocity?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer"> <FiInstagram   className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
+            <a href="mailto: customercare@buylocity.in"> <FiMail  className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
+            <a href="https://instagram.com/buylocity" target="_blank" rel="noreferrer"> <FiInstagram   className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
             <a href="https://facebook.com/buylocity" target="_blank" rel="noreferrer"> <FiFacebook className="hover:scale-110" style={{color:'var(--black-color)'}} /> </a>
-            <a href="https://twitter.com/buylocity?t=j7V4L9RSJZLaVjThs1e8YA&s=09" target="_blank" rel="noreferrer"> <FiTwitter className="hover:scale-110"  style={{color:'var(--black-color)'}}/> </a>
+            <a href="https://twitter.com/buylocity" target="_blank" rel="noreferrer"> <FiTwitter className="hover:scale-110"  style={{color:'var(--black-color)'}}/> </a>
             <a href="https://wa.me/c/918383004856" target="_blank" rel="noreferrer"> <SiWhatsapp className="hover:scale-110" style={{color:'var(--black-color)'}}/> </a>
-            <a href="https://www.linkedin.com/in/buylocity-undefined-aa9975274" target="_blank" rel="noreferrer"> <FiLinkedin className="hover:scale-110" style={{color:'var(--black-color)'}}/> </a>
+            <a href="https://www.linkedin.com/in/buy-locity-aa9975274" target="_blank" rel="noreferrer"> <FiLinkedin className="hover:scale-110" style={{color:'var(--black-color)'}}/> </a>
           </div>
         </div>
 

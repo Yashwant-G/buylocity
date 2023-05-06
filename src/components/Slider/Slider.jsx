@@ -69,7 +69,7 @@ const Slider = () => {
   }
 
   return (
-      <div className="app__slider app__flex" id="home">
+      <div className="app__slider app__flex " id="home">
         <div className="app__slider-images">
             <div className="app__slider-images_container" ref={scrollRef}>
                 {SliderData.map((slide, index) => (

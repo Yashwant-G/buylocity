@@ -29,7 +29,7 @@ const About = () => {
 
   const sScreen = width < 650 ? true : false;
   return (
-    <div className="app__about" id="about">
+    <div className="app__about " id="about">
       <h2 className="head-text about_head">About Us</h2>
       <h2 className="h-text about_text">
         <motion.div

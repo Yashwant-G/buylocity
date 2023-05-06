@@ -73,7 +73,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="app__testimonial" id="testimonial">
+    <div className="app__testimonial " id="testimonial">
       <h2 className="head-text about_head">Our Testimonials</h2>
       {testimonials.length && (
         <>
