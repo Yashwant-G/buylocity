@@ -161,3 +161,18 @@
     }
   }
 }
+
+.scrollRight{
+  animation: scrollR 2s infinite alternate-reverse;
+}
+
+@keyframes scrollR {
+  from{
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  to{
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+}

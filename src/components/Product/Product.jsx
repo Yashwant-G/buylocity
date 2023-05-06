@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AiOutlinePlus, AiOutlineWhatsApp } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineWhatsApp, AiOutlineDoubleRight } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
@@ -14,6 +14,7 @@ const Product = () => {
   const [filterProduct, setFilterProduct] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Clothing");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+  const [loading,setLoading]=useState(false);
   const { light } = useContext(ModeContext);
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Product = () => {
   }, []);
 
   const handleWorkFilter = (item) => {
+    setLoading(true);
     setActiveFilter(item);
     setAnimateCard([{ y: 100, opacity: 0 }]);
 
@@ -49,6 +51,9 @@ const Product = () => {
 
       setFilterProduct(product.filter((prod) => prod.tags.includes(item)));
     }, 500);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -77,7 +82,7 @@ const Product = () => {
       </div>
       
 
-      <motion.div
+      {!loading ? <motion.div
         animate={animateCard}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
         className={`app__work-portfolio ${filterProduct.length===1 && 'justify-center'} ${filterProduct.length<4 && 'lg:justify-center'}`}
@@ -151,9 +156,13 @@ const Product = () => {
           </a>
         ))}
       </motion.div>
+      :
+      <div className="h-text text-2xl p-20 animate-pulse">loading....</div>
+      }
 
+      {filterProduct.length>2 && <AiOutlineDoubleRight className="mt-4 text-3xl scrollRight" />}
       <div className="flex flex-col w-full my-12">
-        <div className="h-[1px] w-full bg-[var(--black-color)]"></div>
+        <div className="h-[1.5px] w-full bg-[var(--black-color)]"></div>
         <div className="flex flex-wrap justify-evenly items-baseline mt-8 px-8 w-full">
           {features.map((feat, index) => (
             <img
