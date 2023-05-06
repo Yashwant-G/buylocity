@@ -42,6 +42,7 @@ const Testimonial = () => {
 
     const entry = {
       _type: "testimonial",
+      _id: 'drafts.',
       name: formData.username,
       // userImage: formData.img,
       designation: formData.desig,
@@ -51,7 +52,7 @@ const Testimonial = () => {
     };
 
     client
-      .create(entry, { publish: false })
+      .create(entry)
       .then(() => {
         console.log("success");
         setLoading(false);

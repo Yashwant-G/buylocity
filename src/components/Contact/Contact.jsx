@@ -20,7 +20,7 @@ const Contact = () => {
         </div>
 
         <div className="app__footer-links_logo">
-          <h2 className="head-text about_head">Buylocity</h2>
+          <h2 className="head-text about_head">BuyLocity</h2>
           <p className="p__opensans">
             &quot;The best way to find yourself is to lose yourself in the
             service of others.&quot;
@@ -45,7 +45,7 @@ const Contact = () => {
       </div>
 
       <div className="footer__copyright mt-4">
-        <p className="p__opensans">2023 Buylocity. All Rights reserved.</p>
+        <p className="p__opensans">2023 BuyLocity. All Rights reserved.</p>
       </div>
 
       <div className="footer__policies flex gap-8 mt-4 mb-[-0.5rem]">
