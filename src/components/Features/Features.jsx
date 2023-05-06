@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ModeContext } from "../../context/context";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { client, urlFor } from "../../client";
+import MotionWrap from "../../wrapper/MotionWrap";
 
 const Features = () => {
   const [features, setFeatures] = useState([]);
@@ -14,7 +15,7 @@ const Features = () => {
     });
   });
   return (
-    <div>
+    <div className="w-full">
       
       <div className="flex flex-col w-full my-12">
         <div className="h-[1.5px] w-full bg-[var(--black-color)]"></div>
@@ -55,4 +56,4 @@ const Features = () => {
   );
 };
 
-export default Features;
+export default MotionWrap(Features, "app__features");

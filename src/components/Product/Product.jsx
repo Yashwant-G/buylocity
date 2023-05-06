@@ -104,7 +104,8 @@ const Product = () => {
                   />
 
                   <motion.div
-                    whileHover={{ opacity: [0, 1] }}
+                    whileInView={{opacity:0}}
+                    whileHover={{ opacity: 1 }}
                     transition={{
                       duration: 0.25,
                       ease: "easeInOut",
@@ -119,11 +120,10 @@ const Product = () => {
                     {prod.name}
                   </h4>
                   <pre
-                    className="p-text text-[#6b7688] break-all whitespace-pre-line"
+                    className="p-text text-[#8693a9] break-all whitespace-pre-line"
                     style={{ marginTop: 10 }}
                   >
-                    {prod.description}
-                    {/* {(prod.description).substring(0,10)} */}
+                    {(prod.description).substring(0,150)}...
                   </pre>
                 </div>
                 <div className="app__work-content app__flex flex mt-[-15px] ">
