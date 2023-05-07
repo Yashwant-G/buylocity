@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <div className={`app ${light ? "background-light":"background-dark"}`}>
-      <Navbar/>
+      <Navbar home={true} />
       <Slider/>
       <Slogan/>
       <Product/>

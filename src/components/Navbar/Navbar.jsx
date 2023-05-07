@@ -6,8 +6,9 @@ import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
 import "./Navbar.scss";
+import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState(" ");
   const [open, setOpen] = useState(" ");
@@ -49,7 +50,10 @@ const Navbar = () => {
     <div>
       <div className="h-7 w-full bg-[var(--secondary-color)] fixed z-[2] app__flex">
         <div className="app__flex gap-2 salesDiv">
-          <p className="h-text text-xs lg:text-sm text-white whitespace-nowrap"> {text} </p>
+          <p className="h-text text-xs lg:text-sm text-white whitespace-nowrap">
+            {" "}
+            {text}{" "}
+          </p>
           {open === "open" && (
             <button className="h-text text-sm text-[#DDB34B] cursor-pointer hover:underline whitespace-nowrap">
               <a href="https://wa.me/c/918383004856">Order now 👇</a>
@@ -59,7 +63,7 @@ const Navbar = () => {
       </div>
       <nav className="app__navbar mt-7">
         <div className="app__navbar-logo mr-3 lg:mr-0">
-          <a href="/">
+          <NavLink to="/">
             <img
               src={logo.img}
               alt="logo"
@@ -67,16 +71,27 @@ const Navbar = () => {
               width={logo.width}
               loading="lazy"
             />
-          </a>
+          </NavLink>
         </div>
-        <ul className="app__navbar-links">
-          {navList.map((item, index) => (
-            <li className="app__flex p-text" key={index}>
-              <div />
-              <a href={`${item.link}`}>{item.title}</a>
-            </li>
-          ))}
-        </ul>
+
+        {home ? (
+          <ul className="app__navbar-links">
+            {navList.map((item, index) => (
+              <li className="app__flex p-text" key={index}>
+                <div />
+                <a href={`/${item.link}`}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="app__navbar-links">
+              <li className="app__flex p-text">
+                <div />
+                <NavLink to='/'>Home</NavLink>
+              </li>
+          </ul>
+        )}
+        
         <div className="app__navbar-mode">
           {light ? (
             <MdDarkMode
