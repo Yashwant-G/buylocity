@@ -26,6 +26,7 @@ const Features = () => {
               alt={index}
               key={index}
               className={`w-20 lg:w-40 ${light ? "invert-0" : "invert"}`}
+              loading="lazy"
             />
           ))}
         </div>

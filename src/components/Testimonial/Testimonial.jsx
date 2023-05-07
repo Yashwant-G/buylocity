@@ -84,6 +84,7 @@ const Testimonial = () => {
                 <img
                   src={urlFor(testimonials[currentIndex].userImage)}
                   alt={testimonials[currentIndex].name}
+                  loading="lazy"
                 />
               )}
               <div className="flex">

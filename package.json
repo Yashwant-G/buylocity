@@ -5,11 +5,14 @@
   "dependencies": {
     "@sanity/client": "^5.4.2",
     "@sanity/image-url": "^1.0.2",
-    "framer-motion": "^10.12.4",
+    "framer-motion": "^10.12.8",
+    "fs": "^0.0.1-security",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",
+    "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "sass": "^1.62.1"
   },
