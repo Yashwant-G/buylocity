@@ -121,7 +121,6 @@ const Navbar = ({ home }) => {
                 <ul className="app__navbar-links">
                   {navList.map((item, index) => (
                     <li className="app__flex p-text" key={index}>
-                      {/* <div /> */}
                       <a href={`${item.link}`}>{item.title}</a>
                     </li>
                   ))}
@@ -129,7 +128,6 @@ const Navbar = ({ home }) => {
               ) : (
                 <ul className="app__navbar-links">
                   <li className="app__flex p-text">
-                    <div />
                     <NavLink to="/">Home</NavLink>
                   </li>
                 </ul>
