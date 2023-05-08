@@ -85,23 +85,23 @@ const Navbar = ({ home }) => {
           </ul>
         ) : (
           <ul className="app__navbar-links">
-              <li className="app__flex p-text">
-                <div />
-                <NavLink to='/'>Home</NavLink>
-              </li>
+            <li className="app__flex p-text">
+              <div />
+              <NavLink to="/">Home</NavLink>
+            </li>
           </ul>
         )}
-        
+
         <div className="app__navbar-mode">
           {light ? (
             <MdDarkMode
-              className="hover:scale-105"
+              className="hover:scale-105 mode-icon"
               style={{ fontSize: "35px" }}
               onClick={() => modeFunction()}
             />
           ) : (
             <MdOutlineLightMode
-              className="hover:scale-105"
+              className="hover:scale-105 mode-icon"
               style={{ fontSize: "30px", color: "white" }}
               onClick={() => modeFunction()}
             />
@@ -117,15 +117,23 @@ const Navbar = ({ home }) => {
               transition={{ duration: 0.85, ease: "easeOut" }}
             >
               <HiX onClick={() => setToggle(false)} />
-              <ul>
-                {navList.map((item) => (
-                  <li key={item}>
-                    <a href={`${item.link}`} onClick={() => setToggle(false)}>
-                      {item.title}
-                    </a>
+              {home ? (
+                <ul className="app__navbar-links">
+                  {navList.map((item, index) => (
+                    <li className="app__flex p-text" key={index}>
+                      <div />
+                      <a href={`/${item.link}`}>{item.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="app__navbar-links">
+                  <li className="app__flex p-text">
+                    <div />
+                    <NavLink to="/">Home</NavLink>
                   </li>
-                ))}
-              </ul>
+                </ul>
+              )}
             </motion.div>
           )}
         </div>

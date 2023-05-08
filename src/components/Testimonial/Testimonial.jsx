@@ -21,7 +21,7 @@ const Testimonial = () => {
     desig: "",
     email: "",
     test: "",
-    rate: null,
+    rate: undefined,
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);

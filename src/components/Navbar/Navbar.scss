@@ -1,3 +1,18 @@
+.mode-icon{
+  animation: bb 1.5s 1 linear;
+}
+@keyframes bb {
+  0%{
+    transform: translateY(-50%);
+  }
+  50%{
+    transform: translateY(50%);
+  }
+  100%{
+    transform: translateY(0%);
+  }
+}
+
 .app__navbar {
   width: 100%;
   display: flex;

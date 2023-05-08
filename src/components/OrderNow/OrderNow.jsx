@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import MotionWrap from "../../wrapper/MotionWrap";
 
 const OrderNow = () => {
   const [width, setWidth] = useState(0);
@@ -20,7 +21,7 @@ const OrderNow = () => {
   return (
     <div className="app__flex flex-col gap-8 w-full h-full">
       <div className="mt-28 h-text">Please fill up this Order Form</div>
-      <div className=" border-black border-2 rounded-xl p-1 py-4 lg:pb-5 mb-8">
+      <div className=" border-[var(--black-color)] border-2 rounded-xl p-1 py-4 lg:pb-5 mb-8">
         <iframe
           title="gForm"
           src="https://docs.google.com/forms/d/e/1FAIpQLSdjlCzTpoHIlV-op00vN2WlTO72Z91fmLSFPVVr84WU-Qu76Q/viewform?embedded=true"
@@ -37,4 +38,4 @@ const OrderNow = () => {
   );
 };
 
-export default OrderNow;
+export default MotionWrap(OrderNow, "app__serving");
