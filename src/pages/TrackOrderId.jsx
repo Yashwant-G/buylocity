@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Helmet from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import { client } from "../client";
 import Contact from "../components/Contact/Contact";
@@ -13,9 +14,8 @@ const TrackOrderId = () => {
   const [details, setDetails] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
-
+  const id = location.pathname.split("/").at(-1);
   useEffect(() => {
-    const id = location.pathname.split("/").at(-1);
     const query = `*[_type == "orders" && orderId == $orderId]`;
     const params = { orderId: id.toString() };
 
@@ -32,6 +32,15 @@ const TrackOrderId = () => {
 
   return (
     <div className={`app ${light ? "background-light" : "background-dark"}`}>
+      <Helmet>
+        <title>Buylocity- Live Track your Order</title>
+        <meta
+          name="description"
+          content="Welcome to our order details page, where you can view all the information related to your recent purchase. Our easy-to-use interface provides you with a comprehensive overview of your order, including the items purchased, delivery date, and payment information.
+          With our order details page, you can easily review and confirm the details of your purchase. If you have any questions or concerns, our dedicated customer service team is always available to assist you.
+          So whether you're checking the status of a recent delivery or simply want to review your purchase history, our order details page makes it easy and convenient. Try our order details page today and experience the ease of managing your purchases online!"
+        />
+      </Helmet>
       <Navbar home={false} />
       {found ? (
         <Found details={details} />

@@ -54,7 +54,7 @@ const Navbar = ({ home }) => {
             {" "}
             {text}{" "}
           </p>
-          {open === "open" && (
+          {open.toLowerCase() === "open" && (
             <button className="h-text text-sm text-[#DDB34B] cursor-pointer hover:underline whitespace-nowrap">
               <a href="https://wa.me/c/918383004856">Order now 👇</a>
             </button>
