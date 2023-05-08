@@ -70,13 +70,13 @@
   align-items: flex-start;
 
   p {
-    font-size: 1.25rem;
+    // font-size: 1.1rem;
     line-height: 2rem;
     color: var(--gray-color);
     font-family: var(--font-base);
 
     @media screen and (min-width: 2000px) {
-      font-size: 2rem;
+      // font-size: 2rem;
       line-height: 3.5rem;
     }
   }

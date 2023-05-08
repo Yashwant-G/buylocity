@@ -107,8 +107,8 @@ const Testimonial = () => {
               </div>
             </div>
             <div className="app__testimonial-content">
-              <p className="p-text">
-                &quot;{testimonials[currentIndex].testimonial}&quot;
+              <p className="p-text text-sm sm:text-[1.15rem]">
+                {testimonials[currentIndex].testimonial}
               </p>
               <div>
                 <h4 className="bold-text">{testimonials[currentIndex].name}</h4>

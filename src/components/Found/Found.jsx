@@ -4,15 +4,15 @@ import { MdAddCall } from "react-icons/md";
 import Spinner from "../Spinner/Spinner";
 
 const Found = ({ details }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-      setLoading(true);
+  // useEffect(() => {
+  //   setLoading(true);
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }, []);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
   const date = new Date(details.orderPlaced);
 
   const formattedDate = date.toLocaleString("en-US", {
@@ -51,57 +51,90 @@ const Found = ({ details }) => {
               <div className="h-text mb-8">
                 <span className="mr-2">{details.reason}</span>
               </div>
-              <div className="p-text text-lg">
-                Contact us for more details
-              </div>
+              <div className="p-text text-lg">Contact us for more details</div>
             </div>
           ) : (
             <div className="app__flex flex-col items-start gap-8">
-              <div className="app__flex gap-2">
+              <div className="app__flex gap-2 relative">
                 <div className="bg-[var(--white-color)] p-3 rounded-full">
                   <FaCheck className="text-green-500 text-xl" />
                 </div>
                 <div className="p-text text-lg">Order Placed</div>
               </div>
-              {details.orderRecieved && (
-                <div className="app__flex gap-2">
-                  <div className="bg-[var(--white-color)] p-3 rounded-full">
-                    <FaCheck className="text-green-500 text-xl" />
-                  </div>
-                  <div className="p-text text-lg">Order Recieved</div>
+
+              <div className="app__flex gap-2 relative">
+                <div
+                  className={`${
+                    details.orderRecieved ? "bg-green-500" : "bg-gray-400"
+                  } h-[2rem] absolute top-[-2rem] left-5 w-1`}
+                ></div>
+                <div className="bg-[var(--white-color)] p-3 rounded-full">
+                  <FaCheck
+                    className={`text-green-500 text-xl ${
+                      details.orderRecieved ? "opacity-1" : "opacity-0"
+                    }`}
+                  />
                 </div>
-              )}
-              {details.orderPacked && (
-                <div className="app__flex gap-2">
-                  <div className="bg-[var(--white-color)] p-3 rounded-full">
-                    <FaCheck className="text-green-500 text-xl" />
-                  </div>
-                  <div className="p-text text-lg">Order Packed</div>
+                <div className="p-text text-lg">Order Recieved</div>
+              </div>
+
+              <div className="app__flex gap-2 relative">
+                <div
+                  className={`${
+                    details.orderPacked ? "bg-green-500" : "bg-gray-400"
+                  } h-[2rem] absolute top-[-2rem] left-5 w-1`}
+                ></div>
+                <div className="bg-[var(--white-color)] p-3 rounded-full">
+                  <FaCheck
+                    className={`text-green-500 text-xl ${
+                      details.orderPacked ? "opacity-1" : "opacity-0"
+                    }`}
+                  />
                 </div>
-              )}
-              {details.outForDelivery && (
-                <div className="app__flex gap-2">
-                  <div className="bg-[var(--white-color)] p-3 rounded-full">
-                    <FaCheck className="text-green-500 text-xl" />
-                  </div>
-                  <div className="p-text text-lg">
-                    <p>Out For Delivery </p>
-                  </div>
-                  <div className="">
+                <div className="p-text text-lg">Order Packed</div>
+              </div>
+
+              <div className="app__flex gap-2 relative">
+                <div
+                  className={`${
+                    details.outForDelivery ? "bg-green-500" : "bg-gray-400"
+                  } h-[2rem] absolute top-[-2rem] left-5 w-1`}
+                ></div>
+                <div className="bg-[var(--white-color)] p-3 rounded-full">
+                  <FaCheck
+                    className={`text-green-500 text-xl ${
+                      details.outForDelivery ? "opacity-1" : "opacity-0"
+                    }`}
+                  />
+                </div>
+
+                <div className="p-text text-lg">
+                  <p>Out For Delivery </p>
+                </div>
+                <div className="">
+                  {!details.delivered && details.outForDelivery && (
                     <a href={`tel:+91${details.phoneNumber}`}>
                       <MdAddCall className="text-lg text-blue-700" />
                     </a>
-                  </div>
+                  )}
                 </div>
-              )}
-              {details.delivered && (
-                <div className="app__flex gap-2">
-                  <div className="bg-[var(--white-color)] p-3 rounded-full">
-                    <FaCheck className="text-green-500 text-xl" />
-                  </div>
-                  <div className="p-text text-lg">Order delivered</div>
+              </div>
+
+              <div className="app__flex gap-2 relative">
+                <div
+                  className={`${
+                    details.delivered ? "bg-green-500" : "bg-gray-400"
+                  } h-[2rem] absolute top-[-2rem] left-5 w-1`}
+                ></div>
+                <div className="bg-[var(--white-color)] p-3 rounded-full">
+                  <FaCheck
+                    className={`text-green-500 text-xl ${
+                      details.delivered ? "opacity-1" : "opacity-0"
+                    }`}
+                  />
                 </div>
-              )}
+                <div className="p-text text-lg">Order delivered</div>
+              </div>
             </div>
           )}
         </div>
