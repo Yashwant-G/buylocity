@@ -4,15 +4,15 @@ import { MdAddCall } from "react-icons/md";
 import Spinner from "../Spinner/Spinner";
 
 const Found = ({ details }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   setLoading(true);
+  useEffect(() => {
+    setLoading(true);
 
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, []);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const date = new Date(details.orderPlaced);
 
   const formattedDate = date.toLocaleString("en-US", {
