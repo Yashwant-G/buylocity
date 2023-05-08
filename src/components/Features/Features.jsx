@@ -19,7 +19,7 @@ const Features = () => {
       
       <div className="flex flex-col w-full my-12">
         <div className="h-[1.5px] w-full bg-[var(--black-color)]"></div>
-        <div className="overflow-hidden app__flex flex-wrap justify-between mx-auto mt-8 px-4 w-full">
+        <div className="overflow-hidden app__flex flex-wrap justify-between mx-auto mt-8 px-0 sm:px-4 w-full">
           {features.map((feat, index) => (
             <img
               src={urlFor(feat.imgUrl)}

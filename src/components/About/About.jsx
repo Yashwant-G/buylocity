@@ -30,7 +30,7 @@ const About = () => {
   const sScreen = width < 650 ? true : false;
   return (
     <div className="app__about " id="about">
-      <h2 className="head-text about_head">About Us</h2>
+      <h2 className="head-text about_head text-3xl sm:text-4xl">About Us</h2>
       <h2 className="h-text about_text">
         <motion.div
           whileInView={{ scale: [0.5, 1], opacity: [0, 1] }}

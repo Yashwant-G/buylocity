@@ -9,9 +9,9 @@ import pdf from '../../assets/Returns and Refunds Policy.pdf';
 const Contact = () => {
   return (
     <div className="app__footer section__padding" id="contact">
-      <div className="app__footer-links">
+      <div className="app__footer-links mt-0 sm:mt-20">
         <div className="app__footer-links_contact">
-          <h1 className="app__footer-headtext">Contact Us</h1>
+          <h1 className="app__footer-headtext text-2xl sm:text-3xl">Contact Us</h1>
           <p className="p__opensans">MD Danish</p>
           <p className="p__opensans hover:underline hover:text-blue-400"><a href="tel:+919899655710">+91 9899655710</a> </p>
           <br/>
@@ -20,8 +20,8 @@ const Contact = () => {
         </div>
 
         <div className="app__footer-links_logo">
-          <h2 className="head-text about_head">BuyLocity</h2>
-          <p className="p__opensans">
+          <h2 className="head-text about_head text-2xl sm:text-3xl">BuyLocity</h2>
+          <p className="p__opensans px-4 sm:px-0 mt-4">
             &quot;The best way to find yourself is to lose yourself in the
             service of others.&quot;
           </p>
@@ -36,7 +36,7 @@ const Contact = () => {
         </div>
 
         <div className="app__footer-links_work">
-          <h1 className="app__footer-headtext">Working Hours</h1>
+          <h1 className="app__footer-headtext text-2xl sm:text-3xl">Working Hours</h1>
           <p className="p__opensans">Monday-Sunday:</p>
           <p className="p__opensans capitalize">10:00 aM - 9:00 pM</p>
           <p className="p__opensans">Saturday-Sunday:</p>

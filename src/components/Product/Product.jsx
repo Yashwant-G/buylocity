@@ -53,7 +53,7 @@ const Product = () => {
 
   return (
     <section className="app__flex w-full flex-col " id="products">
-      <h2 className="head-text">
+      <h2 className="head-text text-2xl lg:text-4xl">
         Explore <span>Our</span> Collections
       </h2>
 

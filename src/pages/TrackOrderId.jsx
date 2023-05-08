@@ -36,13 +36,12 @@ const TrackOrderId = () => {
       {found ? (
         <Found details={details} />
       ) : (
-        <div className="app__flex head-text pt-28 gap-2 h-[70vh]">
+        <div className="app__flex head-text pt-28 gap-1 h-[70vh] text-lg lg:text-2xl">
           Order Id Not found, Please
           <span
             className="cursor-pointer hover:underline"
             onClick={() => navigate(`/track`)}
           >
-            {" "}
             try again
           </span>
         </div>

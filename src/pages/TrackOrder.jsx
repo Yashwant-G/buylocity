@@ -21,14 +21,14 @@ const TrackOrder = () => {
   return (
     <div className={`app ${light ? "background-light" : "background-dark"}`}>
       <Navbar home={false} />
-      <div className="app__flex flex-col w-full h-full">
+      <div className="app__flex flex-col w-full h-[90vh]">
         <div className="head-text mt-28" >Track <span>Your</span> order</div>
         <form onSubmit={handleSubmit} className="flex flex-col p-16 gap-4">
           <h2 className="h-text">
             Enter Your Order Id
           </h2>
           <input
-            className="px-4 py-2 h-text text-sm outline-none text-center rounded-lg"
+            className="px-4 py-2 h-text text-black text-sm outline-none text-center rounded-lg"
             type="text"
             placeholder="Order Id"
             name="username"
