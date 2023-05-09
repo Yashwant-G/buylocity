@@ -40,10 +40,10 @@ const Slider = () => {
     
     if (direction1 === 'left') {
       setCount(count--);
-      current.scrollLeft -= 300;
+      current.scrollLeft -= 350;
     } else {
       setCount(count++);
-      current.scrollLeft += 300;
+      current.scrollLeft += 350;
     }
   };
 

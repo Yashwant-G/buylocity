@@ -56,6 +56,10 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .app__work-item {
     width: 270px;
     flex-direction: column;
@@ -86,10 +90,6 @@
       margin: 1rem;
     }
   }
-}
-
-.app__work-portfolior::-webkit-scrollbar {
-  display: none;
 }
 
 .app__work-img {

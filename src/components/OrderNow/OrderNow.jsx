@@ -16,7 +16,7 @@ const OrderNow = () => {
   }, []);
 
   const height = width < 650 ? 700 : 450;
-  const width1=width < 650 ? 350 : 700;
+  // const width1=width < 650 ? 350 : 700;
 
   return (
     <div className="app__flex flex-col gap-8 w-full h-full">
@@ -25,7 +25,7 @@ const OrderNow = () => {
         <iframe
           title="gForm"
           src="https://docs.google.com/forms/d/e/1FAIpQLSdjlCzTpoHIlV-op00vN2WlTO72Z91fmLSFPVVr84WU-Qu76Q/viewform?embedded=true"
-          width={width1}
+          width={width/1.2}
           height={height}
           frameBorder="0"
           marginHeight="0"
