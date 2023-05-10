@@ -69,7 +69,7 @@ const Product = () => {
             {item.category}
             {/* <div>
                 {item.features.map((feature, ind) => (
-                  <img src={urlFor(feature.featureimg).url()} key={ind} alt=" " loading="lazy"/>
+                  <img src={urlFor(feature).url()} key={ind} alt=" " loading="lazy"/>
                 ))}
             </div> */}
           </div>

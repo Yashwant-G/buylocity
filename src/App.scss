@@ -4,15 +4,14 @@
 }
 
 .background-light {
-  background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=412&q=80');
-  background-image: url('./assets/bg-3.png');
+  background-image: url('./assets/bg-light.png');
   background-position: 0%;
   background-repeat: repeat-y;
   background-size: cover;
 }
 
 .background-dark {
-  background-image: url('https://img.freepik.com/free-photo/abstract-luxury-blur-dark-grey-black-gradient-used-as-background-studio-wall-display-your-products_1258-54562.jpg?size=626&ext=jpg');
+  background-image: url('./assets/bg-dark.jpg');
   background-repeat: repeat-y;
   background-size: cover;
   background-position: center;
