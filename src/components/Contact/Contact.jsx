@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FiFacebook, FiTwitter, FiInstagram, FiMail, FiLinkedin } from 'react-icons/fi';
 import {SiWhatsapp} from 'react-icons/si';
 import MotionWrap from "../../wrapper/MotionWrap";
 import './Contact.css'
-import pdf from '../../assets/Returns and Refunds Policy.pdf';
 
 
 const Contact = () => {
@@ -44,15 +44,20 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="footer__copyright mt-4">
-        <p className="p__opensans">2023 BuyLocity. All Rights reserved.</p>
+
+      <div className="footer__policies flex gap-8 mt-4 mb-[-0.5rem] flex-wrap mx-4">
+        <p className="p__opensans text-[var(--secondary-color)] 
+        cursor-pointer hover:underline"><Link to='/contact'> Contact Us</Link></p>
+        <p className="p__opensans text-[var(--secondary-color)] 
+        cursor-pointer hover:underline"><Link to='/terms&conditions'> Terms & Conditions</Link></p>
+        <p className="p__opensans text-[var(--secondary-color)] 
+        cursor-pointer hover:underline"><Link to='/privacy&policy'> Privacy & Policy</Link></p>
+        <p className="p__opensans text-[var(--secondary-color)] 
+        cursor-pointer hover:underline"><Link to='/return&refund'>Cancellation & Return/Refund Policy</Link></p>
       </div>
 
-      <div className="footer__policies flex gap-8 mt-4 mb-[-0.5rem]">
-        <p className="p__opensans text-[var(--secondary-color)] 
-        cursor-pointer hover:underline">Terms & Conditions</p>
-        <p className="p__opensans text-[var(--secondary-color)] 
-        cursor-pointer hover:underline"><a href={pdf} target="_blank" rel="noreferrer">Return & Refund Policy</a> </p>
+      <div className="footer__copyright mt-4">
+        <p className="p__opensans">2023 BuyLocity. All Rights reserved.</p>
       </div>
 
     </div>

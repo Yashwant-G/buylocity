@@ -31,7 +31,7 @@ const TrackOrderId = () => {
   }, []);
 
   return (
-    <div className={`app ${light ? "background-light" : "background-dark"}`}>
+    <div className={`app ${light ? "background-light" : "background-dark"} w-full h-full`}>
       <Helmet>
         <title>Buylocity- Live Track your Order</title>
         <meta
