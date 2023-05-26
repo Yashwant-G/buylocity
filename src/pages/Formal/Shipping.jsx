@@ -9,11 +9,10 @@ const Shipping = () => {
   return (
     <>
       <Helmet>
-        <title>Buylocity- Return & Refund</title>
+        <title>Buylocity- Shipping Policy</title>
         <meta
           name="description"
-          content="Learn about our Return, Refund, and
-        Cancellation Policy at Buylocity. Understand the procedures and
+          content="Learn about our Shipping Policy at Buylocity. Understand the procedures and
         terms for cancelling orders, returning products, and initiating refunds.
         Stay informed and make informed decisions with our comprehensive
         policy."
@@ -36,7 +35,9 @@ const Shipping = () => {
           </div>
           <ul className="flex flex-col gap-4">
             <div>
-              <li className="text-left text-lg font-semibold">1. Order Processing:</li>
+              <li className="text-left text-lg font-semibold">
+                1. Order Processing:
+              </li>
               <div>
                 Upon receiving your order, our team will begin processing it
                 immediately. We strive to process all orders within 1 hour of
@@ -44,7 +45,9 @@ const Shipping = () => {
               </div>
             </div>
             <div>
-              <li className="text-left text-lg font-semibold">2. Delivery Timeframe:</li>
+              <li className="text-left text-lg font-semibold">
+                2. Delivery Timeframe:
+              </li>
               <div>
                 We take pride in our fast delivery service. We guarantee
                 delivery within 2 hours from the time your order is confirmed.
@@ -55,7 +58,9 @@ const Shipping = () => {
               </div>
             </div>
             <div>
-              <li className="text-left text-lg font-semibold">3. Tracking Orders:</li>
+              <li className="text-left text-lg font-semibold">
+                3. Tracking Orders:
+              </li>
               <div>
                 To keep you informed every step of the way, we provide real-time
                 order tracking. Once your order is dispatched, you will receive
@@ -64,7 +69,9 @@ const Shipping = () => {
               </div>
             </div>
             <div>
-              <li className="text-left text-lg font-semibold">4. Shipping Charges:</li>
+              <li className="text-left text-lg font-semibold">
+                4. Shipping Charges:
+              </li>
               <div>
                 We offer competitive shipping rates based on the weight and
                 dimensions of your order. The shipping charges will be displayed
@@ -73,7 +80,9 @@ const Shipping = () => {
               </div>
             </div>
             <div>
-              <li className="text-left text-lg font-semibold">5. Delivery Area:</li>
+              <li className="text-left text-lg font-semibold">
+                5. Delivery Area:
+              </li>
               <div>
                 Currently, we provide delivery services within limited areas of
                 Delhi NCR. If your location falls within this area, you can
@@ -81,7 +90,9 @@ const Shipping = () => {
               </div>
             </div>
             <div>
-              <li className="text-left text-lg font-semibold">6. Returns and Exchanges:</li>
+              <li className="text-left text-lg font-semibold">
+                6. Returns and Exchanges:
+              </li>
               <div>
                 For information on returns and exchanges, please refer to our
                 dedicated Returns Policy page on our website.

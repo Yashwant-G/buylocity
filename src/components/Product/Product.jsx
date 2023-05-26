@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AiOutlinePlus, AiOutlineDoubleRight } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
+import Spinner from "../Spinner/Spinner";
 
 import { urlFor, client } from "../../client";
 import "./Product.scss";
@@ -152,7 +153,7 @@ const Product = () => {
         ))}
       </motion.div>
       :
-      <div className="h-text text-2xl p-20 animate-pulse">loading....</div>
+      <Spinner/>
       }
 
       {filterProduct.length > 2 && (

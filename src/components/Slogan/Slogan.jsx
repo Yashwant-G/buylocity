@@ -1,11 +1,10 @@
 import React from "react";
 import MotionWrap from "../../wrapper/MotionWrap";
 import { motion } from "framer-motion";
-import "./Slogan.scss";
 
 const Slogan = () => {
   return (
-    <div className="slogan_div ">
+    <div className="w-[80%] h-full py-20">
       <h2 className="h-text">
         <motion.div
           whileInView={{ x: [-200, 0], opacity: [0, 1] }}

@@ -12,7 +12,7 @@ const Privacy = () => {
         <title>Buylocity- Privacy & Policy</title>
         <meta
           name="description"
-          content="Discover the comprehensive Terms and Conditions of [Company Name]. Gain insights into our policies, rights, and obligations for a transparent and fair partnership. Stay informed and make informed decisions with our detailed terms."
+          content="Discover the comprehensive Terms and Conditions of Buylocity. Gain insights into our policies, rights, and obligations for a transparent and fair partnership. Stay informed and make informed decisions with our detailed terms."
         />
       </Helmet>
 
@@ -25,7 +25,7 @@ const Privacy = () => {
         <div className="pt-28">
           <p className="head-text">Privacy & Policy</p>
         </div>
-        <div className="p-12 space-y-8 text-[var(--black-color)]">
+        <div className="p-12 space-y-4 text-[var(--black-color)]">
           <div>
             This privacy policy sets out how BuyLocity uses and protects any
             information that you give BuyLocity when you use this website.

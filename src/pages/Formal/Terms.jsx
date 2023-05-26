@@ -25,7 +25,7 @@ const Terms = () => {
         <div className="pt-28">
           <p className="head-text">Terms & Conditions</p>
         </div>
-        <div className="p-12 space-y-8 text-[var(--black-color)]">
+        <div className="p-12 space-y-6 text-[var(--black-color)]">
           <div>
             The Website Owner, including subsidiaries and affiliates (“Website”
             or “Website Owner” or “we” or “us” or “our”) provides the
@@ -46,8 +46,9 @@ const Terms = () => {
           </div>
           <div>
             The term 'BuyLocity' or 'us' or 'we' refers to the owner of the
-            website whose registered/operational office is Mohan Garden New Delhi West Delhi DELHI 110059. The
-            term 'you' refers to the user or viewer of our website.
+            website whose registered/operational office is Mohan Garden New
+            Delhi West Delhi DELHI 110059. The term 'you' refers to the user or
+            viewer of our website.
           </div>
           <div className="font-semibold">
             The use of this website is subject to the following terms of use:
@@ -58,13 +59,14 @@ const Terms = () => {
               information and use only. It is subject to change without notice.
             </li>
             <li>
-              2. Neither we nor any third parties provide any warranty or guarantee
-              as to the accuracy, timeliness, performance, completeness or
-              suitability of the information and materials found or offered on
-              this website for any particular purpose. You acknowledge that such
-              information and materials may contain inaccuracies or errors and
-              we expressly exclude liability for any such inaccuracies or errors
-              to the fullest extent permitted by law.
+              2. Neither we nor any third parties provide any warranty or
+              guarantee as to the accuracy, timeliness, performance,
+              completeness or suitability of the information and materials found
+              or offered on this website for any particular purpose. You
+              acknowledge that such information and materials may contain
+              inaccuracies or errors and we expressly exclude liability for any
+              such inaccuracies or errors to the fullest extent permitted by
+              law.
             </li>
             <li>
               3. Your use of any information or materials on this website is
@@ -95,13 +97,13 @@ const Terms = () => {
               further information.
             </li>
             <li>
-              8. You may not create a link to this website from another website or
-              document without BuyLocity's prior written consent.
+              8. You may not create a link to this website from another website
+              or document without BuyLocity's prior written consent.
             </li>
             <li>
-              9. Your use of this website and any dispute arising out of such use
-              of the website is subject to the laws of India or other regulatory
-              authority.
+              9. Your use of this website and any dispute arising out of such
+              use of the website is subject to the laws of India or other
+              regulatory authority.
             </li>
           </ul>
           <div>

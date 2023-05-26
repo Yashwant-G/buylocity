@@ -25,6 +25,7 @@ const Home = () => {
           So why wait? Whether you need groceries, snacks, or other household items, BuyLocity has got you covered. Experience the convenience of shopping from your favorite local stores without ever leaving your home. Try BuyLocity today and see how we can simplify your shopping experience!"
         />
       </Helmet>
+      
       <Navbar home={true} />
       <Slider />
       <Slogan />

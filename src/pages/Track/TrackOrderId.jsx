@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
-import { client } from "../client";
-import Contact from "../components/Contact/Contact";
-import Found from "../components/Found/Found";
-import Navbar from "../components/Navbar/Navbar";
-import { ModeContext } from "../context/context";
-import MotionWrap from "../wrapper/MotionWrap";
+import { client } from "../../client";
+import Contact from "../../components/Contact/Contact";
+import Navbar from "../../components/Navbar/Navbar";
+import Found from "../../components/Found/Found";
+import { ModeContext } from "../../context/context";
+import MotionWrap from "../../wrapper/MotionWrap";
 
 const TrackOrderId = () => {
   const { light } = useContext(ModeContext);

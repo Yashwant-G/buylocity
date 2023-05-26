@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState(" ");
-  const [open, setOpen] = useState(" ");
+  const [open, setOpen] = useState(true);
   const [logo, setLogo] = useState({
     img: null,
     height: "",
@@ -25,7 +25,7 @@ const Navbar = ({ home }) => {
 
     client.fetch(query).then((data) => {
       setText(data.statustext);
-      setOpen(data.title);
+      setOpen(data.stat);
     });
     client
       .fetch('*[_type == "navbar"] | order(_createdAt asc)')
@@ -54,7 +54,7 @@ const Navbar = ({ home }) => {
             {" "}
             {text}{" "}
           </p>
-          {open.toLowerCase() === "open" && (
+          {open===true && (
             <button className="h-text text-sm text-[#DDB34B] cursor-pointer hover:underline whitespace-nowrap">
               <a href="https://wa.me/c/918383004856">Order now 👇</a>
             </button>

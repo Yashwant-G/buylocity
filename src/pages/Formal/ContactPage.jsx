@@ -13,7 +13,7 @@ const ContactPage = () => {
         <meta name="description" content="Contact Us - Get in touch with our dedicated customer support team for any inquiries, feedback, or assistance you need. Call our hotline, send us an email, or chat with us live. We're here to help!"/>
       </Helmet>
 
-      <div className={`app ${light ? "background-light" : "background-dark"} h-[110vh] w-full`}>
+      <div className={`app ${light ? "background-light" : "background-dark"} h-[110vh] w-full text-[var(--black-color)]`}>
         <Navbar home={false} />
         <div className="pt-40">
           <p className='head-text'>Contact us</p>

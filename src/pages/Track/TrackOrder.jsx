@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import Contact from "../components/Contact/Contact";
-import Navbar from "../components/Navbar/Navbar";
-import { ModeContext } from "../context/context";
 import { useNavigate } from "react-router-dom";
 import Helmet from "react-helmet";
+import { ModeContext } from "../../context/context";
+import Navbar from "../../components/Navbar/Navbar";
+import Contact from "../../components/Contact/Contact";
 
 const TrackOrder = () => {
   const { light } = useContext(ModeContext);
