@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Helmet from "react-helmet";
-import Navbar from "../components/Navbar/Navbar";
-import { ModeContext } from "../context/context";
+import Navbar from "../../components/Navbar/Navbar";
+import { ModeContext } from "../../context/context";
 
 const Privacy = () => {
   const { light } = useContext(ModeContext);

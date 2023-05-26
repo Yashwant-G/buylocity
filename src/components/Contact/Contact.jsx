@@ -8,7 +8,7 @@ import './Contact.css'
 
 const Contact = () => {
   return (
-    <div className="app__footer section__padding" id="contact">
+    <div className="app__footer section__padding pb-[2%]" id="contact">
       <div className="app__footer-links mt-0 sm:mt-20">
         <div className="app__footer-links_contact">
           <h1 className="app__footer-headtext text-2xl sm:text-3xl">Contact Us</h1>
@@ -45,18 +45,20 @@ const Contact = () => {
       </div>
 
 
-      <div className="footer__policies flex gap-8 mt-4 mb-[-0.5rem] flex-wrap mx-4">
+      <div className="footer__policies app__flex gap-8 mt-4 mb-[-0.5rem] flex-wrap mx-4">
         <p className="p__opensans text-[var(--secondary-color)] 
         cursor-pointer hover:underline"><Link to='/contact'> Contact Us</Link></p>
         <p className="p__opensans text-[var(--secondary-color)] 
+        cursor-pointer hover:underline"><Link to='/shipping'> Shipping</Link></p>
+        <p className="p__opensans text-[var(--secondary-color)] 
         cursor-pointer hover:underline"><Link to='/terms&conditions'> Terms & Conditions</Link></p>
         <p className="p__opensans text-[var(--secondary-color)] 
-        cursor-pointer hover:underline"><Link to='/privacy&policy'> Privacy & Policy</Link></p>
+        cursor-pointer hover:underline"><Link to='/privacy&policy'> Privacy Policy</Link></p>
         <p className="p__opensans text-[var(--secondary-color)] 
-        cursor-pointer hover:underline"><Link to='/return&refund'>Cancellation & Return/Refund Policy</Link></p>
+        cursor-pointer hover:underline"><Link to='/return&refund'>Cancellation & Return/Refund</Link></p>
       </div>
 
-      <div className="footer__copyright mt-4">
+      <div className="footer__copyright mt-4 pt-4">
         <p className="p__opensans">2023 BuyLocity. All Rights reserved.</p>
       </div>
 

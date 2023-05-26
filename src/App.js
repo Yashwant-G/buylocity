@@ -4,10 +4,11 @@ import Home from "./pages/Home";
 import Order from "./pages/Order";
 import TrackOrder from "./pages/TrackOrder";
 import TrackOrderId from "./pages/TrackOrderId";
-import Privacy from "./pages/Privacy";
-import ContactPage from "./pages/ContactPage";
-import Terms from "./pages/Terms";
-import Return from "./pages/Return";
+import Privacy from "./pages/Formal/Privacy";
+import ContactPage from "./pages/Formal/ContactPage";
+import Terms from "./pages/Formal/Terms";
+import Return from "./pages/Formal/Return";
+import Shipping from "./pages/Formal/Shipping";
 import error from "./assets/404.jpg"
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/terms&conditions" element={<Terms />} />
       <Route path="/privacy&policy" element={<Privacy />} />
       <Route path="/return&refund" element={<Return />} />
+      <Route path="/shipping" element={<Shipping />} />
       <Route
         path="*"
         element={
