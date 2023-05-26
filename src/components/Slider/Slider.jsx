@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
 
-import "./Slider.css";
+import "./Slider.scss";
 
 const Slider = () => {
   const [SliderData, setSliderData] = useState([]);
@@ -28,12 +28,12 @@ const Slider = () => {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="pt-32">
+      <div className="pt-32" >
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 5500,
+            delay: 55000,
             disableOnInteraction: false,
           }}
           pagination={{
@@ -47,7 +47,7 @@ const Slider = () => {
           {SliderData.map((slide, index) => (
             <SwiperSlide key={index}>
               <img
-                className="rounded-xl"
+                className="sm:rounded-xl pb-7"
                 src={urlFor(slide.imgUrl)}
                 alt="slider_image"
                 loading="lazy"

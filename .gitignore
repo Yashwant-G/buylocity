@@ -115,6 +115,8 @@ typings/
 # dotenv environment variables file
 .env
 
+todo.text
+
 
 ### SublimeText ###
 # cache files for sublime text

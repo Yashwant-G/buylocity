@@ -265,8 +265,8 @@ const Testimonial = () => {
       <div>
         <h1 className="text-[var(--black-color)] text-center text-3xl my-[5rem] mt-28 lg:text-6xl coming-soon">
           <motion.div
-            whileInView={{ x: [-100, 0], opacity: [0, 1], scale: [0, 1] }}
-            transition={{ duration: 2 }}
+            whileInView={{ x: [-60, 0], opacity: [0, 1], scale: [0, 1] }}
+            transition={{ duration: 1 }}
             className=""
           >
             App Coming Soon....

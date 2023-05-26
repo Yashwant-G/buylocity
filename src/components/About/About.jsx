@@ -33,8 +33,8 @@ const About = () => {
       <h2 className="head-text about_head text-[1.75rem] sm:text-4xl">About Us</h2>
       <h2 className="h-text about_text text-lg">
         <motion.div
-          whileInView={{ scale: [0.5, 1], opacity: [0, 1] }}
-          transition={{ duration: 1 }}
+          whileInView={{ scale: [0.7, 1], opacity: [0, 1] }}
+          transition={{ duration: 0.7 }}
           className=""
         >
           {sScreen ? (

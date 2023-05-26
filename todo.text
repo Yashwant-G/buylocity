@@ -2,10 +2,11 @@ TODO
 
 1. Swiper Slider DONE
 2. Success Page with confetti
-3. Test without animation
+3. Test without animation DONE
 4. Context API/ Redux
 9. Fetching Centralized
 5. Navbar Fix
 6. Button color fix
 7. Load unresponsive mode
 8. Rating in stars
+9. Schemas update- Products images, stock, color

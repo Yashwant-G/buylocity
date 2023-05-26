@@ -7,8 +7,8 @@ const Slogan = () => {
     <div className="w-[80%] h-full py-20">
       <h2 className="h-text">
         <motion.div
-          whileInView={{ x: [-200, 0], opacity: [0, 1] }}
-          transition={{ duration: 1.5 }}
+          whileInView={{ x: [-100, 0], opacity: [0, 1] }}
+          transition={{ duration: 1 }}
           className=""
         >
           <i>
