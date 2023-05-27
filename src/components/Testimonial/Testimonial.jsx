@@ -39,11 +39,11 @@ const Testimonial = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(currentRate===0){
-      toast.error('Please Provide Rating');
-      return; 
-    } 
-    
+    if (currentRate === 0) {
+      toast.error("Please Provide Rating");
+      return;
+    }
+
     // setIsFormSubmitted(true);
     setLoading(true);
 
@@ -229,28 +229,34 @@ const Testimonial = () => {
                 onChange={handleChangeInput}
               />
             </div>
-            <p className="text-lg text-gray-500 font-semibold -mt-2 mr-auto">Rate Our Service</p>
-            <div className="relative w-full app__flex -mt-2 justify-start">
-              {[1, 2, 3, 4, 5].map((ind) => (
-                <div>
-                  {ind <= currentRate ? (
-                    <AiFillStar
-                      onClick={() => {
-                        setCurrentRate(ind);
-                      }}
-                      className="text-xl sm:text-2xl text-blue-600 cursor-pointer"
-                    />
-                  ) : (
-                    <AiOutlineStar
-                      onClick={() => {
-                        setCurrentRate(ind);
-                      }}
-                      className="text-xl sm:text-2xl text-blue-600 cursor-pointer"
-                    />
-                  )}
-                </div>
-              ))}
+
+            <div className="fle flex-col gap-4">
+              <p className="text-lg text-gray-500 font-semibold -mt-2 mb-4 mr-auto">
+                Rate Our Service
+              </p>
+              <div className="relative w-full app__flex -mt-2">
+                {[1, 2, 3, 4, 5].map((ind) => (
+                  <div>
+                    {ind <= currentRate ? (
+                      <AiFillStar
+                        onClick={() => {
+                          setCurrentRate(ind);
+                        }}
+                        className="text-2xl text-blue-600 cursor-pointer"
+                      />
+                    ) : (
+                      <AiOutlineStar
+                        onClick={() => {
+                          setCurrentRate(ind);
+                        }}
+                        className="text-2xl text-blue-600 cursor-pointer"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
+
             <button
               className="bg-[var(--secondary-color)] text-white p-text text-lg px-3 py-1 hover:bg-white 
         hover:text-[var(--gray-color)] rounded-3xl mt-2"

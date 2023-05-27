@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 // Import Swiper styles
 import "swiper/css";
@@ -12,10 +12,11 @@ import "swiper/css/zoom";
 import { EffectCube, Pagination, Zoom } from "swiper";
 import { urlFor } from "../../client";
 
-const Individual = ({ prodImg, prod, options }) => {
+const Individual = ({ prodImg, prod, options, tags }) => {
+  const [showDesc, setShowDesc] = useState(false);
   return (
-    <div className="h-full w-full px-8  mb-20">
-      <div className="flex flex-col md:flex-row gap-2">
+    <div className="h-full w-full px-8  mb-20 mx-auto">
+      <div className="flex flex-col md:flex-row gap-8">
         <div className="w-[100%] h-full md:w-[45%]">
           <Swiper
             effect={"cube"}
@@ -48,15 +49,17 @@ const Individual = ({ prodImg, prod, options }) => {
           </Swiper>
         </div>
 
-        <div className="w-[100%] md:w-[55%] h-full ml-12 flex flex-col">
-          <div className="head-text mr-auto whitespace-nowrap">{prod.name}</div>
-
-          <div className="h-text text-lg text-red-400 mr-auto animate-pulse">
-            {prod.special}!
+        <div className="w-[100%] md:w-[55%] h-full app__flex flex-col mx-auto">
+          <div className="head-text mt-4 md:mt-0 text-2xl md:text-3xl mr-auto whitespace-pre-line text-left">
+            {prod.name}
           </div>
 
-          <div className="flex mt-6">
-            <h4 className="bold-text text-[var(--black-color)] flex gap-2 text-2xl ">
+          <div className="h-text text-sm md:text-lg text-red-400 mr-auto animate-pulse">
+            {prod.special}
+          </div>
+
+          <div className="flex mt-6 mr-auto">
+            <h4 className="bold-text text-[var(--black-color)] flex gap-2 text-xl md:text-2xl ">
               Rs.{prod.price}
               <span className="line-through text-gray-500">{prod.mrp}</span>
               <span className="text-green-500 animate-pulse">
@@ -65,14 +68,14 @@ const Individual = ({ prodImg, prod, options }) => {
             </h4>
           </div>
 
-          <div className="flex flex-col gap-8 mt-6">
-            {options.map((opt, ind) => (
+          <div className="flex flex-col gap-8 mt-6 mr-auto">
+            {options && options.map((opt, ind) => (
               <div className="flex flex-col gap-2 " key={ind}>
                 <div className="h-text mr-auto ">{opt.title} </div>
                 <div className="flex gap-4">
                   {opt.values.map((op, i) => (
                     <div
-                      className={`bg-[var(--secondary-color)] p-text text-base text-white 
+                      className={`bg-[var(--secondary-color)] p-text text-sm md:text-base text-white 
                     px-3 cursor-pointer py-1 rounded-full hover:bg-blue-500 hover:scale-105`}
                     >
                       {op}
@@ -83,10 +86,10 @@ const Individual = ({ prodImg, prod, options }) => {
             ))}
           </div>
 
-          <div className="flex gap-4 mt-8 w-[90%]">
+          <div className="flex gap-4 mt-8 w-[100%] md:w-[90%] mr-auto">
             <button
               className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
-                  py-1 rounded-lg mt-1 hover:bg-blue-500 hover:scale-105 text-xl w-[50%]"
+                  py-1 rounded-lg mt-1 hover:bg-blue-500 hover:scale-105  whitespace-nowrap text-lg md:text-xl w-[50%]"
             >
               <a href={prod.whatsappLink} target="_blank" rel="noreferrer">
                 Add to cart
@@ -103,13 +106,35 @@ const Individual = ({ prodImg, prod, options }) => {
             </button>
           </div>
 
-          <div className="my-10 app__flex flex-col items-start">
-            <div className="h-text mb-1">Description</div>
-            <pre className="app__flex justify-start p__opensans">
+          <div className="my-10 app__flex flex-col items-start mr-auto">
+            <div
+              onClick={() => {
+                setShowDesc(!showDesc);
+              }}
+              className="h-text mb-1 app__flex gap-2 cursor-pointer"
+            >
+              Description
+              {showDesc ? <AiOutlineUp /> : <AiOutlineDown />}
+            </div>
+            <pre
+              className={`app__flex justify-start p__opensans whitespace-pre-line ${
+                showDesc ? "flex" : "hidden"
+              }`}
+            >
               {prod.description}
             </pre>
           </div>
         </div>
+      </div>
+
+      <div className="flex flex-col w-full gap-4 mt-6">
+        <div className="h-text mr-auto md:mr-0">About Product</div>
+        <div className="p-text text-sm md:text-lg">{prod.shortDescription}</div>
+      </div>
+      <div className="flex gap-8 mt-8">
+        {tags.map((t,index)=>(
+          <div className="text-blue-500">#{t}</div>
+        ))}
       </div>
     </div>
   );

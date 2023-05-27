@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AiOutlinePlus, AiOutlineDoubleRight } from "react-icons/ai";
+import {
+  AiOutlinePlus,
+  AiOutlineDoubleRight,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
@@ -126,6 +130,18 @@ const BestSeller = () => {
           }`}
         />
       )}
+
+      <div>
+        <button
+          className="mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
+          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-500"
+        >
+          <Link className="app__flex gap-2" to="/products">
+            {" "}
+            All Products <AiOutlineShoppingCart />
+          </Link>
+        </button>
+      </div>
     </section>
   );
 };

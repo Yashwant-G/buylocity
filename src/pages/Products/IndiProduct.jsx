@@ -7,12 +7,14 @@ import Individual from "../../components/Product/Individual";
 import Spinner from "../../components/Spinner/Spinner";
 import { ModeContext } from "../../context/context";
 import { client } from "../../client";
+import Features from "../../components/Features/Features";
 
 const IndiProduct = () => {
   const { light } = useContext(ModeContext);
   const [prod, setProd] = useState([]);
   const [prodImg, setProdImg] = useState([]);
-  const [options,setOptions]=useState([]);
+  const [options, setOptions] = useState([]);
+  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   //   const navigate = useNavigate();
@@ -25,7 +27,8 @@ const IndiProduct = () => {
       setProd(data);
       setProdImg(data.productImages);
       setOptions(data.options);
-      console.log(data);
+      setTags(data.tags);
+      // console.log(data);
     });
     setTimeout(() => {
       setLoading(false);
@@ -46,7 +49,10 @@ const IndiProduct = () => {
       {loading && <Spinner />}
       <Navbar home={false} />
       <div className="min-h-[100vh] w-full pt-32">
-        <Individual prod={prod} prodImg={prodImg} options={options} />
+        <Individual prod={prod} prodImg={prodImg} options={options} tags={tags} />
+      </div>
+      <div className="-mt-16 mb-8">
+        <Features />
       </div>
       <Contact />
     </div>
