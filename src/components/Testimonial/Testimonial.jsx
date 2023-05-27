@@ -6,29 +6,30 @@ import {
   AiOutlineCloseCircle,
 } from "react-icons/ai";
 import { motion } from "framer-motion";
-import Spinner from "../Spinner/Spinner"
+import Spinner from "../Spinner/Spinner";
 
 import MotionWrap from "../../wrapper/MotionWrap";
 
 import { urlFor, client } from "../../client";
 import "./Testimonial.scss";
+import toast from "react-hot-toast";
 
 const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
+  const [currentRate, setCurrentRate] = useState(0);
 
   const [formData, setFormData] = useState({
     username: "",
     desig: "",
     email: "",
     test: "",
-    rate: undefined,
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const { username, desig, email, test, rate } = formData;
+  const { username, desig, email, test } = formData;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -38,18 +39,23 @@ const Testimonial = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(currentRate===0){
+      toast.error('Please Provide Rating');
+      return; 
+    } 
+    
     // setIsFormSubmitted(true);
     setLoading(true);
 
     const entry = {
       _type: "testimonial",
-      _id: 'drafts.',
+      _id: "drafts.",
       name: formData.username,
       // userImage: "formData.img",
       designation: formData.desig,
       email: formData.email,
       testimonial: formData.test,
-      rating: parseInt(formData.rate),
+      rating: currentRate,
     };
 
     client
@@ -58,6 +64,7 @@ const Testimonial = () => {
         console.log("success");
         setLoading(false);
         setIsFormSubmitted(true);
+        toast.success("Testimonial Submitted");
       })
       .catch((err) => console.log(err));
   };
@@ -67,16 +74,20 @@ const Testimonial = () => {
   };
 
   useEffect(() => {
-    const query = '*[_type == "testimonial"] | order(_updatedAt asc)';
+    const query =
+      '*[_type == "testimonial" && _id in path("drafts.**") == false] | order(_updatedAt asc)';
 
     client.fetch(query).then((data) => {
       setTestimonials(data);
+      console.log(data);
     });
   }, []);
 
   return (
     <div className="app__testimonial " id="testimonial">
-      <h2 className="head-text about_head text-3xl sm:text-4xl">Our Testimonials</h2>
+      <h2 className="head-text about_head text-3xl sm:text-4xl">
+        Our Testimonials
+      </h2>
       {testimonials.length && (
         <>
           <div className="app__testimonial-item app__flex">
@@ -179,7 +190,7 @@ const Testimonial = () => {
           <>
             <div>
               <input
-                className="px-4 py-2 h-text text-left text-sm outline-none rounded-lg"
+                className="px-4 py-2 h-text text-left text-black text-sm outline-none rounded-lg"
                 type="text"
                 placeholder="Your name"
                 name="username"
@@ -190,7 +201,7 @@ const Testimonial = () => {
             </div>
             <div>
               <input
-                className="px-4 py-2 h-text text-left text-sm outline-none rounded-lg"
+                className="px-4 py-2 h-text text-left text-black text-sm outline-none rounded-lg"
                 type="text"
                 placeholder="Your Designation"
                 name="desig"
@@ -201,7 +212,7 @@ const Testimonial = () => {
 
             <div>
               <input
-                className="px-4 py-2 h-text text-left text-sm outline-none rounded-lg"
+                className="px-4 py-2 h-text text-left text-black text-sm outline-none rounded-lg"
                 type="email"
                 placeholder="Your Email"
                 name="email"
@@ -211,33 +222,43 @@ const Testimonial = () => {
             </div>
             <div>
               <textarea
-                className="px-4 py-2 h-text text-left text-sm outline-none rounded-lg"
+                className="px-4 py-2 h-text text-left text-black text-sm outline-none rounded-lg"
                 placeholder="Your Testimony"
                 name="test"
                 value={test}
                 onChange={handleChangeInput}
               />
             </div>
-            <div className="relative w-full">
-              <input
-                className="px-4 py-2 h-text text-left text-sm outline-none rounded-lg appearance-none w-full"
-                type="number"
-                placeholder="Rate us Out of 5"
-                name="rate"
-                value={rate}
-                onChange={handleChangeInput}
-                min="1"
-                max="5"
-              />
+            <p className="text-lg text-gray-500 font-semibold -mt-2 mr-auto">Rate Our Service</p>
+            <div className="relative w-full app__flex -mt-2 justify-start">
+              {[1, 2, 3, 4, 5].map((ind) => (
+                <div>
+                  {ind <= currentRate ? (
+                    <AiFillStar
+                      onClick={() => {
+                        setCurrentRate(ind);
+                      }}
+                      className="text-xl sm:text-2xl text-blue-600 cursor-pointer"
+                    />
+                  ) : (
+                    <AiOutlineStar
+                      onClick={() => {
+                        setCurrentRate(ind);
+                      }}
+                      className="text-xl sm:text-2xl text-blue-600 cursor-pointer"
+                    />
+                  )}
+                </div>
+              ))}
             </div>
             <button
               className="bg-[var(--secondary-color)] text-white p-text text-lg px-3 py-1 hover:bg-white 
-        hover:text-[var(--gray-color)] rounded-3xl"
+        hover:text-[var(--gray-color)] rounded-3xl mt-2"
               type="submit"
             >
               {!loading ? "Submit" : "Submitting..."}
             </button>
-            {loading && <Spinner/>}
+            {loading && <Spinner />}
             <div className="flex justify-start w-[200px]">
               <p className="p-text text-gray-500">
                 If you are comfortable in sharing your image, please{" "}
@@ -261,7 +282,9 @@ const Testimonial = () => {
         onClick={() => {
           setOpen(false);
         }}
-        className={`fixed bg-[#5f5f5f83] top-0 left-0 right-0 bottom-0 ${open? 'scale-1':'scale-0'} z-10`}
+        className={`fixed bg-[#5f5f5f83] top-0 left-0 right-0 bottom-0 ${
+          open ? "scale-1" : "scale-0"
+        } z-10`}
       ></div>
 
       <div>

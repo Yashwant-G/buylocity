@@ -1,7 +1,11 @@
 import "./App.scss";
-import { Link, Route, Routes } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
+
+import Products from "./pages/Products/Products";
+import IndiProduct from "./pages/Products/IndiProduct";
 
 import TrackOrder from "./pages/Track/TrackOrder";
 import TrackOrderId from "./pages/Track/TrackOrderId";
@@ -15,9 +19,16 @@ import Shipping from "./pages/Formal/Shipping";
 import PageNotFound from "./assets/404.png";
 
 function App() {
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/products" element={<Products/>} />
+      <Route path="/products/:id" element={<IndiProduct/>} />
       <Route path="/order" element={<Order />} />
       <Route path="/track" element={<TrackOrder />} />
       <Route path="/track/:id" element={<TrackOrderId />} />

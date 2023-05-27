@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
 import "./Navbar.scss";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
@@ -54,7 +54,7 @@ const Navbar = ({ home }) => {
             {" "}
             {text}{" "}
           </p>
-          {open===true && (
+          {open === true && (
             <button className="h-text text-sm text-[#DDB34B] cursor-pointer hover:underline whitespace-nowrap">
               <a href="https://wa.me/c/918383004856">Order now 👇</a>
             </button>
@@ -79,7 +79,11 @@ const Navbar = ({ home }) => {
             {navList.map((item, index) => (
               <li className="app__flex p-text" key={index}>
                 <div />
-                <a href={`${item.link}`}>{item.title}</a>
+                {item.link.includes("/") ? (
+                  <Link to={item.link}>{item.title}</Link>
+                ) : (
+                  <a href={`${item.link}`}>{item.title}</a>
+                )}
               </li>
             ))}
           </ul>

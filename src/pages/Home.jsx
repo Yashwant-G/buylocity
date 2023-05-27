@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Slider from "../components/Slider/Slider";
 import Slogan from "../components/Slogan/Slogan";
-import Product from "../components/Product/Product";
+import BestSeller from "../components/Product/BestSeller";
 import Features from "../components/Features/Features";
 import Serving from "../components/Serving/Serving";
 import About from "../components/About/About";
@@ -19,7 +19,7 @@ const Home = () => {
     setwait(true);
     setTimeout(() => {
       setwait(false);
-    }, 2500);
+    }, 1500);
   }, []);
 
   return (
@@ -37,7 +37,7 @@ const Home = () => {
       <Navbar home={true} />
       <Slider />
       <Slogan />
-      <Product />
+      <BestSeller />
       <Features />
       <Serving />
       <About />

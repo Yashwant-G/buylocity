@@ -28,7 +28,7 @@ const Slider = () => {
   return (
     <div className="flex flex-col h-full w-full" id="home">
       <div className="pt-32" >
-        <Swiper
+        <Swiper id="swiper1"
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{

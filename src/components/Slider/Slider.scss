@@ -43,9 +43,9 @@
   align-items: center;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  color: var(--black-color);
+#swiper1 .swiper-button-next,
+#swiper1 .swiper-button-prev {
+  color: var(--secondary-color);
   @media screen and (max-width: 650px) {
     display: none;
   }

@@ -46,19 +46,20 @@
   }
 }
 
-.app__work-portfolio {
+.app__products-portfolio {
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  // -ms-overflow-style: none;
+  // scrollbar-width: none;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 
   .app__work-item {
     width: 270px;
@@ -175,4 +176,16 @@
     transform: translateX(100%);
     opacity: 0.5;
   }
+}
+
+.swiper-pagination {
+  color: var(--secondary-color);
+  margin-top: 12px;
+}
+
+#swiper2 .swiper-button-next,
+#swiper2 .swiper-button-prev {
+  color: var(--secondary-color);
+  scale: 0.5;
+  width: 2%;
 }
