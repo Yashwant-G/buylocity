@@ -18,7 +18,6 @@ const Slider = () => {
 
     client.fetch(query).then((data) => {
       setSliderData(data);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     });
   }, []);
 
@@ -27,13 +26,13 @@ const Slider = () => {
   }
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full" id="home">
       <div className="pt-32" >
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 55000,
+            delay: 3500,
             disableOnInteraction: false,
           }}
           pagination={{

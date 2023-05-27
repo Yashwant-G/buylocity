@@ -24,7 +24,7 @@ const Found = ({ details }) => {
     second: "numeric",
   });
   return (
-    <div className="w-full h-full mb-20">
+    <div className="w-full min-h-[100vh] mb-20">
       {!loading ? (
         <div className="pt-28 w-full h-full app__flex flex-col gap-12 lg:gap-8">
           <div className="head-text text-2xl lg:text-3xl">
@@ -139,9 +139,7 @@ const Found = ({ details }) => {
           )}
         </div>
       ) : (
-        <div className="w-full h-[80vh]">
-          <Spinner />
-        </div>
+        <Spinner />
       )}
     </div>
   );

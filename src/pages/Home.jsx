@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Slider from "../components/Slider/Slider";
 import Slogan from "../components/Slogan/Slogan";
@@ -10,9 +10,17 @@ import Testimonial from "../components/Testimonial/Testimonial";
 import Contact from "../components/Contact/Contact";
 import { ModeContext } from "../context/context";
 import Helmet from "react-helmet";
+import Spinner from "../components/Spinner/Spinner";
 
 const Home = () => {
   const { light } = useContext(ModeContext);
+  const [wait, setwait] = useState(false);
+  useEffect(() => {
+    setwait(true);
+    setTimeout(() => {
+      setwait(false);
+    }, 2500);
+  }, []);
 
   return (
     <div className={`app ${light ? "background-light" : "background-dark"}`}>
@@ -25,7 +33,7 @@ const Home = () => {
           So why wait? Whether you need groceries, snacks, or other household items, BuyLocity has got you covered. Experience the convenience of shopping from your favorite local stores without ever leaving your home. Try BuyLocity today and see how we can simplify your shopping experience!"
         />
       </Helmet>
-      
+      {wait && <Spinner />}
       <Navbar home={true} />
       <Slider />
       <Slogan />

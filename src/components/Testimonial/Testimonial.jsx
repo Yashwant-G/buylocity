@@ -6,6 +6,7 @@ import {
   AiOutlineCloseCircle,
 } from "react-icons/ai";
 import { motion } from "framer-motion";
+import Spinner from "../Spinner/Spinner"
 
 import MotionWrap from "../../wrapper/MotionWrap";
 
@@ -44,7 +45,7 @@ const Testimonial = () => {
       _type: "testimonial",
       _id: 'drafts.',
       name: formData.username,
-      // userImage: formData.img,
+      // userImage: "formData.img",
       designation: formData.desig,
       email: formData.email,
       testimonial: formData.test,
@@ -151,7 +152,7 @@ const Testimonial = () => {
       <div>
         <button
           className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-2xl
-          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-[#DDB34B]"
+          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-500"
           onClick={() => {
             setOpen(true);
           }}
@@ -164,7 +165,7 @@ const Testimonial = () => {
         onSubmit={handleSubmit}
         className={`fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] 
       scale-1 z-10 bg-[#ffce53] app__flex flex-col gap-4 py-8 px-8 
-      rounded-2xl ${!open ? "scale-0" : "scale-1"}`}
+      rounded-2xl ${!open ? "scale-0" : "scale-1"} z-20`}
       >
         <div className="flex w-full justify-end items-center text-xl cursor-pointer mt-[-1rem]">
           <AiOutlineCloseCircle
@@ -236,6 +237,7 @@ const Testimonial = () => {
             >
               {!loading ? "Submit" : "Submitting..."}
             </button>
+            {loading && <Spinner/>}
             <div className="flex justify-start w-[200px]">
               <p className="p-text text-gray-500">
                 If you are comfortable in sharing your image, please{" "}
@@ -259,7 +261,7 @@ const Testimonial = () => {
         onClick={() => {
           setOpen(false);
         }}
-        className={`fixed bg-[#5f5f5f83] top-0 left-0 right-0 bottom-0 ${open? 'scale-1':'scale-0'}`}
+        className={`fixed bg-[#5f5f5f83] top-0 left-0 right-0 bottom-0 ${open? 'scale-1':'scale-0'} z-10`}
       ></div>
 
       <div>

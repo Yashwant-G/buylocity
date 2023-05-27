@@ -120,12 +120,12 @@ const Product = () => {
                   <h4 className="bold-text text-[var(--black-color)]">
                     {prod.name}
                   </h4>
-                  <pre
+                  {/* <pre
                     className="p-text text-[#8693a9] break-all whitespace-pre-line"
                     style={{ marginTop: 10 }}
                   >
                     {(prod.description).substring(0,150)}...
-                  </pre>
+                  </pre> */}
                 </div>
                 <div className="app__work-content app__flex flex mt-[-15px] ">
                   <h4 className="bold-text text-[var(--black-color)] flex gap-1">
@@ -142,7 +142,7 @@ const Product = () => {
                 <div>
                   <button
                     className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
-                  py-1 rounded-lg mt-1 hover:bg-[#DDB34B]"
+                  py-1 rounded-lg mt-1 hover:bg-blue-500"
                   >
                     Add <AiOutlinePlus />
                   </button>

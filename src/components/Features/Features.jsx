@@ -46,7 +46,7 @@ const Features = () => {
             {" "}
             <button
               className="app__flex gap-2 mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
-          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-[#DDB34B]"
+          px-4 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-500"
             >
               Whatsapp Store <AiOutlineWhatsApp />
             </button>
