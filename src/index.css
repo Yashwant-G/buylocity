@@ -8,21 +8,21 @@
   --font-base: "DM Sans", sans-serif;
   --font-alt: 'Open Sans', sans-serif;
 
-  --primary-color: #1e1e1e;
+  /* --primary-color: #1e1e1e;
   --secondary-color: #6b75e0;
   --black-color: #ffffff;
   --gray-color: #a5b1c5;
   --white-color:  #030303;
   --lightGray-color: #e4e4e4;
-  --brown-color: #46364a;
+  --brown-color: #46364a; */
   
-  /* --primary-color: #edf2f8;
+  --primary-color: #edf2f8;
   --secondary-color: #1d2687;
   --black-color: #030303;
   --lightGray-color: #e4e4e4;
   --gray-color: #6b7688;
   --brown-color: #46364a;
-  --white-color: #ffffff; */
+  --white-color: #ffffff;
 
 }
 

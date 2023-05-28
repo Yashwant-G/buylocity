@@ -5,7 +5,7 @@ export const ModeContext = createContext();
 
 // Define a component to provide the value of toggle state to the context
 export const ModeContextProvider = ({ children }) => {
-  const [light,setLight]=useState(false);
+  const [light,setLight]=useState(true);
 
   const modeFunction = () => {
     if(light){

@@ -36,7 +36,7 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
 
   return (
     <section className="app__flex w-full flex-col " id="products">
-      <h2 className="head-text text-2xl lg:text-4xl mb-16 mt-10">
+      <h2 className="head-text text-2xl lg:text-4xl mb-8 md:mb-16 mt-10">
         {firstHead} <span>{secondHead}</span>
       </h2>
 

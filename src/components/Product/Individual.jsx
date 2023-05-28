@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import confetti from "canvas-confetti";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { BsCartX } from "react-icons/bs";
 
 // Import Swiper styles
 import "swiper/css";
@@ -12,10 +14,34 @@ import "swiper/css/zoom";
 import { EffectCube, Pagination, Zoom } from "swiper";
 import { urlFor } from "../../client";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Individual = ({ prodImg, prod, options, tags }) => {
   const [showDesc, setShowDesc] = useState(false);
   const [showAb, setShowAb] = useState(false);
+  const [actColor, setActColor] = useState("");
+  const [actPack, setActPack] = useState("");
+  const [actSize, setActSize] = useState("");
+  const handleChange = (value, type) => {
+    if (type === "Color") {
+      setActColor(value);
+    }
+    if (type === "Pack") {
+      setActPack(value);
+    }
+    if (type === "Size") {
+      setActSize(value);
+    }
+    if (type === "Submit") {
+      toast.success(`${prod.name} Added to Cart`);
+      confetti({
+        particleCount: 300,
+        spread: 70,
+        origin: { y: 1 },
+      });
+    }
+  };
+
   return (
     <div className="h-full w-full px-8  mb-20 mx-auto">
       <div className="flex flex-col md:flex-row gap-8">
@@ -64,7 +90,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
             <h4 className="bold-text text-[var(--black-color)] flex gap-2 text-xl md:text-2xl ">
               Rs.{prod.price}
               <span className="line-through text-gray-500">{prod.mrp}</span>
-              <span className="text-green-500 animate-pulse">
+              <span className="text-green-500 ">
                 {Math.round(((prod.mrp - prod.price) / prod.mrp) * 100)}% OFF
               </span>
             </h4>
@@ -75,39 +101,101 @@ const Individual = ({ prodImg, prod, options, tags }) => {
               options.map((opt, ind) => (
                 <div className="flex flex-col gap-2 " key={ind}>
                   <div className="h-text mr-auto ">{opt.title} </div>
-                  <div className="flex gap-4">
-                    {opt.values.map((op, i) => (
-                      <div key={i}
-                        className={`bg-[var(--secondary-color)] p-text text-sm md:text-base text-white 
-                    px-3 cursor-pointer py-1 rounded-full hover:bg-blue-500 hover:scale-105`}
-                      >
-                        {op}
-                      </div>
-                    ))}
-                  </div>
+                  {opt.title === "Color" ? (
+                    <div className="flex gap-6 cursor-pointer flex-wrap mt-2 ">
+                      {opt.values.map((op, i) => (
+                        <div
+                          key={i}
+                          onClick={() => handleChange(op, opt.title)}
+                          className="flex flex-col items-center gap-1"
+                        >
+                          <div
+                            className={`${
+                              op === actColor &&
+                              "border-2 border-blue-500 rounded-full hover:scale-110"
+                            } p-1`}
+                          >
+                            <div
+                              className={`h-[25px] w-[25px] hover:scale-110 border-[1.2px] border-[var(--black-color)] rounded-full bg-[${op.toLowerCase()}]`}
+                            ></div>
+                          </div>
+                          <div
+                            className={`${
+                              op === actColor && "text-[var(--secondary-color)]"
+                            } p__opensans`}
+                          >
+                            {op}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex gap-4">
+                      {opt.values.map((op, i) => (
+                        <div
+                          key={i}
+                          onClick={() => {
+                            handleChange(op, opt.title);
+                          }}
+                          className={`${
+                            op === actSize || op === actPack
+                              ? "bg-[var(--secondary-color)] text-white"
+                              : "bg-white text-black"
+                          }  p-text text-sm md:text-base
+                    px-3 cursor-pointer py-1 rounded-full hover:bg-[var(--secondary-color)] hover:text-white hover:scale-105`}
+                        >
+                          {op}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
           </div>
 
-          <div className="flex gap-4 mt-8 w-[100%] md:w-[90%] mr-auto">
-            <button
-              className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
+          {prod.stock !== 0 ? (
+            <div className="w-full mt-8">
+              {prod.stock < 3 && (
+                <div className="p__opensans ml-1 text-red-500 animate-pulse">
+                  Hurry only {prod.stock} left !!!
+                </div>
+              )}
+              <div className="flex gap-4 w-[100%] md:w-[90%] mr-auto">
+                <button
+                  onClick={() => {
+                    handleChange(null, "Submit");
+                  }}
+                  className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
                   py-1 rounded-lg mt-1 hover:bg-blue-500 hover:scale-105  whitespace-nowrap text-lg md:text-xl w-[50%]"
-            >
-              <a href={prod.whatsappLink} target="_blank" rel="noreferrer">
-                Add to cart
-              </a>{" "}
-              <AiOutlinePlus />
-            </button>
-            <button
-              className="app__flex gap-1 bg-yellow-300 text-gray-700 font-medium px-3 
+                >
+                  <a href={prod.whatsappLink} target="_blank" rel="noreferrer">
+                    Add to cart
+                  </a>{" "}
+                  <AiOutlinePlus />
+                </button>
+                <button
+                  className="app__flex gap-1 bg-yellow-300 text-gray-700 font-medium px-3 
                   py-1 rounded-lg mt-1 hover:bg-yellow-500 hover:scale-105 w-[50%]"
-            >
-              <a href={prod.whatsappLink} target="_blank" rel="noreferrer">
-                Buy Now
-              </a>{" "}
-            </button>
-          </div>
+                >
+                  <a href={prod.whatsappLink} target="_blank" rel="noreferrer">
+                    Buy Now
+                  </a>{" "}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex gap-4 mt-8 w-[100%] md:w-[90%] mr-auto">
+              <button
+                onClick={() => {
+                  toast.error("Out of Stock");
+                }}
+                className="app__flex gap-1 bg-[var(--gray-color)] text-white px-3 
+                  py-1 rounded-lg mt-1 hover:bg-gray-700 hover:scale-105  whitespace-nowrap text-lg md:text-xl w-[50%] mx-0 md:mx-auto"
+              >
+                Out of Stock <BsCartX />
+              </button>
+            </div>
+          )}
 
           <div className="my-10 app__flex flex-col items-start mr-auto">
             <div
@@ -146,20 +234,36 @@ const Individual = ({ prodImg, prod, options, tags }) => {
         </div>
       </div>
 
-      {prod.return && <div className="flex flex-col w-full gap-4 mt-10">
-        <div className="h-text mr-auto md:mr-0 app__flex gap-2 cursor-pointer">Hassle Free Return/Exchange</div>
-        <div className="p-text md:text-center text-sm md:text-lg">{prod.return} For complete informatiom, refer <Link to="/return&refund" className="text-blue-500 hover:underline" >return/refund policy</Link></div>
-      </div>}
+      {prod.return && (
+        <div className="flex flex-col w-full gap-4 mt-10">
+          <div className="h-text mr-auto md:mr-0 app__flex gap-2 cursor-pointer">
+            Hassle Free Return/Exchange
+          </div>
+          <div className="p-text md:text-center text-sm md:text-lg">
+            {prod.return} For complete informatiom, refer{" "}
+            <Link to="/return&refund" className="text-blue-500 hover:underline">
+              return/refund policy
+            </Link>
+          </div>
+        </div>
+      )}
 
-      { prod.warranty && <div className="flex flex-col w-full gap-4 mt-10">
-        <div className="h-text mr-auto md:mr-0 app__flex gap-2 cursor-pointer">Warranty</div>
-        <div className="p-text md:text-center text-sm md:text-lg">{prod.warranty}</div>
-      </div>}
-
+      {prod.warranty && (
+        <div className="flex flex-col w-full gap-4 mt-10">
+          <div className="h-text mr-auto md:mr-0 app__flex gap-2 cursor-pointer">
+            Warranty
+          </div>
+          <div className="p-text md:text-center text-sm md:text-lg">
+            {prod.warranty}
+          </div>
+        </div>
+      )}
 
       <div className="flex gap-8 mt-8 flex-wrap">
         {tags.map((t, index) => (
-          <div className="text-blue-500" key={index}>#{t}</div>
+          <div className="text-blue-500" key={index}>
+            #{t}
+          </div>
         ))}
       </div>
     </div>

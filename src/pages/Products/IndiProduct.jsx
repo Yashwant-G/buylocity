@@ -35,7 +35,7 @@ const IndiProduct = () => {
       setLoading(false);
     }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
   return (
     <div className={`app ${light ? "background-light" : "background-dark"}`}>
       <Helmet>
@@ -52,12 +52,24 @@ const IndiProduct = () => {
       {loading && <Spinner />}
       <Navbar home={false} />
       <div className="min-h-[100vh] w-full pt-32">
-        <Individual prod={prod} prodImg={prodImg} options={options} tags={tags} />
+        <Individual
+          prod={prod}
+          prodImg={prodImg}
+          options={options}
+          tags={tags}
+        />
       </div>
-      <div className="-mt-12 mb-8">
+      <div className="-mt-12 mb-16">
         <Features />
       </div>
-      <BestSeller search={tags} heading={"Our Bestsellers"} firstHead={"Similar"} secondHead={"Products"} />
+      <div className="mb-8">
+        <BestSeller
+          search={tags}
+          heading={"Our Bestsellers"}
+          firstHead={"Similar"}
+          secondHead={"Products"}
+        />
+      </div>
       <Contact />
     </div>
   );
