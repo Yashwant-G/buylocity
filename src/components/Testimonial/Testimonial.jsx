@@ -79,7 +79,7 @@ const Testimonial = () => {
 
     client.fetch(query).then((data) => {
       setTestimonials(data);
-      console.log(data);
+      // console.log(data);
     });
   }, []);
 
@@ -235,8 +235,8 @@ const Testimonial = () => {
                 Rate Our Service
               </p>
               <div className="relative w-full app__flex -mt-2">
-                {[1, 2, 3, 4, 5].map((ind) => (
-                  <div>
+                {[1, 2, 3, 4, 5].map((ind,i) => (
+                  <div key={i}>
                     {ind <= currentRate ? (
                       <AiFillStar
                         onClick={() => {

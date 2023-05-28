@@ -37,7 +37,7 @@ const Product = () => {
 
     client.fetch(query2).then((data) => {
       setProduct(data);
-      console.log(data);
+      // console.log(data);
       setFilterProduct(data.filter((prod) => prod.tags.includes("Clothing")));
     });
   }, []);
@@ -91,7 +91,7 @@ const Product = () => {
           } ${filterProduct.length < 4 && "lg:justify-center"}`}
         >
           {filterProduct.map((prod, index) => (
-            <div>
+            <div key={index}>
               <motion.div
                 whileInView={{ opacity: 1 }}
                 whileHover={{ scale: 1.05 }}
@@ -111,7 +111,7 @@ const Product = () => {
                       className="mySwiper h-full w-full"
                     >
                       {prod.productImages.map((productImage, ind) => (
-                        <SwiperSlide>
+                        <SwiperSlide key={ind}>
                           <img
                             src={urlFor(productImage)}
                             alt={prod.name}

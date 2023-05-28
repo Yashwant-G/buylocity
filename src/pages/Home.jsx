@@ -37,7 +37,7 @@ const Home = () => {
       <Navbar home={true} />
       <Slider />
       <Slogan />
-      <BestSeller />
+      <BestSeller search={["Bestseller"]} firstHead={"Our"} secondHead={"Bestseller"} />
       <Features />
       <Serving />
       <About />

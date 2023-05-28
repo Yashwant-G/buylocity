@@ -20,27 +20,29 @@ import "./BestSeller.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
 import { Link } from "react-router-dom";
 
-const BestSeller = () => {
+const BestSeller = ({ search, firstHead, secondHead }) => {
   const [filterProduct, setFilterProduct] = useState([]);
   const { light } = useContext(ModeContext);
+  // console.log(search==="Bestseller");
 
   useEffect(() => {
     const query2 = '*[_type == "product"] | order(_updatedAt asc)';
-
     client.fetch(query2).then((data) => {
-      setFilterProduct(data.filter((prod) => prod.tags.includes("Bestseller")));
+      setFilterProduct(
+        data.filter((prod) => search.some((tag) => prod.tags.includes(tag)))
+      );
     });
-  }, []);
+  }, [search]);
 
   return (
     <section className="app__flex w-full flex-col " id="products">
       <h2 className="head-text text-2xl lg:text-4xl mb-16 mt-10">
-        Our <span>Bestsellers</span>
+        {firstHead} <span>{secondHead}</span>
       </h2>
 
       <div className={`app__bestseller-portfolio app__flex `}>
         {filterProduct.map((prod, index) => (
-          <div>
+          <div key={index}>
             <motion.div
               whileInView={{ opacity: 1 }}
               whileHover={{ scale: 1.05 }}
@@ -60,7 +62,7 @@ const BestSeller = () => {
                     className="mySwiper h-full w-full"
                   >
                     {prod.productImages.map((productImage, ind) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={ind}>
                         <img
                           src={urlFor(productImage)}
                           alt={prod.name}
@@ -132,15 +134,15 @@ const BestSeller = () => {
       )}
 
       <div>
-        <button
-          className="mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
-          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-500"
-        >
-          <Link className="app__flex gap-2" to="/products">
+        <Link to="/products">
+          <button
+            className="mx-auto bg-[var(--secondary-color)] text-white text-l lg:text-xl
+          px-5 py-3 rounded-2xl mt-8 hover:scale-105 hover:bg-blue-500 app__flex gap-2"
+          >
             {" "}
             All Products <AiOutlineShoppingCart />
-          </Link>
-        </button>
+          </button>
+        </Link>
       </div>
     </section>
   );

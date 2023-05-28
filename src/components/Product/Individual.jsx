@@ -11,9 +11,11 @@ import "swiper/css/zoom";
 // import required modules
 import { EffectCube, Pagination, Zoom } from "swiper";
 import { urlFor } from "../../client";
+import { Link } from "react-router-dom";
 
 const Individual = ({ prodImg, prod, options, tags }) => {
   const [showDesc, setShowDesc] = useState(false);
+  const [showAb, setShowAb] = useState(false);
   return (
     <div className="h-full w-full px-8  mb-20 mx-auto">
       <div className="flex flex-col md:flex-row gap-8">
@@ -36,7 +38,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
             className="mySwiper"
           >
             {prodImg.map((productImage, index) => (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <div className="swiper-zoom-container">
                   <img
                     src={urlFor(productImage)}
@@ -69,21 +71,22 @@ const Individual = ({ prodImg, prod, options, tags }) => {
           </div>
 
           <div className="flex flex-col gap-8 mt-6 mr-auto">
-            {options && options.map((opt, ind) => (
-              <div className="flex flex-col gap-2 " key={ind}>
-                <div className="h-text mr-auto ">{opt.title} </div>
-                <div className="flex gap-4">
-                  {opt.values.map((op, i) => (
-                    <div
-                      className={`bg-[var(--secondary-color)] p-text text-sm md:text-base text-white 
+            {options &&
+              options.map((opt, ind) => (
+                <div className="flex flex-col gap-2 " key={ind}>
+                  <div className="h-text mr-auto ">{opt.title} </div>
+                  <div className="flex gap-4">
+                    {opt.values.map((op, i) => (
+                      <div key={i}
+                        className={`bg-[var(--secondary-color)] p-text text-sm md:text-base text-white 
                     px-3 cursor-pointer py-1 rounded-full hover:bg-blue-500 hover:scale-105`}
-                    >
-                      {op}
-                    </div>
-                  ))}
+                      >
+                        {op}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           <div className="flex gap-4 mt-8 w-[100%] md:w-[90%] mr-auto">
@@ -111,7 +114,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
               onClick={() => {
                 setShowDesc(!showDesc);
               }}
-              className="h-text mb-1 app__flex gap-2 cursor-pointer"
+              className="h-text mb-1 app__flex gap-1 cursor-pointer"
             >
               Description
               {showDesc ? <AiOutlineUp /> : <AiOutlineDown />}
@@ -127,13 +130,36 @@ const Individual = ({ prodImg, prod, options, tags }) => {
         </div>
       </div>
 
-      <div className="flex flex-col w-full gap-4 mt-6">
-        <div className="h-text mr-auto md:mr-0">About Product</div>
-        <div className="p-text text-sm md:text-lg">{prod.shortDescription}</div>
+      <div className="flex flex-col w-full gap-4 mt-0 md:mt-6">
+        <div
+          onClick={() => {
+            setShowAb(!showAb);
+          }}
+          className="h-text mr-auto md:mr-0 app__flex gap-1 cursor-pointer"
+        >
+          About Product {showAb ? <AiOutlineUp /> : <AiOutlineDown />}
+        </div>
+        <div
+          className={`p-text text-sm md:text-lg ${showAb ? "flex" : "hidden"}`}
+        >
+          {prod.shortDescription}
+        </div>
       </div>
-      <div className="flex gap-8 mt-8">
-        {tags.map((t,index)=>(
-          <div className="text-blue-500">#{t}</div>
+
+      {prod.return && <div className="flex flex-col w-full gap-4 mt-10">
+        <div className="h-text mr-auto md:mr-0 app__flex gap-2 cursor-pointer">Hassle Free Return/Exchange</div>
+        <div className="p-text md:text-center text-sm md:text-lg">{prod.return} For complete informatiom, refer <Link to="/return&refund" className="text-blue-500 hover:underline" >return/refund policy</Link></div>
+      </div>}
+
+      { prod.warranty && <div className="flex flex-col w-full gap-4 mt-10">
+        <div className="h-text mr-auto md:mr-0 app__flex gap-2 cursor-pointer">Warranty</div>
+        <div className="p-text md:text-center text-sm md:text-lg">{prod.warranty}</div>
+      </div>}
+
+
+      <div className="flex gap-8 mt-8 flex-wrap">
+        {tags.map((t, index) => (
+          <div className="text-blue-500" key={index}>#{t}</div>
         ))}
       </div>
     </div>

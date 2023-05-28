@@ -8,6 +8,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { ModeContext } from "../../context/context";
 import { client } from "../../client";
 import Features from "../../components/Features/Features";
+import BestSeller from "../../components/Product/BestSeller";
 
 const IndiProduct = () => {
   const { light } = useContext(ModeContext);
@@ -41,9 +42,11 @@ const IndiProduct = () => {
         <title>Buylocity- {`${prod.name}`}</title>
         <meta
           name="description"
-          content="Welcome to our order form page, where you can easily place an order for your desired products in just a few clicks. Our simple and user-friendly order form makes it easy to browse through our selection of products and add them to your cart.
-          With our secure payment system, you can rest assured that your payment information is safe and secure. Our team of professionals works hard to ensure that your order is processed quickly and accurately, and we always strive to provide the best possible customer service.
-          So whether you're looking to purchase groceries, household items, or any other products, our order form page makes it easy and convenient. Simply browse through our selection, add items to your cart, and complete your purchase with just a few clicks. Try our order form page today and experience the ease of online shopping!"
+          content="Discover a wide selection of products and categories at our online store. Explore our extensive range of high-quality 
+          items to meet all your needs. From electronics to home decor, fashion to kitchenware, we offer a diverse collection to cater to 
+          every taste and preference. Whether you're looking for the latest gadgets, stylish clothing, or unique gifts, our website has 
+          you covered. Browse through our user-friendly interface, conveniently organized into various categories, making it easy to find 
+          exactly what you're searching for. Shop with confidence and enjoy a seamless shopping experience with our trusted online store"
         />
       </Helmet>
       {loading && <Spinner />}
@@ -51,9 +54,10 @@ const IndiProduct = () => {
       <div className="min-h-[100vh] w-full pt-32">
         <Individual prod={prod} prodImg={prodImg} options={options} tags={tags} />
       </div>
-      <div className="-mt-16 mb-8">
+      <div className="-mt-12 mb-8">
         <Features />
       </div>
+      <BestSeller search={tags} heading={"Our Bestsellers"} firstHead={"Similar"} secondHead={"Products"} />
       <Contact />
     </div>
   );
