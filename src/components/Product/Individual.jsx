@@ -82,7 +82,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
             {prod.name}
           </div>
 
-          <div className="h-text text-sm md:text-lg text-red-400 mr-auto animate-pulse">
+          <div className="h-text text-sm md:text-lg text-[red] mr-auto animate-pulse">
             {prod.special}
           </div>
 
@@ -90,7 +90,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
             <h4 className="bold-text text-[var(--black-color)] flex gap-2 text-xl md:text-2xl ">
               Rs.{prod.price}
               <span className="line-through text-gray-500">{prod.mrp}</span>
-              <span className="text-green-500 ">
+              <span className="text-green-600 ">
                 {Math.round(((prod.mrp - prod.price) / prod.mrp) * 100)}% OFF
               </span>
             </h4>
@@ -102,7 +102,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                 <div className="flex flex-col gap-2 " key={ind}>
                   <div className="h-text mr-auto ">{opt.title} </div>
                   {opt.title === "Color" ? (
-                    <div className="flex gap-6 cursor-pointer flex-wrap mt-2 ">
+                    <div className="flex gap-4 cursor-pointer flex-wrap mt-2 ">
                       {opt.values.map((op, i) => (
                         <div
                           key={i}
@@ -116,15 +116,10 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                             } p-1`}
                           >
                             <div
-                              className={`h-[25px] w-[25px] hover:scale-110 border-[1.2px] border-[var(--black-color)] rounded-full bg-[${op.toLowerCase()}]`}
+                            style={{backgroundColor: `${op.toLowerCase()}`}}
+                              className={`h-[30px] w-[30px] hover:scale-110 border-[1.2px] 
+                              border-[var(--black-color)] rounded-full`}
                             ></div>
-                          </div>
-                          <div
-                            className={`${
-                              op === actColor && "text-[var(--secondary-color)]"
-                            } p__opensans`}
-                          >
-                            {op}
                           </div>
                         </div>
                       ))}
@@ -156,7 +151,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
           {prod.stock !== 0 ? (
             <div className="w-full mt-8">
               {prod.stock < 3 && (
-                <div className="p__opensans ml-1 text-red-500 animate-pulse">
+                <div className="p__opensans ml-1 text-[red] animate-bounce">
                   Hurry only {prod.stock} left !!!
                 </div>
               )}
@@ -208,7 +203,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
               {showDesc ? <AiOutlineUp /> : <AiOutlineDown />}
             </div>
             <pre
-              className={`app__flex justify-start p__opensans whitespace-pre-line ${
+              className={`app__flex justify-start p-text text-sm md:text-base whitespace-pre-line ${
                 showDesc ? "flex" : "hidden"
               }`}
             >

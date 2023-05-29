@@ -14,7 +14,7 @@ import { Pagination, Navigation } from "swiper";
 import { urlFor, client } from "../../client";
 import "./Product.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const Product = () => {
   const [categories, setCategories] = useState([]);
@@ -23,9 +23,10 @@ const Product = () => {
   const [activeFilter, setActiveFilter] = useState("Clothing");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [loading, setLoading] = useState(false);
+  const navigate=useNavigate();
 
   useEffect(() => {
-    const query1 = '*[_type == "categories"] | order(_updatedAt asc)';
+    const query1 = '*[_type == "categories"] | order(_updatedAt desc)';
 
     client.fetch(query1).then((data) => {
       setCategories(data);
@@ -33,7 +34,7 @@ const Product = () => {
       // console.log(urlFor(categories[1].features[1].featureimg));
     });
 
-    const query2 = '*[_type == "product"] | order(_updatedAt asc)';
+    const query2 = '*[_type == "product"] | order(_updatedAt desc)';
 
     client.fetch(query2).then((data) => {
       setProduct(data);
@@ -113,6 +114,7 @@ const Product = () => {
                       {prod.productImages.map((productImage, ind) => (
                         <SwiperSlide key={ind}>
                           <img
+                          onClick={()=>{navigate(`/products/${prod._id}`)}}
                             src={urlFor(productImage)}
                             alt={prod.name}
                             loading="lazy"

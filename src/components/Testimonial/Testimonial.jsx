@@ -75,7 +75,7 @@ const Testimonial = () => {
 
   useEffect(() => {
     const query =
-      '*[_type == "testimonial" && _id in path("drafts.**") == false] | order(_updatedAt asc)';
+      '*[_type == "testimonial" && _id in path("drafts.**") == false] | order(_updatedAt desc)';
 
     client.fetch(query).then((data) => {
       setTestimonials(data);

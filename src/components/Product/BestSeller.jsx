@@ -18,15 +18,16 @@ import { Pagination, Navigation } from "swiper";
 import { urlFor, client } from "../../client";
 import "./BestSeller.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BestSeller = ({ search, firstHead, secondHead }) => {
   const [filterProduct, setFilterProduct] = useState([]);
   const { light } = useContext(ModeContext);
+  const navigate=useNavigate();
   // console.log(search==="Bestseller");
 
   useEffect(() => {
-    const query2 = '*[_type == "product"] | order(_updatedAt asc)';
+    const query2 = '*[_type == "product"] | order(_updatedAt desc)';
     client.fetch(query2).then((data) => {
       setFilterProduct(
         data.filter((prod) => search.some((tag) => prod.tags.includes(tag)))
@@ -50,30 +51,31 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
               className="app__bestseller-portfolio "
             >
               <div className="app__work-item app__flex" key={index}>
-                <div className="app__work-img app__flex">
-                  <Swiper
-                    id="swiper2"
-                    pagination={{
-                      type: "fraction",
-                    }}
-                    navigation={true}
-                    loop={true}
-                    modules={[Pagination, Navigation]}
-                    className="mySwiper h-full w-full"
-                  >
-                    {prod.productImages.map((productImage, ind) => (
-                      <SwiperSlide key={ind}>
-                        <img
-                          src={urlFor(productImage)}
-                          alt={prod.name}
-                          loading="lazy"
-                          key={ind}
-                          className="h-full w-full"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
+                  <div className="app__work-img app__flex">
+                    <Swiper
+                      id="swiper2"
+                      pagination={{
+                        type: "fraction",
+                      }}
+                      navigation={true}
+                      loop={true}
+                      modules={[Pagination, Navigation]}
+                      className="mySwiper h-full w-full"
+                    >
+                      {prod.productImages.map((productImage, ind) => (
+                        <SwiperSlide key={ind}>
+                          <img
+                            onClick={()=>{navigate(`/products/${prod._id}`)}}
+                            src={urlFor(productImage)}
+                            alt={prod.name}
+                            loading="lazy"
+                            key={ind}
+                            className="h-full w-full"
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
 
                 <div className="app__work-content app__flex">
                   {prod.special && (

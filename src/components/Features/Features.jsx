@@ -9,7 +9,7 @@ const Features = () => {
   const { light } = useContext(ModeContext);
 
   useEffect(() => {
-    const query3 = '*[_type == "features"] | order(_updatedAt asc)';
+    const query3 = '*[_type == "features"] | order(_updatedAt desc)';
     client.fetch(query3).then((data) => {
       setFeatures(data);
     });
