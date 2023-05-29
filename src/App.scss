@@ -3,6 +3,10 @@
   font-family: var(--font-base);
 }
 
+div{
+  -webkit-tap-highlight-color: transparent;
+}
+
 .background-light {
   background-image: url('./assets/bg-light.png');
   background-position: 0%;

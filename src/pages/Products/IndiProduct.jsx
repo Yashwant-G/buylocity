@@ -31,6 +31,7 @@ const IndiProduct = () => {
       setTags(data.tags);
       // console.log(data);
     });
+
     setTimeout(() => {
       setLoading(false);
     }, 500);

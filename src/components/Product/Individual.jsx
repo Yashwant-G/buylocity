@@ -3,15 +3,18 @@ import confetti from "canvas-confetti";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { BsCartX } from "react-icons/bs";
+import { PortableText } from "@portabletext/react";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/zoom";
+import "./Individual.scss";
 
 // import required modules
-import { EffectCube, Pagination, Zoom } from "swiper";
+import { EffectCube, Pagination, Zoom, Navigation } from "swiper";
 import { urlFor } from "../../client";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -22,8 +25,9 @@ const Individual = ({ prodImg, prod, options, tags }) => {
   const [actColor, setActColor] = useState("");
   const [actPack, setActPack] = useState("");
   const [actSize, setActSize] = useState("");
-  const handleChange = (value, type) => {
-    if (type === "Color") {
+  const [colName, setColName] = useState("");
+  const handleChange = async (value, type) => {
+    if (type === "Color" && value[0] !== "#") {
       setActColor(value);
     }
     if (type === "Pack") {
@@ -40,13 +44,49 @@ const Individual = ({ prodImg, prod, options, tags }) => {
         origin: { y: 1 },
       });
     }
+    if (type === "hex") {
+      if (value[0] === "#") {
+        setActColor("");
+        await fetchData(value.substring(1));
+        setActColor(value);
+      } else {
+        setColName("");
+      }
+    }
   };
 
+  const components = {
+    types: {
+      code: (props) => (
+        <pre data-language={props.node.language}>
+          <code>{props.node.code}</code>
+        </pre>
+      ),
+      anchor: (props) => (
+        <a href={props.node.href} target="_blank" rel="noopener noreferrer">
+          {props.children}
+        </a>
+      ),
+      listItem: (props) => <li>{props.children}</li>,
+    },
+  };
+
+  const fetchData = async (hex) => {
+    try {
+      const response = await fetch(`https://www.thecolorapi.com/id?hex=${hex}`); // Replace with your API endpoint URL
+      const jsonData = await response.json();
+      setColName(jsonData.name.value);
+      console.log(colName);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   return (
-    <div className="h-full w-full px-8  mb-20 mx-auto">
+    <div className="h-full w-full px-8 mb-20 mx-auto overflow-hidden">
       <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-[100%] h-full md:w-[45%]">
+        <div className="w-[100%] h-full md:h-[577px] md:w-[45%]">
           <Swiper
+            id="swiper3"
             effect={"cube"}
             zoom={true}
             grabCursor={true}
@@ -57,10 +97,11 @@ const Individual = ({ prodImg, prod, options, tags }) => {
               shadowOffset: 20,
               shadowScale: 0.94,
             }}
+            navigation={true}
             pagination={{
               clickable: true,
             }}
-            modules={[Zoom, EffectCube, Pagination]}
+            modules={[Zoom, EffectCube, Pagination, Navigation]}
             className="mySwiper"
           >
             {prodImg.map((productImage, index) => (
@@ -96,18 +137,18 @@ const Individual = ({ prodImg, prod, options, tags }) => {
             </h4>
           </div>
 
-          <div className="flex flex-col gap-8 mt-6 mr-auto">
+          <div className="flex flex-col gap-8 mt-6 mr-auto max-w-full">
             {options &&
               options.map((opt, ind) => (
                 <div className="flex flex-col gap-2 " key={ind}>
                   <div className="h-text mr-auto ">{opt.title} </div>
                   {opt.title === "Color" ? (
-                    <div className="flex gap-4 cursor-pointer flex-wrap mt-2 ">
+                    <div className="flex gap-4 cursor-pointer w-full overflow-auto mt-2">
                       {opt.values.map((op, i) => (
                         <div
                           key={i}
                           onClick={() => handleChange(op, opt.title)}
-                          className="flex flex-col items-center gap-1"
+                          className="flex flex-col items-center gap-1 p-0.5"
                         >
                           <div
                             className={`${
@@ -116,16 +157,22 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                             } p-1`}
                           >
                             <div
-                            style={{backgroundColor: `${op.toLowerCase()}`}}
+                              onClick={() => {
+                                handleChange(op, "hex");
+                              }}
+                              style={{ backgroundColor: `${op.toLowerCase()}` }}
                               className={`h-[30px] w-[30px] hover:scale-110 border-[1.2px] 
                               border-[var(--black-color)] rounded-full`}
                             ></div>
                           </div>
+                          {op === actColor && (
+                            <div>{colName === "" ? op : colName}</div>
+                          )}
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 w-full p-1 overflow-auto">
                       {opt.values.map((op, i) => (
                         <div
                           key={i}
@@ -136,7 +183,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                             op === actSize || op === actPack
                               ? "bg-[var(--secondary-color)] text-white"
                               : "bg-white text-black"
-                          }  p-text text-sm md:text-base
+                          }  p-text text-sm md:text-base w-fit h-full whitespace-nowrap text-center
                     px-3 cursor-pointer py-1 rounded-full hover:bg-[var(--secondary-color)] hover:text-white hover:scale-105`}
                         >
                           {op}
@@ -191,26 +238,31 @@ const Individual = ({ prodImg, prod, options, tags }) => {
               </button>
             </div>
           )}
-
-          <div className="my-10 app__flex flex-col items-start mr-auto">
-            <div
-              onClick={() => {
-                setShowDesc(!showDesc);
-              }}
-              className="h-text mb-1 app__flex gap-1 cursor-pointer"
-            >
-              Description
-              {showDesc ? <AiOutlineUp /> : <AiOutlineDown />}
-            </div>
-            <pre
-              className={`app__flex justify-start p-text text-sm md:text-base whitespace-pre-line ${
-                showDesc ? "flex" : "hidden"
-              }`}
-            >
-              {prod.description}
-            </pre>
-          </div>
         </div>
+      </div>
+
+      <div className="my-10 app__flex flex-col items-start md:items-center">
+        <div
+          onClick={() => {
+            setShowDesc(!showDesc);
+          }}
+          className="h-text mb-1 app__flex gap-1 cursor-pointer"
+        >
+          Description
+          {showDesc ? <AiOutlineUp /> : <AiOutlineDown />}
+        </div>
+        <div></div>
+        <pre
+          className={`app__flex justify-start p-text text-sm md:text-base whitespace-pre-line ${
+            showDesc ? "flex" : "hidden"
+          }`}
+        >
+          {prod.description}
+        </pre>
+      </div>
+
+      <div className="prose p-text text-sm md:text-lg">
+        <PortableText value={prod.description1} components={components} />
       </div>
 
       <div className="flex flex-col w-full gap-4 mt-0 md:mt-6">
@@ -254,7 +306,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
         </div>
       )}
 
-      <div className="flex gap-8 mt-8 flex-wrap">
+      <div className="flex gap-8 mt-8 overflow-auto">
         {tags.map((t, index) => (
           <div className="text-blue-500" key={index}>
             #{t}
