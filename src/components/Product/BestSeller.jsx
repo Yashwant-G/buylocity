@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { ModeContext } from "../../context/context";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import "./BestSeller.scss";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,14 +17,13 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 
 import { urlFor, client } from "../../client";
-import "./BestSeller.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const BestSeller = ({ search, firstHead, secondHead }) => {
   const [filterProduct, setFilterProduct] = useState([]);
   const { light } = useContext(ModeContext);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   // console.log(search==="Bestseller");
 
   useEffect(() => {
@@ -51,31 +51,33 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
               className="app__bestseller-portfolio "
             >
               <div className="app__work-item app__flex" key={index}>
-                  <div className="app__work-img app__flex">
-                    <Swiper
-                      id="swiper2"
-                      pagination={{
-                        type: "fraction",
-                      }}
-                      navigation={true}
-                      loop={true}
-                      modules={[Pagination, Navigation]}
-                      className="mySwiper h-full w-full"
-                    >
-                      {prod.productImages.map((productImage, ind) => (
-                        <SwiperSlide key={ind}>
-                          <img
-                            onClick={()=>{navigate(`/products/${prod._id}`)}}
-                            src={urlFor(productImage)}
-                            alt={prod.name}
-                            loading="lazy"
-                            key={ind}
-                            className="h-full w-full"
-                          />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  </div>
+                <div className="app__work-img app__flex">
+                  <Swiper
+                    id="swiper2"
+                    pagination={{
+                      type: "fraction",
+                    }}
+                    navigation={true}
+                    loop={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper h-full w-full"
+                  >
+                    {prod.productImages.map((productImage, ind) => (
+                      <SwiperSlide key={ind}>
+                        <img
+                          onClick={() => {
+                            navigate(`/products/${prod._id}`);
+                          }}
+                          src={urlFor(productImage)}
+                          alt={prod.name}
+                          loading="lazy"
+                          key={ind}
+                          className="h-full w-full"
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
 
                 <div className="app__work-content app__flex">
                   {prod.special && (
@@ -86,12 +88,14 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
                   <h4 className="bold-text text-[var(--black-color)] hover:underline">
                     <Link to={`/products/${prod._id}`}>{prod.name}</Link>
                   </h4>
-                  <div
-                    className="p-text text-[#8693a9] mr-auto"
-                    style={{ marginTop: 10 }}
-                  >
-                    {prod.description.substring(0, 20)}...
-                  </div>
+                  {prod.shortDescription && (
+                    <div
+                      className="p-text text-[#8693a9] mr-auto"
+                      style={{ marginTop: 10 }}
+                    >
+                      {prod.shortDescription.substring(0, 20)}...
+                    </div>
+                  )}
                 </div>
                 <div className="app__work-content app__flex flex mt-[-15px] ">
                   <h4 className="bold-text text-[var(--black-color)] flex gap-1">

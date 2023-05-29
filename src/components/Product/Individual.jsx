@@ -143,7 +143,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                 <div className="flex flex-col gap-2 " key={ind}>
                   <div className="h-text mr-auto ">{opt.title} </div>
                   {opt.title === "Color" ? (
-                    <div className="flex gap-4 cursor-pointer w-full overflow-auto mt-2">
+                    <div className="flex gap-4 cursor-pointer w-full overflow-auto mt-2 scrollDiv">
                       {opt.values.map((op, i) => (
                         <div
                           key={i}
@@ -172,7 +172,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                       ))}
                     </div>
                   ) : (
-                    <div className="flex gap-4 w-full p-1 overflow-auto">
+                    <div className="flex gap-4 w-full p-1 overflow-auto scrollDiv">
                       {opt.values.map((op, i) => (
                         <div
                           key={i}
@@ -251,18 +251,11 @@ const Individual = ({ prodImg, prod, options, tags }) => {
           Description
           {showDesc ? <AiOutlineUp /> : <AiOutlineDown />}
         </div>
-        <div></div>
-        <pre
-          className={`app__flex justify-start p-text text-sm md:text-base whitespace-pre-line ${
-            showDesc ? "flex" : "hidden"
-          }`}
-        >
-          {prod.description}
-        </pre>
-      </div>
-
-      <div className="prose p-text text-sm md:text-lg">
-        <PortableText value={prod.description1} components={components} />
+        {showDesc && (
+          <div className="p-text text-sm md:text-lg">
+            <PortableText value={prod.description} components={components} />
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col w-full gap-4 mt-0 md:mt-6">
@@ -306,7 +299,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
         </div>
       )}
 
-      <div className="flex gap-8 mt-8 overflow-auto">
+      <div className="flex gap-8 mt-8 overflow-auto scrollDiv">
         {tags.map((t, index) => (
           <div className="text-blue-500" key={index}>
             #{t}

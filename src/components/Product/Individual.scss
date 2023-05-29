@@ -3,6 +3,18 @@
   // scale: 0.5;
   // width: 15%;
   width: 0.1%;
-  @media screen and (max-width:650px) {
+  color: var(--black-color);
+  @media screen and (max-width: 650px) {
+  }
+}
+
+.scrollDiv {
+  @media screen and (min-width: 650px) {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: flex;
+    }
   }
 }

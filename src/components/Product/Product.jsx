@@ -14,7 +14,7 @@ import { Pagination, Navigation } from "swiper";
 import { urlFor, client } from "../../client";
 import "./Product.scss";
 import MotionWrap from "../../wrapper/MotionWrap";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Product = () => {
   const [categories, setCategories] = useState([]);
@@ -23,7 +23,7 @@ const Product = () => {
   const [activeFilter, setActiveFilter] = useState("Clothing");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [loading, setLoading] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const query1 = '*[_type == "categories"] | order(_updatedAt desc)';
@@ -114,7 +114,9 @@ const Product = () => {
                       {prod.productImages.map((productImage, ind) => (
                         <SwiperSlide key={ind}>
                           <img
-                          onClick={()=>{navigate(`/products/${prod._id}`)}}
+                            onClick={() => {
+                              navigate(`/products/${prod._id}`);
+                            }}
                             src={urlFor(productImage)}
                             alt={prod.name}
                             loading="lazy"
@@ -135,12 +137,14 @@ const Product = () => {
                     <h4 className="bold-text text-[var(--black-color)] hover:underline">
                       <Link to={`/products/${prod._id}`}>{prod.name}</Link>
                     </h4>
-                    <div
-                      className="p-text text-[#8693a9] mr-auto"
-                      style={{ marginTop: 10 }}
-                    >
-                      {prod.description.substring(0, 20)}...
-                    </div>
+                    {prod.shortDescription && (
+                      <div
+                        className="p-text text-[#8693a9] mr-auto"
+                        style={{ marginTop: 10 }}
+                      >
+                        {prod.shortDescription.substring(0, 20)}...
+                      </div>
+                    )}
                   </div>
                   <div className="app__work-content app__flex flex mt-[-15px] ">
                     <h4 className="bold-text text-[var(--black-color)] flex gap-1">
