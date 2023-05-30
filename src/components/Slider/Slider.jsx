@@ -46,7 +46,7 @@ const Slider = () => {
           {SliderData.map((slide, index) => (
             <SwiperSlide key={index}>
               <img
-                className="sm:rounded-xl pb-7"
+                className="sm:rounded-xl"
                 src={urlFor(slide.imgUrl)}
                 alt="slider_image"
                 loading="lazy"

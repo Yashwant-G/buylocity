@@ -103,7 +103,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                     src={urlFor(productImage)}
                     alt={index}
                     loading="lazy"
-                    className="md:rounded-lg pb-8"
+                    className="rounded-xl"
                   />
               </SwiperSlide>
             ))}
