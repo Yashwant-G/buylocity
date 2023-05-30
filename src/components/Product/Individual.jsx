@@ -7,17 +7,16 @@ import { PortableText } from "@portabletext/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "swiper/css/zoom";
 import "./Individual.scss";
 
 // import required modules
-import { EffectCube, Pagination, Zoom, Navigation } from "swiper";
+import {Pagination, Navigation } from "swiper";
 import { urlFor } from "../../client";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import Spinner from "../Spinner/Spinner";
 
 const Individual = ({ prodImg, prod, options, tags }) => {
   const [showDesc, setShowDesc] = useState(false);
@@ -26,6 +25,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
   const [actPack, setActPack] = useState("");
   const [actSize, setActSize] = useState("");
   const [colName, setColName] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleChange = async (value, type) => {
     if (type === "Color" && value[0] !== "#") {
       setActColor(value);
@@ -46,9 +46,10 @@ const Individual = ({ prodImg, prod, options, tags }) => {
     }
     if (type === "hex") {
       if (value[0] === "#") {
-        setActColor("");
+        setLoading(true);
         await fetchData(value.substring(1));
         setActColor(value);
+        setLoading(false);
       } else {
         setColName("");
       }
@@ -83,36 +84,27 @@ const Individual = ({ prodImg, prod, options, tags }) => {
   };
   return (
     <div className="h-full w-full px-8 mb-20 mx-auto overflow-hidden">
+      {loading && <Spinner />}
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-[100%] h-full md:h-[577px] md:w-[45%]">
           <Swiper
             id="swiper3"
-            effect={"cube"}
-            zoom={true}
             grabCursor={true}
-            // loop={true}
-            cubeEffect={{
-              shadow: true,
-              slideShadows: true,
-              shadowOffset: 20,
-              shadowScale: 0.94,
-            }}
             navigation={true}
             pagination={{
-              clickable: true,
+              type: "fraction",
             }}
-            modules={[Zoom, EffectCube, Pagination, Navigation]}
+            modules={[Pagination, Navigation]}
             className="mySwiper"
           >
             {prodImg.map((productImage, index) => (
               <SwiperSlide key={index}>
-                <div className="swiper-zoom-container">
                   <img
                     src={urlFor(productImage)}
                     alt={index}
-                    className="rounded-lg pb-8"
+                    loading="lazy"
+                    className="md:rounded-lg pb-8"
                   />
-                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -166,7 +158,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                             ></div>
                           </div>
                           {op === actColor && (
-                            <div>{colName === "" ? op : colName}</div>
+                            <div className="text-sm md:text-base text-[var(--black-color)] whitespace-nowrap">{colName === "" ? op : colName}</div>
                           )}
                         </div>
                       ))}

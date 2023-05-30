@@ -45,6 +45,7 @@ function App() {
               src={PageNotFound}
               alt="404 Not Found"
               className="h-1/2 rounded-xl"
+              loading="lazy"
             />
             <p>Page Not Found</p>
             <button
