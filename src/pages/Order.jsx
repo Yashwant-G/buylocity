@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import Helmet from "react-helmet";
 import Contact from "../components/Contact/Contact";
 import Navbar from "../components/Navbar/Navbar";
 import OrderNow from "../components/OrderNow/OrderNow";
-import { ModeContext } from "../context/context";
 
 const Order = () => {
-  const { light } = useContext(ModeContext);
   return (
-    <div className={`app ${light ? "background-light" : "background-dark"}`}>
+    <div>
       <Helmet>
         <title>Buylocity- Order Form</title>
         <meta

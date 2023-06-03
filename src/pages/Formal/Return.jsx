@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import Helmet from "react-helmet";
 import Navbar from "../../components/Navbar/Navbar";
-import { ModeContext } from "../../context/context";
 
 const Return = () => {
-  const { light } = useContext(ModeContext);
-
   return (
     <>
       <Helmet>
@@ -20,11 +17,7 @@ const Return = () => {
         />
       </Helmet>
 
-      <div
-        className={`app ${
-          light ? "background-light" : "background-dark"
-        } w-full`}
-      >
+      <div>
         <Navbar />
         <div className="container mx-auto py-8 pt-28 p-12 text-[var(--black-color)]">
           <h1 className="head-text font-bold mb-4">
@@ -113,7 +106,9 @@ const Return = () => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-[var(--black-color)] px-4 py-2">Electronic Products</td>
+                <td className="border border-[var(--black-color)] px-4 py-2">
+                  Electronic Products
+                </td>
                 <td className="border border-[var(--black-color)] px-4 py-2">
                   2 Hours from the date and time of delivery
                 </td>

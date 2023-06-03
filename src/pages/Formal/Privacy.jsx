@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React  from "react";
 import Helmet from "react-helmet";
 import Navbar from "../../components/Navbar/Navbar";
-import { ModeContext } from "../../context/context";
 
 const Privacy = () => {
-  const { light } = useContext(ModeContext);
 
   return (
     <>
@@ -16,11 +14,7 @@ const Privacy = () => {
         />
       </Helmet>
 
-      <div
-        className={`app ${
-          light ? "background-light" : "background-dark"
-        } w-full`}
-      >
+      <div>
         <Navbar home={false} />
         <div className="pt-28">
           <p className="head-text">Privacy & Policy</p>
@@ -117,9 +111,10 @@ const Privacy = () => {
           </div>
           <ul className="ml-[2%] space-y-2">
             <li>
-              1. whenever you are asked to fill in a form on the website, look for
-              the box that you can click to indicate that you do not want the
-              information to be used by anybody for direct marketing purposes
+              1. whenever you are asked to fill in a form on the website, look
+              for the box that you can click to indicate that you do not want
+              the information to be used by anybody for direct marketing
+              purposes
             </li>
             <li>
               2. if you have previously agreed to us using your personal

@@ -1,21 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import { client } from "../../client";
 import Contact from "../../components/Contact/Contact";
 import Navbar from "../../components/Navbar/Navbar";
 import Found from "../../components/Found/Found";
-import { ModeContext } from "../../context/context";
 import MotionWrap from "../../wrapper/MotionWrap";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../redux/slices/loading";
 
 const TrackOrderId = () => {
-  const { light } = useContext(ModeContext);
   const [found, setFound] = useState(true);
   const [details, setDetails] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const id = location.pathname.split("/").at(-1);
+  const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(setLoading(true));
     const query = `*[_type == "orders" && orderId == $orderId]`;
     const params = { orderId: id.toString() };
 
@@ -27,11 +29,14 @@ const TrackOrderId = () => {
       setDetails(order[0]);
       console.log(order);
     });
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={`app ${light ? "background-light" : "background-dark"} w-full`}>
+    <div>
       <Helmet>
         <title>Buylocity- Live Track your Order</title>
         <meta

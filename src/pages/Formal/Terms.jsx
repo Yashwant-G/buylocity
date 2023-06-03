@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import Helmet from "react-helmet";
 import Navbar from "../../components/Navbar/Navbar";
-import { ModeContext } from "../../context/context";
 
 const Terms = () => {
-  const { light } = useContext(ModeContext);
-
   return (
     <>
       <Helmet>
@@ -16,11 +13,7 @@ const Terms = () => {
         />
       </Helmet>
 
-      <div
-        className={`app ${
-          light ? "background-light" : "background-dark"
-        } w-full`}
-      >
+      <div>
         <Navbar home={false} />
         <div className="pt-28">
           <p className="head-text">Terms & Conditions</p>

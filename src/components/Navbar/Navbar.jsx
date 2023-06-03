@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { client, urlFor } from "../../client";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { motion } from "framer-motion";
-import { ModeContext } from "../../context/context";
 
 import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setBgMode } from "../../redux/slices/bgMode";
 
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
@@ -17,7 +18,8 @@ const Navbar = ({ home }) => {
     height: "",
     width: "",
   });
-  const { light, modeFunction } = useContext(ModeContext);
+  const { light } = useSelector((state)=>state.bgMode);
+  const dispatch=useDispatch();
   const [navList, setNavlist] = useState([]);
 
   useEffect(() => {
@@ -101,13 +103,13 @@ const Navbar = ({ home }) => {
             <MdDarkMode
               className="hover:scale-105 mode-icon"
               style={{ fontSize: "35px" }}
-              onClick={() => modeFunction()}
+              onClick={() => dispatch(setBgMode())}
             />
           ) : (
             <MdOutlineLightMode
               className="hover:scale-105 mode-icon"
               style={{ fontSize: "30px", color: "white" }}
-              onClick={() => modeFunction()}
+              onClick={() => dispatch(setBgMode())}
             />
           )}
         </div>

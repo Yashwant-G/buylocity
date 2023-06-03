@@ -6,13 +6,14 @@ import {
   AiOutlineCloseCircle,
 } from "react-icons/ai";
 import { motion } from "framer-motion";
-import Spinner from "../Spinner/Spinner";
 
 import MotionWrap from "../../wrapper/MotionWrap";
 
 import { urlFor, client } from "../../client";
 import "./Testimonial.scss";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../redux/slices/loading";
 
 const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,8 +27,9 @@ const Testimonial = () => {
     test: "",
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const loading = useSelector((state) => state.loading);
+  const dispatch = useDispatch();
 
   const { username, desig, email, test } = formData;
 
@@ -45,7 +47,7 @@ const Testimonial = () => {
     }
 
     // setIsFormSubmitted(true);
-    setLoading(true);
+    dispatch(setLoading(true));
 
     const entry = {
       _type: "testimonial",
@@ -62,11 +64,14 @@ const Testimonial = () => {
       .create(entry)
       .then(() => {
         console.log("success");
+        dispatch(setLoading(false));
         setLoading(false);
         setIsFormSubmitted(true);
         toast.success("Testimonial Submitted");
       })
       .catch((err) => console.log(err));
+
+    toast.success("Testimonial Submitted");
   };
 
   const handleClick = (index) => {
@@ -235,7 +240,7 @@ const Testimonial = () => {
                 Rate Our Service
               </p>
               <div className="relative w-full app__flex -mt-2">
-                {[1, 2, 3, 4, 5].map((ind,i) => (
+                {[1, 2, 3, 4, 5].map((ind, i) => (
                   <div key={i}>
                     {ind <= currentRate ? (
                       <AiFillStar
@@ -264,7 +269,6 @@ const Testimonial = () => {
             >
               {!loading ? "Submit" : "Submitting..."}
             </button>
-            {loading && <Spinner />}
             <div className="flex justify-start w-[200px]">
               <p className="p-text text-gray-500">
                 If you are comfortable in sharing your image, please{" "}

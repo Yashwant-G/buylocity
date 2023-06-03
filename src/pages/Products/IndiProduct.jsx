@@ -1,27 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Helmet from "react-helmet";
 import Contact from "../../components/Contact/Contact";
 import Navbar from "../../components/Navbar/Navbar";
 import Individual from "../../components/Product/Individual";
-import Spinner from "../../components/Spinner/Spinner";
-import { ModeContext } from "../../context/context";
 import { client } from "../../client";
 import Features from "../../components/Features/Features";
 import BestSeller from "../../components/Product/BestSeller";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../redux/slices/loading";
 
 const IndiProduct = () => {
-  const { light } = useContext(ModeContext);
   const [prod, setProd] = useState([]);
   const [prodImg, setProdImg] = useState([]);
   const [options, setOptions] = useState([]);
   const [tags, setTags] = useState([]);
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const dispatch=useDispatch();
   //   const navigate = useNavigate();
   const id = location.pathname.split("/").at(-1);
   useEffect(() => {
-    setLoading(true);
+    dispatch(setLoading(true));
     const query = `*[_type == "product" && _id == $productId][0]`;
     const params = { productId: id.toString() };
     client.fetch(query, params).then((data) => {
@@ -33,12 +32,12 @@ const IndiProduct = () => {
     });
 
     setTimeout(() => {
-      setLoading(false);
+      dispatch(setLoading(false));
     }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   return (
-    <div className={`app ${light ? "background-light" : "background-dark"}`}>
+    <div>
       <Helmet>
         <title>Buylocity- {`${prod.name}`}</title>
         <meta
@@ -50,7 +49,7 @@ const IndiProduct = () => {
           exactly what you're searching for. Shop with confidence and enjoy a seamless shopping experience with our trusted online store"
         />
       </Helmet>
-      {loading && <Spinner />}
+      
       <Navbar home={false} />
       <div className="min-h-[100vh] w-full pt-32">
         <Individual

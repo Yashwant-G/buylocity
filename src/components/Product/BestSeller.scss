@@ -70,7 +70,7 @@
       background-color: var(--white-color);
       color: var(--black-color);
   
-      cursor: pointer;
+      // cursor: pointer;
       transition: all 0.3s ease;
   
       &:hover {
@@ -98,6 +98,7 @@
     border: 1px solid var(--black-color);
     border-radius: 8px;
     position: relative;
+    cursor: pointer;
   
     img {
       width: 100%;

@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ModeContext } from "../../context/context";
+import React, { useState, useEffect } from "react";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { client, urlFor } from "../../client";
 import MotionWrap from "../../wrapper/MotionWrap";
+import { useSelector } from "react-redux";
 
 const Features = () => {
   const [features, setFeatures] = useState([]);
-  const { light } = useContext(ModeContext);
+  const { light } = useSelector((state) => state.bgMode);
 
   useEffect(() => {
     const query3 = '*[_type == "features"] | order(_updatedAt desc)';
@@ -16,7 +16,6 @@ const Features = () => {
   });
   return (
     <div className="w-full">
-      
       <div className="flex flex-col w-full my-12">
         <div className="h-[1.5px] w-full bg-[var(--black-color)]"></div>
         <div className="overflow-hidden app__flex flex-wrap justify-between mx-auto mt-8 px-0 sm:px-4 w-full">

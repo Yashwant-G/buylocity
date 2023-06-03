@@ -1,14 +1,22 @@
-import React, { useContext } from "react";
+import React, {useEffect } from "react";
 import Helmet from "react-helmet";
 import Contact from "../../components/Contact/Contact";
 import Navbar from "../../components/Navbar/Navbar";
 import Product from "../../components/Product/Product";
-import { ModeContext } from "../../context/context";
+import { setLoading } from "../../redux/slices/loading";
+import { useDispatch } from "react-redux";
 
 const Products = () => {
-  const { light } = useContext(ModeContext);
+  const dispatch=useDispatch();
+  useEffect(()=>{
+    dispatch(setLoading(true));
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 750);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
-    <div className={`app ${light ? "background-light" : "background-dark"}`}>
+    <div >
       <Helmet>
         <title>Buylocity- Products</title>
         <meta

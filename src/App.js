@@ -17,47 +17,54 @@ import Return from "./pages/Formal/Return";
 import Shipping from "./pages/Formal/Shipping";
 
 import PageNotFound from "./assets/404.png";
+import Spinner from "./components/Spinner/Spinner";
+import { useSelector } from "react-redux";
 
 function App() {
   const location = useLocation();
+  const { light } = useSelector((state) => state.bgMode);
+  const { loading } = useSelector((state) => state.loading);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [location]); //test
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/products" element={<Products/>} />
-      <Route path="/products/:id" element={<IndiProduct/>} />
-      <Route path="/order" element={<Order />} />
-      <Route path="/track" element={<TrackOrder />} />
-      <Route path="/track/:id" element={<TrackOrderId />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/terms&conditions" element={<Terms />} />
-      <Route path="/privacy&policy" element={<Privacy />} />
-      <Route path="/return&refund" element={<Return />} />
-      <Route path="/shipping" element={<Shipping />} />
-      <Route
-        path="*"
-        element={
-          <div className="w-full h-[100vh] head-text app__flex flex-col background-light">
-            <img
-              src={PageNotFound}
-              alt="404 Not Found"
-              className="h-1/2 rounded-xl"
-              loading="lazy"
-            />
-            <p>Page Not Found</p>
-            <button
-              className="bg-[var(--secondary-color)] text-white p-text text-lg px-7 py-1 mt-8 hover:bg-[var(--hover-color)] 
+    <div className={`app ${light ? "background-light" : "background-dark"}`}>
+      {loading && <Spinner />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<IndiProduct />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/track" element={<TrackOrder />} />
+        <Route path="/track/:id" element={<TrackOrderId />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/terms&conditions" element={<Terms />} />
+        <Route path="/privacy&policy" element={<Privacy />} />
+        <Route path="/return&refund" element={<Return />} />
+        <Route path="/shipping" element={<Shipping />} />
+        <Route
+          path="*"
+          element={
+            <div className="w-full h-[100vh] head-text app__flex flex-col background-light">
+              <img
+                src={PageNotFound}
+                alt="404 Not Found"
+                className="h-1/2 rounded-xl"
+                loading="lazy"
+              />
+              <p>Page Not Found</p>
+              <button
+                className="bg-[var(--secondary-color)] text-white p-text text-lg px-7 py-1 mt-8 hover:bg-[var(--hover-color)] 
               rounded-3xl text-center mx-auto"
-            >
-              <Link to="/">Home</Link>
-            </button>
-          </div>
-        }
-      />
-    </Routes>
+              >
+                <Link to="/">Home</Link>
+              </button>
+            </div>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 

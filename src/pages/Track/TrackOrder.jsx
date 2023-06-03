@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Helmet from "react-helmet";
-import { ModeContext } from "../../context/context";
 import Navbar from "../../components/Navbar/Navbar";
 import Contact from "../../components/Contact/Contact";
 
 const TrackOrder = () => {
-  const { light } = useContext(ModeContext);
   const [orderId, setOrderId] = useState(undefined);
   const navigate = useNavigate();
 
@@ -31,7 +29,7 @@ const TrackOrder = () => {
         />
       </Helmet>
 
-      <div className={`app ${light ? "background-light" : "background-dark"}`}>
+      <div>
         <Navbar home={false} />
         <div className="app__flex flex-col w-full h-[90vh]">
           <div className="head-text mt-28">

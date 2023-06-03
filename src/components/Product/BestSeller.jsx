@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiOutlinePlus,
   AiOutlineDoubleRight,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { ModeContext } from "../../context/context";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./BestSeller.scss";
@@ -22,7 +21,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const BestSeller = ({ search, firstHead, secondHead }) => {
   const [filterProduct, setFilterProduct] = useState([]);
-  const { light } = useContext(ModeContext);
   const navigate = useNavigate();
   // console.log(search==="Bestseller");
 
@@ -133,9 +131,7 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
 
       {filterProduct.length > 2 && (
         <AiOutlineDoubleRight
-          className={`mt-4 text-4xl scrollRight ${
-            light ? "invert-0" : "invert"
-          }`}
+          className={`mt-4 text-4xl scrollRight text-[var(--black-color)]`}
         />
       )}
 
