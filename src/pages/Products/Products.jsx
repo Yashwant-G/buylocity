@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Product from "../../components/Product/Product";
 import { setLoading } from "../../redux/slices/loading";
 import { useDispatch } from "react-redux";
+import CartIcon from "../../components/cartIcon/CartIcon";
 
 const Products = () => {
   const dispatch=useDispatch();
@@ -28,6 +29,7 @@ const Products = () => {
           exactly what you're searching for. Shop with confidence and enjoy a seamless shopping experience with our trusted online store"
         />
       </Helmet>
+      <CartIcon/>
       <Navbar home={false} />
       <div className="pt-28">
         <Product />

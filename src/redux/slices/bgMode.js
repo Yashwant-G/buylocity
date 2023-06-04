@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const bgModeSlicer=createSlice({
 	name:"bgMode",
-	initialState:{light:false},
+	initialState:{light:true},
 	reducers:{
         setBgMode:(state)=>{
             state.light=!state.light;

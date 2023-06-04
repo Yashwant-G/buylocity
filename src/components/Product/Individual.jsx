@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import {
+  AiOutlinePlus,
+  AiOutlineDown,
+  AiOutlineUp,
+  AiFillHeart,
+  AiOutlineHeart,
+} from "react-icons/ai";
+import { FiShoppingCart } from "react-icons/fi";
 import { BsCartX } from "react-icons/bs";
 import { PortableText } from "@portabletext/react";
 
@@ -12,11 +19,15 @@ import "swiper/css/navigation";
 import "./Individual.scss";
 
 // import required modules
-import {Pagination, Navigation } from "swiper";
+import { Pagination, Navigation } from "swiper";
 import { urlFor } from "../../client";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import Spinner from "../Spinner/Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../redux/slices/loading";
+import { addToCart } from "../../redux/slices/cart";
+import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
+import { RxDoubleArrowUp } from "react-icons/rx";
 
 const Individual = ({ prodImg, prod, options, tags }) => {
   const [showDesc, setShowDesc] = useState(false);
@@ -25,7 +36,84 @@ const Individual = ({ prodImg, prod, options, tags }) => {
   const [actPack, setActPack] = useState("");
   const [actSize, setActSize] = useState("");
   const [colName, setColName] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [goCart, setGoCart] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { products } = useSelector((state) => state.wishlist);
+  const [wishTogle,setWishTogle] = useState(false);
+
+  useEffect(()=>{
+    setWishTogle(true);
+    setTimeout(()=>{
+      setWishTogle(false);
+    },3000)
+  },[])
+
+  useEffect(() => {
+    setActColor("");
+    setActPack("");
+    setActSize("");
+  }, [location]);
+
+  const cartAdd = () => {
+    if (
+      options &&
+      options.find((item) => item.title === "Size") &&
+      actSize === ""
+    ) {
+      toast.error("Size is required");
+      return;
+    }
+    if (
+      options &&
+      options.find((item) => item.title === "Pack") &&
+      actPack === ""
+    ) {
+      toast.error("Pack is required");
+      return;
+    }
+    if (
+      options &&
+      options.find((item) => item.title === "Color") &&
+      actColor === ""
+    ) {
+      toast.error("Color is required");
+      return;
+    }
+
+    const object = {
+      id: prod._id,
+      name: prod.name,
+      price: prod.price,
+      image: prodImg[0],
+      stock: prod.stock,
+    };
+    if (prod.options) {
+      const size = options.find((item) => item.title === "Size");
+      if (size) object.size = actSize;
+
+      const pack = options.find((item) => item.title === "Pack");
+      if (pack) object.pack = actPack;
+
+      const color = options.find((item) => item.title === "Color");
+      if (color) object.color = actColor;
+    }
+    console.log(object);
+    dispatch(addToCart(object));
+
+    setGoCart(true);
+    setTimeout(() => {
+      setGoCart(false);
+    }, 3000);
+    toast.success(`${prod.name} Added to Cart`);
+    confetti({
+      particleCount: 300,
+      spread: 70,
+      origin: { y: 1 },
+    });
+  };
+
   const handleChange = async (value, type) => {
     if (type === "Color" && value[0] !== "#") {
       setActColor(value);
@@ -36,20 +124,12 @@ const Individual = ({ prodImg, prod, options, tags }) => {
     if (type === "Size") {
       setActSize(value);
     }
-    if (type === "Submit") {
-      toast.success(`${prod.name} Added to Cart`);
-      confetti({
-        particleCount: 300,
-        spread: 70,
-        origin: { y: 1 },
-      });
-    }
     if (type === "hex") {
       if (value[0] === "#") {
-        setLoading(true);
+        dispatch(setLoading(true));
         await fetchData(value.substring(1));
         setActColor(value);
-        setLoading(false);
+        dispatch(setLoading(false));
       } else {
         setColName("");
       }
@@ -84,9 +164,12 @@ const Individual = ({ prodImg, prod, options, tags }) => {
   };
   return (
     <div className="h-full w-full px-8 mb-20 mx-auto overflow-hidden">
-      {loading && <Spinner />}
       <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-[100%] h-full md:h-[577px] md:w-[45%]">
+        <div className="relative w-[100%] h-full md:h-[577px] md:w-[45%]">
+        {wishTogle && (
+          <div className="absolute top-14 right-5 z-10 bg-[var(--secondary-color)] 
+          flex items-center gap-1 text-white px-2 py-1 rounded-lg animate-bounce">Wishlist here <RxDoubleArrowUp/></div>
+        )}
           <Swiper
             id="swiper3"
             grabCursor={true}
@@ -97,14 +180,26 @@ const Individual = ({ prodImg, prod, options, tags }) => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
+            {products.find((p) => p._id === prod._id) ? (
+              <AiFillHeart
+                onClick={() => dispatch(removeFromWishlist({ id: prod._id }))}
+                className="cursor-pointer absolute top-[3%] right-[3%] text-2xl z-10 text-red-500"
+              />
+            ) : (
+              <AiOutlineHeart
+                onClick={() => dispatch(addToWishlist(prod))}
+                className="cursor-pointer absolute top-[3%] right-[3%] text-2xl z-10 "
+              />
+            )}
+
             {prodImg.map((productImage, index) => (
               <SwiperSlide key={index}>
-                  <img
-                    src={urlFor(productImage)}
-                    alt={index}
-                    loading="lazy"
-                    className="rounded-xl"
-                  />
+                <img
+                  src={urlFor(productImage)}
+                  alt={index}
+                  loading="lazy"
+                  className="rounded-xl"
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -158,7 +253,9 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                             ></div>
                           </div>
                           {op === actColor && (
-                            <div className="text-sm md:text-base text-[var(--black-color)] whitespace-nowrap">{colName === "" ? op : colName}</div>
+                            <div className="text-sm md:text-base text-[var(--black-color)] whitespace-nowrap">
+                              {colName === "" ? op : colName}
+                            </div>
                           )}
                         </div>
                       ))}
@@ -195,18 +292,30 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                 </div>
               )}
               <div className="flex gap-4 w-[100%] md:w-[90%] mr-auto">
-                <button
-                  onClick={() => {
-                    handleChange(null, "Submit");
-                  }}
-                  className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
+                {goCart ? (
+                  <button
+                    onClick={() => {
+                      navigate("/cart");
+                    }}
+                    className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
+                  py-1 rounded-lg mt-1 hover:bg-blue-500 hover:scale-105 transition-all duration-200  whitespace-nowrap text-lg md:text-xl w-[50%]"
+                  >
+                    Go to Cart
+                    <FiShoppingCart />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      cartAdd();
+                    }}
+                    className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
                   py-1 rounded-lg mt-1 hover:bg-blue-500 hover:scale-105  whitespace-nowrap text-lg md:text-xl w-[50%]"
-                >
-                  <a href={prod.whatsappLink} target="_blank" rel="noreferrer">
-                    Add to cart
-                  </a>{" "}
-                  <AiOutlinePlus />
-                </button>
+                  >
+                    Add to Cart
+                    <AiOutlinePlus />
+                  </button>
+                )}
+
                 <button
                   className="app__flex gap-1 bg-yellow-300 text-gray-700 font-medium px-3 
                   py-1 rounded-lg mt-1 hover:bg-yellow-500 hover:scale-105 w-[50%]"

@@ -11,6 +11,7 @@ import Contact from "../components/Contact/Contact";
 import Helmet from "react-helmet";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../redux/slices/loading";
+import CartIcon from "../components/cartIcon/CartIcon";
 
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
           So why wait? Whether you need groceries, snacks, or other household items, BuyLocity has got you covered. Experience the convenience of shopping from your favorite local stores without ever leaving your home. Try BuyLocity today and see how we can simplify your shopping experience!"
         />
       </Helmet>
-  
+      <CartIcon/>
       <Navbar home={true} />
       <Slider />
       <Slogan />

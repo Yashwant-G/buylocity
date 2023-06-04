@@ -3,6 +3,8 @@ import {
   AiOutlinePlus,
   AiOutlineDoubleRight,
   AiOutlineShoppingCart,
+  AiFillHeart,
+  AiOutlineHeart,
 } from "react-icons/ai";
 import { motion } from "framer-motion";
 
@@ -18,10 +20,15 @@ import { Pagination, Navigation } from "swiper";
 import { urlFor, client } from "../../client";
 import MotionWrap from "../../wrapper/MotionWrap";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
+import { useDispatch, useSelector } from "react-redux";
 
 const BestSeller = ({ search, firstHead, secondHead }) => {
   const [filterProduct, setFilterProduct] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.wishlist);
   // console.log(search==="Bestseller");
 
   useEffect(() => {
@@ -60,6 +67,19 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
                     modules={[Pagination, Navigation]}
                     className="mySwiper h-full w-full"
                   >
+                  {products.find((p) => p._id === prod._id) ? (
+                      <AiFillHeart
+                        onClick={() =>
+                          dispatch(removeFromWishlist({ id: prod._id }))
+                        }
+                        className="cursor-pointer absolute top-[3%] right-[3%] text-2xl z-10 text-red-500"
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        onClick={() => dispatch(addToWishlist(prod))}
+                        className="cursor-pointer absolute top-[3%] right-[3%] text-2xl z-10 "
+                      />
+                    )}
                     {prod.productImages.map((productImage, ind) => (
                       <SwiperSlide key={ind}>
                         <img
@@ -108,20 +128,27 @@ const BestSeller = ({ search, firstHead, secondHead }) => {
                   </h4>
                 </div>
                 <div>
-                  <button
-                    className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
+                  {prod.stock !== 0 ? (
+                    <button
+                      onClick={() => {
+                        navigate(`/products/${prod._id}`);
+                        toast.error("Select Variant");
+                      }}
+                      className="app__flex gap-1 bg-[var(--secondary-color)] text-white px-3 
                   py-1 rounded-lg mt-1 hover:bg-blue-500"
-                  >
-                    <a
-                      href={prod.whatsappLink}
-                      key={index}
-                      target="_blank"
-                      rel="noreferrer"
                     >
                       Add
-                    </a>{" "}
-                    <AiOutlinePlus />
-                  </button>
+                      <AiOutlinePlus />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => toast.error("Out of Stock")}
+                      className="app__flex gap-1 bg-gray-400 text-white px-3 
+                  py-1 rounded-lg mt-1 hover:bg-gray-600"
+                    >
+                      Out of stock
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -9,6 +9,7 @@ import Features from "../../components/Features/Features";
 import BestSeller from "../../components/Product/BestSeller";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../redux/slices/loading";
+import CartIcon from "../../components/cartIcon/CartIcon";
 
 const IndiProduct = () => {
   const [prod, setProd] = useState([]);
@@ -50,6 +51,7 @@ const IndiProduct = () => {
         />
       </Helmet>
       
+      <CartIcon/>
       <Navbar home={false} />
       <div className="min-h-[100vh] w-full pt-32">
         <Individual

@@ -19,6 +19,9 @@ import Shipping from "./pages/Formal/Shipping";
 import PageNotFound from "./assets/404.png";
 import Spinner from "./components/Spinner/Spinner";
 import { useSelector } from "react-redux";
+import Cart from "./components/Cart/CartComp";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Success from "./pages/Success/Success";
 
 function App() {
   const location = useLocation();
@@ -38,6 +41,9 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/track/:id" element={<TrackOrderId />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/order/:id/success" element={<Success />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/terms&conditions" element={<Terms />} />
         <Route path="/privacy&policy" element={<Privacy />} />
@@ -50,7 +56,7 @@ function App() {
               <img
                 src={PageNotFound}
                 alt="404 Not Found"
-                className="h-1/2 rounded-xl"
+                className="w-1/2  rounded-xl"
                 loading="lazy"
               />
               <p>Page Not Found</p>

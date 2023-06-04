@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { client, urlFor } from "../../client";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { FaShoppingCart } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setBgMode } from "../../redux/slices/bgMode";
+import { AiFillHeart } from "react-icons/ai";
 
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
@@ -18,9 +20,10 @@ const Navbar = ({ home }) => {
     height: "",
     width: "",
   });
-  const { light } = useSelector((state)=>state.bgMode);
-  const dispatch=useDispatch();
+  const { light } = useSelector((state) => state.bgMode);
+  const dispatch = useDispatch();
   const [navList, setNavlist] = useState([]);
+  const { products } = useSelector((state) => state.cart);
 
   useEffect(() => {
     const query = '*[_type == "status"][0]';
@@ -99,19 +102,45 @@ const Navbar = ({ home }) => {
         )}
 
         <div className="app__navbar-mode">
-          {light ? (
-            <MdDarkMode
-              className="hover:scale-105 mode-icon"
-              style={{ fontSize: "35px" }}
-              onClick={() => dispatch(setBgMode())}
-            />
-          ) : (
-            <MdOutlineLightMode
-              className="hover:scale-105 mode-icon"
-              style={{ fontSize: "30px", color: "white" }}
-              onClick={() => dispatch(setBgMode())}
-            />
-          )}
+          <div className="app__flex gap-4">
+            <div>
+              {light ? (
+                <MdDarkMode
+                  className="hover:scale-105 mode-icon"
+                  style={{ fontSize: "30px" }}
+                  onClick={() => dispatch(setBgMode())}
+                />
+              ) : (
+                <MdOutlineLightMode
+                  className="hover:scale-105 mode-icon"
+                  style={{ fontSize: "30px", color: "white" }}
+                  onClick={() => dispatch(setBgMode())}
+                />
+              )}
+            </div>
+            <NavLink to="/cart">
+              <div className="relative">
+                <div
+                  className="absolute top-[-40%] right-[-10%] z-[5] h-text text-[var(--black-color)] bg-[var(--white-color)] 
+              px-[0.30rem] rounded-full text-sm animate-bounce "
+                >
+                  {products.length}
+                </div>
+                <FaShoppingCart
+                  className="text-[var(--black-color)]"
+                  style={{ fontSize: "26px" }}
+                />
+              </div>
+            </NavLink>
+            <NavLink to="/wishlist">
+              <div className="relative">
+                <AiFillHeart
+                  className="text-[var(--black-color)]"
+                  style={{ fontSize: "26px" }}
+                />
+              </div>
+            </NavLink>
+          </div>
         </div>
 
         <div className="app__navbar-menu">
