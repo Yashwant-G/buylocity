@@ -9,8 +9,8 @@ import {
   AiFillDelete,
   AiOutlinePlus,
   AiOutlineMinus,
-  AiOutlineHeart,
 } from "react-icons/ai";
+import {RiHeartAddLine} from "react-icons/ri"
 import { RxCross1 } from "react-icons/rx";
 import {
   descrementQuantity,
@@ -42,7 +42,7 @@ const CartComp = () => {
       <div className="pt-28">
         {products.length > 0 ? (
           <div className="w-full flex flex-col md:flex-row p-4 h-fit ">
-            <div className="w-full md:w-[70%] px-8 md:px-16 py-4 md:py-8 bg-white h-[509px] overflow-auto">
+            <div className="w-full md:w-[70%] px-6 md:px-16 py-4 md:py-8 bg-white h-[509px] overflow-auto">
               <div className="flex justify-between">
                 <div className="h-text text-black text-left text-base whitespace-nowrap md:text-lg">
                   Shopping Cart
@@ -53,30 +53,32 @@ const CartComp = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row gap-2 md:gap-0 justify-between items-start md:items-center mt-2">
+              <div className="flex md:flex-row gap-2 md:gap-0 justify-between items-start md:items-center mt-6 md:mt-2">
                 <div className="text-[var(--secondary-color)] p-text text-base">
                   <Link to="/products">
-                    <button className="app__flex gap-0 md:gap-2">
+                    <button className="app__flex gap-1 md:gap-2">
                       <BsArrowLeft /> Back To Products
                     </button>
                   </Link>{" "}
                 </div>
-                <Link className="mt-auto" to="/wishlist">
+                <Link className="my-auto" to="/wishlist">
                   <div className="flex items-center gap-1 text-[var(--secondary-color)] p-text text-base cursor-pointer">
-                    Add from Wishlist <AiOutlineHeart />
+                    <div className="hidden md:block">Add from Wishlist</div>
+                    <RiHeartAddLine />
                   </div>
                 </Link>
                 <div
                   onClick={() => {
                     dispatch(resetCart());
                   }}
-                  className="p-text text-base cursor-pointer flex items-center gap-1 text-red-500"
+                  className="p-text my-auto text-base cursor-pointer flex items-center gap-1 text-red-500"
                 >
-                  Reset Cart <RxCross1 />
+                  <div className="hidden md:block">Reset Cart</div>
+                  <AiFillDelete />
                 </div>
               </div>
 
-              <div className="h-[1px] w-full bg-black my-6"></div>
+              <div className="h-[1px] w-full bg-black my-4 md:my-6"></div>
 
               <div className="flex flex-col w-full mt-2">
                 <div className="hidden md:flex w-full text-gray-500 text-base">
@@ -84,9 +86,6 @@ const CartComp = () => {
                   <div className="w-[20%] text-center">Quantity</div>
                   <div className="w-[20%] text-center">Price</div>
                   <div className="w-[20%] text-center">Total</div>
-                </div>
-                <div className="text-center h-text block md:hidden">
-                  Cart Items
                 </div>
 
                 {products.map((prod, index) => (
@@ -108,7 +107,7 @@ const CartComp = () => {
                       <div className="flex flex-col justify-between mb-8 gap-2">
                         <div
                           onClick={() => navigate(`/products/${prod.id}`)}
-                          className="cursor-pointer hover:underline bold-text text-black text-base leading-5"
+                          className="cursor-pointer hover:underline bold-text text-black text-sm md:text-base leading-5"
                         >
                           {prod.name}
                         </div>
@@ -122,19 +121,28 @@ const CartComp = () => {
                             ></div>
                           )}
                           {prod.size && (
-                            <div className="bg-[var(--secondary-color)] text-sm px-1.5 pt-0.5 text-white rounded-md">
+                            <div className="bg-[var(--secondary-color)] text-xs md:text-sm px-1.5 py-0.5 my-auto text-white rounded-md">
                               {prod.size}
                             </div>
                           )}
                           {prod.pack && (
-                            <div className="bg-[var(--secondary-color)] text-sm px-1.5 pt-0.5 text-white rounded-md">
+                            <div className="bg-[var(--secondary-color)] text-xs md:text-sm px-1.5 py-0.5 my-auto text-white rounded-md">
                               {prod.pack}
                             </div>
                           )}
                         </div>
-                        <div className="block md:hidden">
+                        <div className="block md:hidden text-sm md:text-base">
                           Rs{prod.price * prod.quantity}
                         </div>
+                        <div onClick={() => {
+                            dispatch(
+                              removeFromCart({
+                                index,
+                                price: prod.price,
+                                quantity: prod.quantity,
+                              })
+                            );
+                          }} className="md:hidden block cursor-pointer text-red-500 absolute -right-4 top-0"><RxCross1/></div>
                         <div
                           onClick={() => {
                             dispatch(
@@ -145,7 +153,7 @@ const CartComp = () => {
                               })
                             );
                           }}
-                          className="flex items-center gap-1 text-red-500 cursor-pointer"
+                          className="hidden md:flex items-center gap-1 text-red-500 cursor-pointer"
                         >
                           Remove <AiFillDelete />
                         </div>

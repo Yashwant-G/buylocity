@@ -74,6 +74,7 @@ const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       state.total -= action.payload.price * action.payload.quantity;
       state.products.splice(action.payload.index, 1);
+      toast.success("Product Removed")
       localStorage.setItem("cart", JSON.stringify(state.products));
       localStorage.setItem("total", JSON.stringify(state.total));
     },

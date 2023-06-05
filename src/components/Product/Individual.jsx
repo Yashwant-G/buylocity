@@ -62,6 +62,10 @@ const Individual = ({ prodImg, prod, options, tags }) => {
       options.find((item) => item.title === "Size") &&
       actSize === ""
     ) {
+      document.getElementsByClassName("Size")[0].classList.add("shake");
+      setTimeout(() => {
+        document.getElementsByClassName("Size")[0].classList.remove("shake");
+      }, 700);
       toast.error("Size is required");
       return;
     }
@@ -69,7 +73,11 @@ const Individual = ({ prodImg, prod, options, tags }) => {
       options &&
       options.find((item) => item.title === "Pack") &&
       actPack === ""
-    ) {
+      ) {
+      document.getElementsByClassName("Pack")[0].classList.add("shake");
+      setTimeout(() => {
+        document.getElementsByClassName("Pack")[0].classList.remove("shake");
+      }, 700);
       toast.error("Pack is required");
       return;
     }
@@ -77,7 +85,11 @@ const Individual = ({ prodImg, prod, options, tags }) => {
       options &&
       options.find((item) => item.title === "Color") &&
       actColor === ""
-    ) {
+      ) {
+      document.getElementsByClassName("Color")[0].classList.add("shake");
+      setTimeout(() => {
+        document.getElementsByClassName("Color")[0].classList.remove("shake");
+      }, 700);
       toast.error("Color is required");
       return;
     }
@@ -167,8 +179,8 @@ const Individual = ({ prodImg, prod, options, tags }) => {
       <div className="flex flex-col md:flex-row gap-8">
         <div className="relative w-[100%] h-full md:h-[577px] md:w-[45%]">
         {wishTogle && (
-          <div className="absolute top-14 right-5 z-10 bg-[var(--secondary-color)] 
-          flex items-center gap-1 text-white px-2 py-1 rounded-lg animate-bounce">Wishlist here <RxDoubleArrowUp/></div>
+          <div className="absolute top-[13%] right-[4%] md:top-[8%] md:right-[5%] z-10 bg-[var(--secondary-color)] 
+          flex items-center gap-1 text-white px-2 py-1 text-sm rounded-lg animate-bounce">Wishlist here <RxDoubleArrowUp/></div>
         )}
           <Swiper
             id="swiper3"
@@ -230,7 +242,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                 <div className="flex flex-col gap-2 " key={ind}>
                   <div className="h-text mr-auto ">{opt.title} </div>
                   {opt.title === "Color" ? (
-                    <div className="flex gap-4 cursor-pointer w-full overflow-auto mt-2 scrollDiv">
+                    <div className="flex gap-4 Color cursor-pointer w-full overflow-auto mt-2 scrollDiv">
                       {opt.values.map((op, i) => (
                         <div
                           key={i}
@@ -261,7 +273,7 @@ const Individual = ({ prodImg, prod, options, tags }) => {
                       ))}
                     </div>
                   ) : (
-                    <div className="flex gap-4 w-full p-1 overflow-auto scrollDiv">
+                    <div className={`flex ${opt.title} gap-4 w-full p-1 overflow-auto scrollDiv`}>
                       {opt.values.map((op, i) => (
                         <div
                           key={i}

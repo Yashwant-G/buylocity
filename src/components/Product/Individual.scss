@@ -7,6 +7,22 @@
   }
 }   
 
+.shake{
+  animation: shakeDiv 500ms linear ;
+}
+@keyframes shakeDiv {
+  0%{
+    transform: translateX(-2%);
+  }
+  50%{
+    transform: translateX(2%);
+  }
+  100%{
+    transform: translateX();
+  }
+  
+}
+
 .swiper-pagination-fraction{
   width: fit-content !important;
   background-color: white !important;

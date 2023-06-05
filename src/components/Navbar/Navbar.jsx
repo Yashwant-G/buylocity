@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { client, urlFor } from "../../client";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
-import { FaShoppingCart } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import { motion } from "framer-motion";
 
 import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setBgMode } from "../../redux/slices/bgMode";
-import { AiFillHeart } from "react-icons/ai";
+import {AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
@@ -23,7 +23,6 @@ const Navbar = ({ home }) => {
   const { light } = useSelector((state) => state.bgMode);
   const dispatch = useDispatch();
   const [navList, setNavlist] = useState([]);
-  const { products } = useSelector((state) => state.cart);
 
   useEffect(() => {
     const query = '*[_type == "status"][0]';
@@ -101,74 +100,77 @@ const Navbar = ({ home }) => {
           </ul>
         )}
 
-        <div className="app__navbar-mode">
-          <div className="app__flex gap-4">
-            <div>
-              {light ? (
-                <MdDarkMode
-                  className="hover:scale-105 mode-icon"
-                  style={{ fontSize: "30px" }}
-                  onClick={() => dispatch(setBgMode())}
-                />
-              ) : (
-                <MdOutlineLightMode
-                  className="hover:scale-105 mode-icon"
-                  style={{ fontSize: "30px", color: "white" }}
-                  onClick={() => dispatch(setBgMode())}
-                />
-              )}
-            </div>
-            <NavLink to="/cart">
-              <div className="relative">
-                <div
-                  className="absolute top-[-40%] right-[-10%] z-[5] h-text text-[var(--black-color)] bg-[var(--white-color)] 
-              px-[0.30rem] rounded-full text-sm animate-bounce "
-                >
-                  {products.length}
+        <div className="flex items-center justify-center">
+          <div className="app__navbar-mode">
+            <div className="app__flex gap-4 md:gap-6 mb-1 -mr-2 md:mr-0">
+              <NavLink to="/search">
+                <div className="relative">
+                  <AiOutlineSearch
+                    className="text-[var(--black-color)] text-2xl md:text-3xl"
+                  />
                 </div>
-                <FaShoppingCart
-                  className="text-[var(--black-color)]"
-                  style={{ fontSize: "26px" }}
-                />
+              </NavLink>
+              <NavLink to="/wishlist">
+                <div className="relative">
+                  <AiOutlineHeart
+                    className="text-[var(--black-color)] text-2xl md:text-3xl"
+                  />
+                </div>
+              </NavLink>
+              <NavLink to="/myaccount">
+                <div className="relative">
+                  <CgProfile
+                    className="text-[var(--black-color)] text-2xl md:text-3xl"
+                  />
+                </div>
+              </NavLink>
+              <div>
+                {light ? (
+                  <MdDarkMode
+                  fontSize={"1.5rem"}
+                    className="hover:scale-105 mode-icon text-[1.7rem] md:text-3xl leading-none text-black"
+                    onClick={() => dispatch(setBgMode())}
+                  />
+                ) : (
+                  <MdOutlineLightMode
+                    className="hover:scale-105 mode-icon text-2xl md:text-3xl text-white"
+                    onClick={() => dispatch(setBgMode())}
+                  />
+                )}
               </div>
-            </NavLink>
-            <NavLink to="/wishlist">
-              <div className="relative">
-                <AiFillHeart
-                  className="text-[var(--black-color)]"
-                  style={{ fontSize: "26px" }}
-                />
-              </div>
-            </NavLink>
+            </div>
           </div>
-        </div>
 
-        <div className="app__navbar-menu">
-          <HiMenuAlt4 onClick={() => setToggle(true)} />
+          <div className="app__navbar-menu">
+            <HiMenuAlt4
+              style={{ fontSize: "23px", color:'white' }}
+              onClick={() => setToggle(true)}
+            />
 
-          {toggle && (
-            <motion.div
-              whileInView={{ x: [100, 0] }}
-              transition={{ duration: 0.85, ease: "easeOut" }}
-            >
-              <HiX onClick={() => setToggle(false)} />
-              {home ? (
-                <ul className="app__navbar-links">
-                  {navList.map((item, index) => (
-                    <li className="app__flex p-text" key={index}>
-                      <a href={`${item.link}`}>{item.title}</a>
+            {toggle && (
+              <motion.div
+                whileInView={{ x: [100, 0] }}
+                transition={{ duration: 0.85, ease: "easeOut" }}
+              >
+                <HiX onClick={() => setToggle(false)} />
+                {home ? (
+                  <ul className="app__navbar-links">
+                    {navList.map((item, index) => (
+                      <li className="app__flex p-text" key={index}>
+                        <a href={`${item.link}`}>{item.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <ul className="app__navbar-links">
+                    <li className="app__flex p-text">
+                      <NavLink to="/">Home</NavLink>
                     </li>
-                  ))}
-                </ul>
-              ) : (
-                <ul className="app__navbar-links">
-                  <li className="app__flex p-text">
-                    <NavLink to="/">Home</NavLink>
-                  </li>
-                </ul>
-              )}
-            </motion.div>
-          )}
+                  </ul>
+                )}
+              </motion.div>
+            )}
+          </div>
         </div>
       </nav>
     </div>
