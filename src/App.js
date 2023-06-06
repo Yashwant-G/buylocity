@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import Cart from "./components/Cart/CartComp";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Success from "./pages/Success/Success";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/track/:id" element={<TrackOrderId />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/cart/checkout" element={<Checkout />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/order/:id/success" element={<Success />} />
         <Route path="/contact" element={<ContactPage />} />

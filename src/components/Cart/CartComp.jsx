@@ -5,12 +5,8 @@ import { Helmet } from "react-helmet";
 import Navbar from "../Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
-import {
-  AiFillDelete,
-  AiOutlinePlus,
-  AiOutlineMinus,
-} from "react-icons/ai";
-import {RiHeartAddLine} from "react-icons/ri"
+import { AiFillDelete, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { RiHeartAddLine } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
 import {
   descrementQuantity,
@@ -19,6 +15,7 @@ import {
   resetCart,
 } from "../../redux/slices/cart";
 import { toast } from "react-hot-toast";
+import CartTree from "./CartTree";
 
 const CartComp = () => {
   const { products, total } = useSelector((state) => state.cart);
@@ -40,15 +37,16 @@ const CartComp = () => {
       </Helmet>
       <Navbar home={false} />
       <div className="pt-28">
+        <CartTree bag={true} />
         {products.length > 0 ? (
           <div className="w-full flex flex-col md:flex-row p-4 h-fit ">
-            <div className="w-full md:w-[70%] px-6 md:px-16 py-4 md:py-8 bg-white h-[509px] overflow-auto">
+            <div className="w-full md:w-[70%] px-6 md:px-16 py-4 md:py-8 md:bg-white h-[509px] overflow-auto">
               <div className="flex justify-between">
-                <div className="h-text text-black text-left text-base whitespace-nowrap md:text-lg">
+                <div className="h-text text-[var(--black-color)] md:text-black text-left text-base whitespace-nowrap md:text-lg">
                   Shopping Cart
                 </div>
 
-                <div className="h-text text-black text-base md:text-lg">
+                <div className="h-text text-[var(--black-color)] md:text-black text-base md:text-lg">
                   {products.length} Items
                 </div>
               </div>
@@ -64,7 +62,7 @@ const CartComp = () => {
                 <Link className="my-auto" to="/wishlist">
                   <div className="flex items-center gap-1 text-[var(--secondary-color)] p-text text-base cursor-pointer">
                     <div className="hidden md:block">Add from Wishlist</div>
-                    <RiHeartAddLine />
+                    <RiHeartAddLine className="text-lg" />
                   </div>
                 </Link>
                 <div
@@ -74,7 +72,7 @@ const CartComp = () => {
                   className="p-text my-auto text-base cursor-pointer flex items-center gap-1 text-red-500"
                 >
                   <div className="hidden md:block">Reset Cart</div>
-                  <AiFillDelete />
+                  <AiFillDelete className="text-lg" />
                 </div>
               </div>
 
@@ -107,7 +105,7 @@ const CartComp = () => {
                       <div className="flex flex-col justify-between mb-8 gap-2">
                         <div
                           onClick={() => navigate(`/products/${prod.id}`)}
-                          className="cursor-pointer hover:underline bold-text text-black text-sm md:text-base leading-5"
+                          className="cursor-pointer hover:underline bold-text text-[var(--black-color)] md:text-black text-sm md:text-base leading-5"
                         >
                           {prod.name}
                         </div>
@@ -131,10 +129,11 @@ const CartComp = () => {
                             </div>
                           )}
                         </div>
-                        <div className="block md:hidden text-sm md:text-base">
+                        <div className="block md:hidden text-sm md:text-base text-[var(--black-color)] md:text-black">
                           Rs{prod.price * prod.quantity}
                         </div>
-                        <div onClick={() => {
+                        <div
+                          onClick={() => {
                             dispatch(
                               removeFromCart({
                                 index,
@@ -142,7 +141,11 @@ const CartComp = () => {
                                 quantity: prod.quantity,
                               })
                             );
-                          }} className="md:hidden block cursor-pointer text-red-500 absolute -right-4 top-0"><RxCross1/></div>
+                          }}
+                          className="md:hidden block cursor-pointer text-red-500 absolute right-2 bottom-[6%]"
+                        >
+                          <RxCross1 className="text-lg" />
+                        </div>
                         <div
                           onClick={() => {
                             dispatch(
@@ -161,7 +164,7 @@ const CartComp = () => {
                     </div>
 
                     <div className="w-[20%] py-2 md:py-0 ml-5 md:ml-0">
-                      <div className="app__flex gap-2">
+                      <div className="app__flex gap-2 text-[var(--black-color)] md:text-black">
                         <button
                           onClick={() => {
                             dispatch(
@@ -205,7 +208,7 @@ const CartComp = () => {
               <div className="h-text text-black">Order Summary</div>
               <div className="h-[1px] mt-12 w-full bg-black"></div>
               <div className="flex justify-between items-center mt-3.5 ">
-                <div className="font-[500]">Total Items</div>
+                <div className="font-[500]">Items Total</div>
                 <div className="font-bold">Rs{total}</div>
               </div>
               <div className="flex justify-between items-center">
@@ -234,11 +237,11 @@ const CartComp = () => {
               </div>
               <div className="h-[1px] mt-4 w-full bg-black"></div>
               <div className="flex justify-between items-center">
-                <div className="my-3">Total Amount</div>
+                <div className="my-3 font-[500]">To Pay</div>
                 <div className="font-bold">Rs{total}</div>
               </div>
               <div>
-                <Link to="/order/1234/success">
+                <Link to="/cart/checkout">
                   <button className="w-full bg-[var(--secondary-color)] text-white py-2 rounded-md">
                     Checkout
                   </button>

@@ -12,13 +12,33 @@ import { setLoading } from "../../redux/slices/loading";
 const TrackOrderId = () => {
   const [found, setFound] = useState(true);
   const [details, setDetails] = useState([]);
+  const [status, setStatus] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const id = location.pathname.split("/").at(-1);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoading(true));
-    const query = `*[_type == "orders" && orderId == $orderId]`;
+    const query = `*[_type == "orders" && orderId == $orderId]{
+      ...,
+      allproducts[]{
+        ...,
+        product->{
+          _id,
+          name,
+          price,
+          options,
+          productImages,
+          shortDescription,
+        },
+      },
+      status->{
+        ...,
+      },
+      user->{
+        ...,
+      },
+    }`;
     const params = { orderId: id.toString() };
 
     client.fetch(query, params).then((order) => {
@@ -27,6 +47,7 @@ const TrackOrderId = () => {
         console.log("not fetched");
       }
       setDetails(order[0]);
+      setStatus(order[0].status)
       console.log(order);
     });
     setTimeout(() => {
@@ -48,7 +69,7 @@ const TrackOrderId = () => {
       </Helmet>
       <Navbar home={false} />
       {found ? (
-        <Found details={details} />
+        <Found details={details} status={status}/>
       ) : (
         <div className="app__flex head-text pt-28 gap-1 h-[70vh] text-lg lg:text-2xl">
           Order Id Not found, Please

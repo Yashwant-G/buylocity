@@ -25,6 +25,7 @@ const Product = () => {
   const [filterProduct, setFilterProduct] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Clothing");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+  const [sortBy, setSortBy] = useState("new");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.wishlist);
@@ -46,6 +47,50 @@ const Product = () => {
       setFilterProduct(data.filter((prod) => prod.tags.includes("Clothing")));
     });
   }, []);
+
+  useEffect(() => {
+    setSortBy("new")
+  },[activeFilter]);
+
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+    dispatch(setLoading(true));
+    setAnimateCard([{ y: 100, opacity: 0 }]);
+
+    setTimeout(() => {
+      if (e.target.value === "new") {
+        setFilterProduct((prevFilterProduct) => {
+          const sortedProducts = [...prevFilterProduct].sort((a, b) => {
+            const dateA = new Date(a._updatedAt);
+            const dateB = new Date(b._updatedAt);
+            return dateB - dateA;
+          });
+          return sortedProducts;
+        });
+      }
+      if (e.target.value === "LtoH") {
+        setFilterProduct((prevFilterProduct) => {
+          const sortedProducts = [...prevFilterProduct].sort(
+            (a, b) => a.price - b.price
+          );
+          return sortedProducts;
+        });
+      }
+      if (e.target.value === "HtoL") {
+        setFilterProduct((prevFilterProduct) => {
+          const sortedProducts = [...prevFilterProduct].sort(
+            (a, b) => b.price - a.price
+          );
+          return sortedProducts;
+        });
+      }
+      setAnimateCard([{ y: 0, opacity: 1 }]);
+    }, 500);
+
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 1000);
+  };
 
   const handleWorkFilter = (item) => {
     dispatch(setLoading(true));
@@ -85,6 +130,20 @@ const Product = () => {
             </div> */}
           </div>
         ))}
+      </div>
+
+      <div className="flex gap-2 items-center w-[78%] mx-auto mb-4 justify-center md:justify-start">
+        <div className="h-text font-[500] text-base md:text-lg">Sort by:</div>
+        <select
+          name="sort"
+          value={sortBy}
+          onChange={handleSortChange}
+          className="p-0.5 md:p-1 border md:border-2 rounded-sm border-gray-600 outline-none w-fit p-text md:text-base"
+        >
+          <option value="new">Newest</option>
+          <option value="LtoH">Price: Low to High</option>
+          <option value="HtoL">Price: High to Low</option>
+        </select>
       </div>
 
       <motion.div
