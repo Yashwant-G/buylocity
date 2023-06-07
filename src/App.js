@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
@@ -18,16 +18,26 @@ import Shipping from "./pages/Formal/Shipping";
 
 import PageNotFound from "./assets/404.png";
 import Spinner from "./components/Spinner/Spinner";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cart from "./components/Cart/CartComp";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Success from "./pages/Success/Success";
 import Checkout from "./components/Checkout/Checkout";
+import Login from "./pages/Auth/Login";
+import { verifyLogin } from "./redux/slices/user";
+import Search from "./pages/Search/Search";
 
 function App() {
   const location = useLocation();
   const { light } = useSelector((state) => state.bgMode);
   const { loading } = useSelector((state) => state.loading);
+  const dispath=useDispatch();
+
+  useEffect(() => {
+    dispath(verifyLogin());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -43,8 +53,10 @@ function App() {
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/track/:id" element={<TrackOrderId />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/auth" element={<Login />} />
         <Route path="/cart/checkout" element={<Checkout />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/order/:id/success" element={<Success />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/terms&conditions" element={<Terms />} />

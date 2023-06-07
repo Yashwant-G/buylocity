@@ -4,6 +4,7 @@ import { MdArrowBackIosNew } from "react-icons/md";
 import "./Checkout.scss";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const Checkout = () => {
   const [address, setAddress] = useState("one");
@@ -25,6 +26,15 @@ const Checkout = () => {
   };
   return (
     <div className="w-full min-h-screen overflow-hidden flex flex-col px-6 md:px-16 py-8">
+      <Helmet>
+        <title>Buylocity- Checkout</title>
+        <meta
+          name="description"
+          content="BuyLocity is a revolutionary 2-hour delivery service that aims to simplify your shopping experience by connecting you with your favorite local stores. With BuyLocity, you can enjoy a seamless and hassle-free shopping experience from the comfort of your own home. Our platform provides you with access to a wide range of products from local stores, ensuring that you can always find what you're looking for.
+          At BuyLocity, we believe in providing our customers with the best possible service. That's why we prioritize quality and reliability in everything we do. Our team works tirelessly to ensure that all products delivered through our platform meet the highest standards of quality. We also guarantee speedy delivery, with all orders arriving at your doorstep within just 2 hours of placing the order.
+          So why wait? Whether you need groceries, snacks, or other household items, BuyLocity has got you covered. Experience the convenience of shopping from your favorite local stores without ever leaving your home. Try BuyLocity today and see how we can simplify your shopping experience!"
+        />
+      </Helmet>
       <div
         onClick={() => navigate("/cart")}
         className="cursor-pointer border-b ml-4 mr-5 pb-5 border-b-gray-500 flex gap-2 items-center text-lg text-[var(--secondary-color)]"
@@ -235,7 +245,9 @@ const Checkout = () => {
 
           <div className="h-0.5 w-full bg-gray-300 my-6" />
 
-          <div className="h-text text-black text-left text-base">Order Summary</div>
+          <div className="h-text text-black text-left text-base">
+            Order Summary
+          </div>
 
           <div className="flex justify-between items-center mt-4 p-text text-sm">
             <div>Items(2):</div>

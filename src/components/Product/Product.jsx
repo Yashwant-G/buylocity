@@ -183,7 +183,7 @@ const Product = () => {
                     ) : (
                       <AiOutlineHeart
                         onClick={() => dispatch(addToWishlist(prod))}
-                        className=" cursor-pointer absolute top-[3%] right-[3%] text-2xl z-10 "
+                        className="text-black cursor-pointer absolute top-[3%] right-[3%] text-2xl z-10 "
                       />
                     )}
                     {prod.productImages.map((productImage, ind) => (

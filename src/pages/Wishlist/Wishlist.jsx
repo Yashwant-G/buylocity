@@ -1,11 +1,11 @@
-import React from 'react'
-import Navbar from '../../components/Navbar/Navbar';
-import { Helmet } from 'react-helmet';
-import WishlistProd from '../../components/WishlistProd/WishlistProd';
+import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import { Helmet } from "react-helmet";
+import WishlistProd from "../../components/WishlistProd/WishlistProd";
 
 const Wishlist = () => {
   return (
-	<div className="w-full min-h-screen">
+    <div className="w-full min-h-screen">
       <Helmet>
         <title>Buylocity- Wishlist</title>
         <meta
@@ -18,11 +18,11 @@ const Wishlist = () => {
         />
       </Helmet>
       <Navbar home={false} />
-	  <div className='pt-28'>
-		<WishlistProd/>
-	  </div>
-	</div>
-  )
-}
+      <div className="pt-28">
+        <WishlistProd />
+      </div>
+    </div>
+  );
+};
 
 export default Wishlist;

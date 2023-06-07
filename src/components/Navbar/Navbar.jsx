@@ -9,7 +9,8 @@ import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setBgMode } from "../../redux/slices/bgMode";
-import {AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
+import { logOut } from "../../redux/slices/user";
 
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
@@ -23,6 +24,13 @@ const Navbar = ({ home }) => {
   const { light } = useSelector((state) => state.bgMode);
   const dispatch = useDispatch();
   const [navList, setNavlist] = useState([]);
+  const { user, logIn } = useSelector((state) => state.user);
+
+  function handleLogout(){
+    /*global google */
+    google.accounts.id.disableAutoSelect();
+    dispatch(logOut());
+  }
 
   useEffect(() => {
     const query = '*[_type == "status"][0]';
@@ -105,29 +113,33 @@ const Navbar = ({ home }) => {
             <div className="app__flex gap-4 md:gap-6 mb-1 -mr-2 md:mr-0">
               <NavLink to="/search">
                 <div className="relative">
-                  <AiOutlineSearch
-                    className="text-[var(--black-color)] text-2xl md:text-3xl"
-                  />
+                  <AiOutlineSearch className="text-[var(--black-color)] text-2xl md:text-3xl" />
                 </div>
               </NavLink>
               <NavLink to="/wishlist">
                 <div className="relative">
-                  <AiOutlineHeart
-                    className="text-[var(--black-color)] text-2xl md:text-3xl"
-                  />
+                  <AiOutlineHeart className="text-[var(--black-color)] text-2xl md:text-3xl" />
                 </div>
               </NavLink>
-              <NavLink to="/myaccount">
-                <div className="relative">
-                  <CgProfile
-                    className="text-[var(--black-color)] text-2xl md:text-3xl"
-                  />
-                </div>
-              </NavLink>
+              {logIn ? (
+                  <div onClick={handleLogout} className="w-7">
+                    <img
+                      className="object-cover rounded-full"
+                      src={user.picture}
+                      alt="profile"
+                    />
+                  </div>
+              ) : (
+                <NavLink to="/auth">
+                  <div className="relative">
+                    <CgProfile className="text-[var(--black-color)] text-2xl md:text-3xl" />
+                  </div>
+                </NavLink>
+              )}
               <div>
                 {light ? (
                   <MdDarkMode
-                  fontSize={"1.5rem"}
+                    fontSize={"1.5rem"}
                     className="hover:scale-105 mode-icon text-[1.7rem] md:text-3xl leading-none text-black"
                     onClick={() => dispatch(setBgMode())}
                   />
@@ -143,7 +155,7 @@ const Navbar = ({ home }) => {
 
           <div className="app__navbar-menu">
             <HiMenuAlt4
-              style={{ fontSize: "23px", color:'white' }}
+              style={{ fontSize: "23px", color: "white" }}
               onClick={() => setToggle(true)}
             />
 
