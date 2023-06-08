@@ -17,20 +17,23 @@ TODO
 7. Sort by DONE...
 9. order-flow tree DONE...
 10 Address Page layout DONE...
+9. search feature DONE...
 
 6. Return/refund request
 11. Address Page Dynamic Logic
 12. Payment Integrate
+13. Contact us form
 13. Login/Signup page
+14. Account Page
 14. Order details below tracking
 7. buy Now logic
 8. rating/review
-9. search feature
 10. publish in play store
 
 *Backend
-1. Submit Test
-2. Login/Signup Auth
+2. Login/Signup Auth DONE>>
+
+1. Submit Testimonial
 3. Razorpay
 4. Mail send
 5. Invoice

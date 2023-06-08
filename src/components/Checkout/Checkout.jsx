@@ -49,13 +49,13 @@ const Checkout = () => {
         <div className="w-full md:w-[70%] flex flex-col">
           <div>
             <div className="h-text text-left">Delivery Address</div>
-            <div class="radio-list text-black pr-4 mt-4">
+            <div className="radio-list text-black pr-4 mt-4">
               <div
                 className={`mb-3 bg-white ${
                   address === "one" && "border-2 border-[#524eee] "
                 } rounded-md `}
               >
-                <div class="radio-item">
+                <div className="radio-item">
                   <input
                     type="radio"
                     name="radio"
@@ -87,7 +87,7 @@ const Checkout = () => {
                   address === "two" && "border-2 border-[#524eee] "
                 } rounded-md `}
               >
-                <div class="radio-item">
+                <div className="radio-item">
                   <input
                     type="radio"
                     name="radio"
@@ -119,7 +119,7 @@ const Checkout = () => {
                   address === "three" && "border-2 border-[#524eee] "
                 } rounded-md `}
               >
-                <div class="radio-item">
+                <div className="radio-item">
                   <input
                     type="radio"
                     name="radio"
@@ -151,7 +151,7 @@ const Checkout = () => {
                   address === "last" && "border-2 border-[#524eee] "
                 } rounded-md `}
               >
-                <div class="radio-item">
+                <div className="radio-item">
                   <input
                     type="radio"
                     name="radio"
@@ -173,13 +173,13 @@ const Checkout = () => {
 
           <div className="mt-4">
             <div className="h-text text-left">Payment Mode</div>
-            <div class="radio-list text-black pr-4 mt-4">
+            <div className="radio-list text-black pr-4 mt-4">
               <div
                 className={`mb-3 bg-white ${
                   paymentMode === "cod" && "border-2 border-[#524eee] "
                 } rounded-md `}
               >
-                <div class="radio-item">
+                <div className="radio-item">
                   <input
                     type="radio"
                     name="paymentMode"
@@ -202,7 +202,7 @@ const Checkout = () => {
                   paymentMode === "online" && "border-2 border-[#524eee] "
                 } rounded-md `}
               >
-                <div class="radio-item">
+                <div className="radio-item">
                   <input
                     type="radio"
                     name="paymentMode"

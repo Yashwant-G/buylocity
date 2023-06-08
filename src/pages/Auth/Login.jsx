@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 
 const Login = () => {
   const [logo, setLogo] = useState(null);
-  const [quote, setQuote] = useState({ q: "Start", author: "Yash" });
+  const [quote, setQuote] = useState({ q: "Quote of the day....", author: "Author" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { logIn } = useSelector((state) => state.user);
@@ -38,7 +38,9 @@ const Login = () => {
       size: "large",
       text: "continue_with",
     });
-    google.accounts.id.prompt();
+    google.accounts.id.prompt((notification)=>{
+      console.log(notification.getNotDisplayedReason());
+    });
 
     const fetchData = async () => {
       try {

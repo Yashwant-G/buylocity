@@ -75,7 +75,7 @@ function App() {
               />
               <p>Page Not Found</p>
               <button
-                className="bg-[var(--secondary-color)] text-white p-text text-lg px-7 py-1 mt-8 hover:bg-[var(--hover-color)] 
+                className="bg-[var(--secondary-color)] text-white p-text text-lg px-7 py-1 mt-8 hover:bg-blue-500 
               rounded-3xl text-center mx-auto"
               >
                 <Link to="/">Home</Link>

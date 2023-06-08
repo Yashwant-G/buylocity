@@ -14,13 +14,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setCookie: (state, action) => {
-      cookies.set("jwt_aut", action.payload, {
+      cookies.set("jwt_auth", action.payload, {
         expires: new Date(Date.now() + 60 * 60 * 1000),
       });
       toast.success("Login successful");
     },
     verifyLogin: (state) => {
-      const cookieValue = cookies.get("jwt_aut");
+      const cookieValue = cookies.get("jwt_auth");
       if (cookieValue) {
         var res = jwt_decode(cookieValue);
         state.user = res;

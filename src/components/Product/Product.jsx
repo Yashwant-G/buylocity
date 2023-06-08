@@ -132,13 +132,14 @@ const Product = () => {
         ))}
       </div>
 
-      <div className="flex gap-2 items-center w-[78%] mx-auto mb-4 justify-center md:justify-start">
-        <div className="h-text font-[500] text-base md:text-lg">Sort by:</div>
+      <div className="gap-2 items-center w-fit mx-auto mb-4 justify-center md:justify-start">
+        <label for="sortBy" className="block mb-2 text-base font-medium text-[var(--black-color)] ">Sort By:</label>
         <select
+          id="sortBy"
           name="sort"
           value={sortBy}
           onChange={handleSortChange}
-          className="p-0.5 md:p-1 border md:border-2 rounded-sm border-gray-600 outline-none w-fit p-text md:text-base"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option value="new">Newest</option>
           <option value="LtoH">Price: Low to High</option>

@@ -26,7 +26,7 @@ const Navbar = ({ home }) => {
   const [navList, setNavlist] = useState([]);
   const { user, logIn } = useSelector((state) => state.user);
 
-  function handleLogout(){
+  function handleLogout() {
     /*global google */
     google.accounts.id.disableAutoSelect();
     dispatch(logOut());
@@ -122,13 +122,20 @@ const Navbar = ({ home }) => {
                 </div>
               </NavLink>
               {logIn ? (
-                  <div onClick={handleLogout} className="w-7">
+                <div className="w-7 dropdown mt-2">
+                  <button className="dropbtn">
                     <img
                       className="object-cover rounded-full"
                       src={user.picture}
                       alt="profile"
                     />
+                  </button>
+                  <div className="dropdown-content text-xs md:text-sm whitespace-nowrap rounded-lg">
+                    <Link to="/account" className="rounded-t-lg">My Account</Link>
+                    <Link to="/sccount/settings" className="-mt-1">Settings</Link>
+                    <button onClick={handleLogout} className="text-[var(--black-color)] hover:text-white pl-3 pb-2 w-full text-left hover:bg-[var(--secondary-color)] rounded-b-lg">Log Out</button>
                   </div>
+                </div>
               ) : (
                 <NavLink to="/auth">
                   <div className="relative">
