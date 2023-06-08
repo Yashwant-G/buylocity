@@ -18,7 +18,7 @@ const Checkout = () => {
     setPaymentMode(event.target.value);
   };
   const handleSubmit = () => {
-    if (address === "" || paymentMode === "") {
+    if (address === "" || address === "last"|| paymentMode === "") {
       toast.error("Please Select Address and Payment Mode!");
       return;
     }
@@ -234,7 +234,7 @@ const Checkout = () => {
             onClick={handleSubmit}
             className=" cursor-pointer w-full bg-[var(--secondary-color)] text-white text-center py-1.5 rounded-md"
           >
-            <button>Place Order</button>
+            <button>{paymentMode === "cod" || paymentMode==="" ? "Place Order":"Pay Now"}</button>
           </div>
 
           <div className="mt-3 p-text w-full">

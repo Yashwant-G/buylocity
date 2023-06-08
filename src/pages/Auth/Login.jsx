@@ -28,8 +28,7 @@ const Login = () => {
     }
     /*global google */
     google.accounts.id.initialize({
-      client_id:
-        "435725511546-5amgavsdaq9pe43d4mg2q2j18nm0jmpv.apps.googleusercontent.com",
+      client_id: "131016831943-6h3277k754eb9b1srp6l1m6fl67c3lcb.apps.googleusercontent.com",
       callback: handleCallbackResponse,
       context: "signin",
     });

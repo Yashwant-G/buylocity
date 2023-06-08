@@ -38,6 +38,9 @@ const TrackOrderId = () => {
       user->{
         ...,
       },
+      address->{
+        ...,
+      },
     }`;
     const params = { orderId: id.toString() };
 
