@@ -1,6 +1,6 @@
 import "./App.scss";
 import { useEffect, useLayoutEffect } from "react";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
 
@@ -24,24 +24,64 @@ import Wishlist from "./pages/Wishlist/Wishlist";
 import Success from "./pages/Success/Success";
 import Checkout from "./components/Checkout/Checkout";
 import Login from "./pages/Auth/Login";
-import { verifyLogin } from "./redux/slices/user";
+import { setSignupUser, setUser, verifyUser } from "./redux/slices/user";
 import Search from "./pages/Search/Search";
+import jwt_decode from "jwt-decode";
+import { client } from "./client";
+import Signup from "./pages/Auth/Signup";
+import MyAccount from "./pages/Auth/MyAccount";
+
 
 function App() {
   const location = useLocation();
   const { light } = useSelector((state) => state.bgMode);
   const { loading } = useSelector((state) => state.loading);
-  const dispath=useDispatch();
+  const dispatch=useDispatch();
+  const navigate = useNavigate();
+
+
+  function handleCallbackResponse(response) {
+    const info=jwt_decode(response.credential);
+    // console.log(info);
+    const query = `*[_type == "users" && email == $email]{
+      userName,
+      imageUrl,
+      accountType,
+      phoneNo,
+      email,
+    }`
+    const params={email: info.email.toString()}
+    client.fetch(query, params).then((res)=>{
+      // console.log(res);
+      if(res.length===0){
+        dispatch(setSignupUser(info));
+        navigate('/auth/signup');
+      }
+      else{
+        dispatch(setUser(res));
+        dispatch(verifyUser());
+        navigate('/');
+      }
+    })
+  }
 
   useEffect(() => {
-    dispath(verifyLogin());
+    dispatch(verifyUser());
+    
+    /*global google */
+    google.accounts.id.initialize({
+      client_id: "131016831943-6h3277k754eb9b1srp6l1m6fl67c3lcb.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+      context: "signin",
+    });
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]); //test
+  }, [location]);
   return (
     <div className={`app ${light ? "background-light" : "background-dark"}`}>
       {loading && <Spinner />}
@@ -54,6 +94,8 @@ function App() {
         <Route path="/track/:id" element={<TrackOrderId />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/auth" element={<Login />} />
+        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/account" element={<MyAccount />} />
         <Route path="/cart/checkout" element={<Checkout />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/search" element={<Search />} />

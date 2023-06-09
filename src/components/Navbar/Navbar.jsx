@@ -10,7 +10,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setBgMode } from "../../redux/slices/bgMode";
 import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
-import { logOut } from "../../redux/slices/user";
+import { removeUser } from "../../redux/slices/user";
 
 const Navbar = ({ home }) => {
   const [toggle, setToggle] = useState(false);
@@ -29,10 +29,11 @@ const Navbar = ({ home }) => {
   function handleLogout() {
     /*global google */
     google.accounts.id.disableAutoSelect();
-    dispatch(logOut());
+    dispatch(removeUser());
   }
 
   useEffect(() => {
+    // console.log(user[0].imageUrl);
     const query = '*[_type == "status"][0]';
 
     client.fetch(query).then((data) => {
@@ -126,7 +127,7 @@ const Navbar = ({ home }) => {
                   <button className="dropbtn">
                     <img
                       className="object-cover rounded-full"
-                      src={user.picture}
+                      src={user[0].imageUrl}
                       alt="profile"
                     />
                   </button>

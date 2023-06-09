@@ -1,44 +1,50 @@
 import { createSlice } from "@reduxjs/toolkit";
-import jwt_decode from "jwt-decode";
 import { toast } from "react-hot-toast";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import cryptoJs from "crypto-js";
+const secretKey = process.env.REACT_APP_SECRET_KEY;
 
 const initialState = {
-  user: {},
-  logIn: cookies.get("jwt_aut") ? true : false,
+  user: [],
+  GoogleUser: {},
+  logIn: false,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setCookie: (state, action) => {
-      cookies.set("jwt_auth", action.payload, {
-        expires: new Date(Date.now() + 60 * 60 * 1000),
-      });
-      toast.success("Login successful");
+    setSignupUser: (state, action) => {
+      state.GoogleUser = action.payload;
     },
-    verifyLogin: (state) => {
-      const cookieValue = cookies.get("jwt_auth");
-      if (cookieValue) {
-        var res = jwt_decode(cookieValue);
-        state.user = res;
+    setUser: (state, action) => {
+      const encryptedData = cryptoJs.AES.encrypt(
+        JSON.stringify(action.payload),
+        secretKey
+      ).toString();
+      localStorage.setItem("encUser", encryptedData);
+    },
+    verifyUser: (state) => {
+      const val=localStorage.getItem('encUser')
+      if(val){
+        const decryptedBytes = cryptoJs.AES.decrypt(val, secretKey);
+        const decryptedData = JSON.parse(decryptedBytes.toString(cryptoJs.enc.Utf8));
+        state.user = decryptedData;
         state.logIn = true;
-        toast.success(`Welcome ${state.user.name}`);
-      } else {
-        state.logIn = false;
-        toast.error("Session Expired, Please log in again");
+        toast.success(`Welcome ${state.user[0].userName}`)
+      }
+      else{
+        toast.error(`Please Sign up`);
       }
     },
-    logOut:(state)=>{
-      cookies.remove("jwt_auth");
-      state.logIn=false;
-      state.user={};
-      toast.success("Logout successful");
+    removeUser:(state)=>{
+      localStorage.removeItem('encUser');
+      state.user = {};
+      state.GoogleUser = {};
+      state.logIn = false;
+      toast.success(`Logged out`);
     }
   },
 });
 
-export const { setCookie, verifyLogin,logOut } = userSlice.actions;
+export const { setSignupUser, setUser, verifyUser, removeUser } = userSlice.actions;
 export default userSlice.reducer;

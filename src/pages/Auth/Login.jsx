@@ -3,23 +3,17 @@ import { Helmet } from "react-helmet";
 import Navbar from "../../components/Navbar/Navbar";
 import { client, urlFor } from "../../client";
 import { ImQuotesLeft } from "react-icons/im";
-import { useDispatch, useSelector } from "react-redux";
-import { setCookie, verifyLogin } from "../../redux/slices/user";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
   const [logo, setLogo] = useState(null);
   const [quote, setQuote] = useState({ q: "Quote of the day....", author: "Author" });
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { logIn } = useSelector((state) => state.user);
 
-  function handleCallbackResponse(response) {
-    dispatch(setCookie(response.credential));
-    dispatch(verifyLogin());
-    navigate("/");
-  }
+
 
   useEffect(() => {
     if(logIn){
@@ -27,19 +21,13 @@ const Login = () => {
       navigate("/profile");
     }
     /*global google */
-    google.accounts.id.initialize({
-      client_id: "131016831943-6h3277k754eb9b1srp6l1m6fl67c3lcb.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-      context: "signin",
-    });
+   
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
       size: "large",
       text: "continue_with",
     });
-    google.accounts.id.prompt((notification)=>{
-      console.log(notification.getNotDisplayedReason());
-    });
+   
 
     const fetchData = async () => {
       try {
