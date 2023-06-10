@@ -24,7 +24,8 @@ const Signup = () => {
 
   useEffect(() => {
     if(GoogleUser==={}){
-      navigate("/auth")
+      navigate("/auth");
+      return;
     }
     if(logIn){
       toast.success("Already logged in");

@@ -49,7 +49,6 @@ const Checkout = () => {
 
   useEffect(() => {
     if(!logIn){
-      console.log(user.length);
       toast.error("Please Login first");
       navigate("/auth");
       return;

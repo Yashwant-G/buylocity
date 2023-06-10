@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
 
 const OrderId = () => {
   const [details, setDetails] = useState([]);
-  const { user } = useSelector((state) => state.user);
+  const { user,logIn } = useSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
   const orderId = location.pathname.split("/").at(-1);
@@ -31,13 +31,17 @@ const OrderId = () => {
       console.log(res);
       if (res[0].user._ref !== user[0]._id) {
         toast.error("Not your Order");
-        navigate("/home");
+        navigate("/");
         return;
       }
       setDetails(res);
     });
   }
   useEffect(() => {
+    if(!logIn){
+      navigate("/auth");
+      return;
+    }
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);

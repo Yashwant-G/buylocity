@@ -13,6 +13,7 @@ import { Modal } from "react-responsive-modal";
 import { setLoading } from "../../redux/slices/loading";
 import Address from "../../components/MyAccount/Address";
 import UserOrders from "../../components/MyAccount/UserOrders";
+import { toast } from "react-hot-toast";
 
 const MyAccount = () => {
   const [profileDiv, setProfileDiv] = useState(false);
@@ -20,7 +21,7 @@ const MyAccount = () => {
   const [ordersDiv, setOrdersDiv] = useState(false);
   const [address, setAddress] = useState([]);
   const [orders, setOrders] = useState([]);
-  const { user } = useSelector((state) => state.user);
+  const { user,logIn } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -55,12 +56,15 @@ const MyAccount = () => {
       });
     } catch (error) {
       console.log(error);
-      navigate("/");
     }
     dispatch(setLoading(false));
   };
 
   useEffect(() => {
+    if(!logIn){
+      toast.error("Not Logged in");
+      navigate("/auth");
+    }
     fetchEntries();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
