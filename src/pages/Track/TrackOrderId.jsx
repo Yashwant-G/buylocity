@@ -21,24 +21,7 @@ const TrackOrderId = () => {
     dispatch(setLoading(true));
     const query = `*[_type == "orders" && orderId == $orderId]{
       ...,
-      allproducts[]{
-        ...,
-        product->{
-          _id,
-          name,
-          price,
-          options,
-          productImages,
-          shortDescription,
-        },
-      },
       status->{
-        ...,
-      },
-      user->{
-        ...,
-      },
-      address->{
         ...,
       },
     }`;

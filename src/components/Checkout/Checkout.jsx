@@ -5,11 +5,18 @@ import "./Checkout.scss";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../redux/slices/loading";
+import { client } from "../../client";
+import { useEffect } from "react";
 
 const Checkout = () => {
-  const [address, setAddress] = useState("one");
+  const [address, setAddress] = useState("");
+  const [addresses, setAddresses] = useState([]);
   const [paymentMode, setPaymentMode] = useState("");
+  const { user, logIn } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setAddress(event.target.value);
@@ -18,12 +25,38 @@ const Checkout = () => {
     setPaymentMode(event.target.value);
   };
   const handleSubmit = () => {
-    if (address === "" || address === "last"|| paymentMode === "") {
+    if (address === "" || address === "last" || paymentMode === "") {
       toast.error("Please Select Address and Payment Mode!");
       return;
     }
     navigate("/order/1234/success");
   };
+
+  const fetchEntries = async () => {
+    dispatch(setLoading(true));
+    const query1 = `*[_type == "address" && user._ref == $userId]`;
+    const params = { userId: user[0]?._id };
+    try {
+      await client.fetch(query1, params).then((res) => {
+        setAddresses(res);
+      });
+    } catch (error) {
+      console.log(error);
+      // navigate("/");
+    }
+    dispatch(setLoading(false));
+  };
+
+  useEffect(() => {
+    if(!logIn){
+      console.log(user.length);
+      toast.error("Please Login first");
+      navigate("/auth");
+      return;
+    }
+    fetchEntries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="w-full min-h-screen overflow-hidden flex flex-col px-6 md:px-16 py-8">
       <Helmet>
@@ -49,126 +82,48 @@ const Checkout = () => {
         <div className="w-full md:w-[70%] flex flex-col">
           <div>
             <div className="h-text text-left">Delivery Address</div>
-            <div className="radio-list text-black pr-4 mt-4">
-              <div
-                className={`mb-3 bg-white ${
-                  address === "one" && "border-2 border-[#524eee] "
-                } rounded-md `}
-              >
-                <div className="radio-item">
-                  <input
-                    type="radio"
-                    name="radio"
-                    id="radio1"
-                    value="one"
-                    checked={address === "one"}
-                    onChange={handleChange}
-                  />
+            {addresses.map((add, index) => (
+              <div key={index} className="radio-list text-black pr-4 mt-4">
+                <div
+                  className={`mb-3 bg-white ${
+                    address === add.name && "border-2 border-[#524eee] "
+                  } rounded-md `}
+                >
+                  <div className="radio-item">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id={add._id}
+                      value={add.name}
+                      checked={address === add.name}
+                      onChange={handleChange}
+                    />
 
-                  <label
-                    for="radio1"
-                    className="flex flex-col md:flex-row items-start md:items-center"
-                  >
-                    <div className="h-text text-black text-base">
-                      Yashwant G
-                    </div>
-                    <div className="p-text md:ml-10 text-sm whitespace-nowrap">
-                      125, Police Line, Vikaspuri
-                    </div>
-                    <div className="md:ml-auto md:mr-0 mr-auto text-base md:text-lg font-[500] text-[#524eee]">
-                      <button>Edit</button>
-                    </div>
-                  </label>
+                    <label
+                      htmlFor={add._id}
+                      className="flex flex-col md:flex-row items-start md:items-center"
+                    >
+                      <div className="h-text relative text-black text-base flex flex-col items-start">
+                        <div className="absolute left-0 -top-1/3 bg-[var(--secondary-color)] px-1 py-0.5 rounded-xl text-white text-xs">
+                          {add.tag}
+                        </div>
+                        <div>{add.name}</div>
+                        <div>{add.number}</div>
+                      </div>
+                      <div className="p-text md:ml-10 text-sm md:whitespace-nowrap">
+                        {add.address}, {add.pincode}
+                      </div>
+                      <div
+                        onClick={() => navigate("/account")}
+                        className="md:ml-auto md:mr-0 mr-auto text-base md:text-lg font-[500] text-[#524eee]"
+                      >
+                        <button>Edit</button>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </div>
-
-              <div
-                className={`mb-3 bg-white ${
-                  address === "two" && "border-2 border-[#524eee] "
-                } rounded-md `}
-              >
-                <div className="radio-item">
-                  <input
-                    type="radio"
-                    name="radio"
-                    id="radio2"
-                    value="two"
-                    checked={address === "two"}
-                    onChange={handleChange}
-                  />
-
-                  <label
-                    for="radio2"
-                    className="flex flex-col md:flex-row items-start md:items-center"
-                  >
-                    <div className="h-text text-black text-base">
-                      Yashwant G
-                    </div>
-                    <div className="p-text md:ml-10 text-sm whitespace-nowrap">
-                      125, Police Line, Vikaspuri
-                    </div>
-                    <div className="md:ml-auto md:mr-0 mr-auto text-base md:text-lg font-[500] text-[#524eee]">
-                      <button>Edit</button>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              <div
-                className={`mb-3 bg-white ${
-                  address === "three" && "border-2 border-[#524eee] "
-                } rounded-md `}
-              >
-                <div className="radio-item">
-                  <input
-                    type="radio"
-                    name="radio"
-                    id="radio3"
-                    value="three"
-                    checked={address === "three"}
-                    onChange={handleChange}
-                  />
-
-                  <label
-                    for="radio3"
-                    className="flex flex-col md:flex-row items-start md:items-center"
-                  >
-                    <div className="h-text text-black text-base">
-                      Yashwant G
-                    </div>
-                    <div className="p-text md:ml-10 text-sm whitespace-nowrap">
-                      125, Police Line, Vikaspuri
-                    </div>
-                    <div className="md:ml-auto md:mr-0 mr-auto text-base md:text-lg font-[500] text-[#524eee]">
-                      <button>Edit</button>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              <div
-                className={`mb-3 bg-white ${
-                  address === "last" && "border-2 border-[#524eee] "
-                } rounded-md `}
-              >
-                <div className="radio-item">
-                  <input
-                    type="radio"
-                    name="radio"
-                    id="radio4"
-                    value="last"
-                    checked={address === "last"}
-                    onChange={handleChange}
-                  />
-
-                  <label for="radio4">
-                    <div className="h-text text-black text-base">
-                      Add new address
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="mt-4">
@@ -234,7 +189,11 @@ const Checkout = () => {
             onClick={handleSubmit}
             className=" cursor-pointer w-full bg-[var(--secondary-color)] text-white text-center py-1.5 rounded-md"
           >
-            <button>{paymentMode === "cod" || paymentMode==="" ? "Place Order":"Pay Now"}</button>
+            <button>
+              {paymentMode === "cod" || paymentMode === ""
+                ? "Place Order"
+                : "Pay Now"}
+            </button>
           </div>
 
           <div className="mt-3 p-text w-full">

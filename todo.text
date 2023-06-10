@@ -18,14 +18,16 @@ TODO
 9. order-flow tree DONE...
 10 Address Page layout DONE...
 9. search feature DONE...
+13. Login/Signup page DONE...
+11. Address Page Dynamic Logic DONE...
+14. Account Page Done...
 
-13. Login/Signup page
-11. Address Page Dynamic Logic
-14. Account Page
-14. Order details below tracking
-13. Contact us form
-12. Payment Integrate
+14. Order details page styling
 6. Return/refund request
+12. Payment Integrate
+15 Cart Db entry flow
+13. Contact us form
+14. Motion Wrap, Footer, CartDiv show on new pages
 7. buy Now logic
 8. rating/review
 10. publish in play store

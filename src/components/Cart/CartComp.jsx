@@ -19,7 +19,7 @@ import CartTree from "./CartTree";
 
 const CartComp = () => {
   const { products, total } = useSelector((state) => state.cart);
-  console.log("Cart Page", products);
+  // console.log("Cart Page", products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (

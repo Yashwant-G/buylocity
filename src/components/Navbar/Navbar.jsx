@@ -123,7 +123,7 @@ const Navbar = ({ home }) => {
                 </div>
               </NavLink>
               {logIn ? (
-                <div className="w-7 dropdown mt-2">
+                <div className="w-8 dropdown mt-2">
                   <button className="dropbtn">
                     <img
                       className="object-cover rounded-full"
@@ -133,7 +133,6 @@ const Navbar = ({ home }) => {
                   </button>
                   <div className="dropdown-content text-xs md:text-sm whitespace-nowrap rounded-lg">
                     <Link to="/account" className="rounded-t-lg">My Account</Link>
-                    <Link to="/sccount/settings" className="-mt-1">Settings</Link>
                     <button onClick={handleLogout} className="text-[var(--black-color)] hover:text-white pl-3 pb-2 w-full text-left hover:bg-[var(--secondary-color)] rounded-b-lg">Log Out</button>
                   </div>
                 </div>

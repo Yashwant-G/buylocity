@@ -2,7 +2,6 @@ import "./App.scss";
 import { useEffect, useLayoutEffect } from "react";
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import Order from "./pages/Order";
 
 import Products from "./pages/Products/Products";
 import IndiProduct from "./pages/Products/IndiProduct";
@@ -30,6 +29,7 @@ import jwt_decode from "jwt-decode";
 import { client } from "./client";
 import Signup from "./pages/Auth/Signup";
 import MyAccount from "./pages/Auth/MyAccount";
+import OrderId from "./pages/OrderId/OrderId";
 
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
     const info=jwt_decode(response.credential);
     // console.log(info);
     const query = `*[_type == "users" && email == $email]{
+      _id,
       userName,
       imageUrl,
       accountType,
@@ -89,7 +90,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<IndiProduct />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/order/:id" element={<OrderId />} />
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/track/:id" element={<TrackOrderId />} />
         <Route path="/cart" element={<Cart />} />

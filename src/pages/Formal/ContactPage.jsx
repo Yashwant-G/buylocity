@@ -13,7 +13,7 @@ const ContactPage = () => {
         />
       </Helmet>
 
-      <div>
+      <div className="text-[var(--black-color)] min-h-screen w-full">
         <Navbar home={false} />
         <div className="pt-40">
           <p className="head-text">Contact us</p>

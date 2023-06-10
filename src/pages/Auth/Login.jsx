@@ -18,7 +18,7 @@ const Login = () => {
   useEffect(() => {
     if(logIn){
       toast.success("Already logged in");
-      navigate("/profile");
+      navigate("/account");
     }
     /*global google */
    
