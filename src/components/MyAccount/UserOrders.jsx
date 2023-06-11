@@ -1,10 +1,44 @@
 import React from "react";
 import { FcCheckmark } from "react-icons/fc";
+import { RxCross2 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 
 const UserOrders = ({ orders }) => {
   // console.log("all",orders[0].allproducts);
   const navigate = useNavigate();
+  const latestStatus = (ord) => {
+    console.log(ord);
+    if (ord.status.orderCancelled) {
+      return <div className="flex flex-row gap-1 items-center text-xs text-red-500 mt-1">
+        Cancelled
+        <RxCross2 />
+      </div>;
+    }
+    if(ord.status.delivered){
+      return <div className="flex flex-row gap-1 items-center text-xs text-blue-500 mt-1">
+        Delivered
+        <FcCheckmark />
+      </div>;
+    }
+    if(ord.status.outForDelivery){
+      return <div className="flex flex-row gap-1 items-center text-xs text-blue-500 mt-1">
+        Out For Delivery
+        <FcCheckmark />
+      </div>;
+    }
+    if(ord.status.orderPacked){
+      return <div className="flex flex-row gap-1 items-center text-xs text-blue-500 mt-1">
+        Packed
+        <FcCheckmark />
+      </div>;
+    }
+    if(ord.status.orderRecieved){
+      return <div className="flex flex-row gap-1 items-center text-xs text-green-500 mt-1">
+        Recieved
+        <FcCheckmark />
+      </div>;
+    }
+  };
   return (
     <div className="w-full h-full p-text text-sm flex flex-col gap-4 py-6">
       {orders.map((ord, ind) => (
@@ -18,12 +52,7 @@ const UserOrders = ({ orders }) => {
               <div className="font-semibold">#{ord.orderId}</div>
               <div>Rs.{ord.total}</div>
             </div>
-            <div className="flex gap-1 items-center">
-              <div className="flex flex-row gap-1 items-center text-xs text-green-500 mt-1">
-                Delivered{" "}
-              </div>
-              <FcCheckmark />
-            </div>
+            <div className="flex gap-1 items-center">{latestStatus(ord)}</div>
           </div>
 
           {/* horizontal division */}

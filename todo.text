@@ -21,14 +21,16 @@ TODO
 13. Login/Signup page DONE...
 11. Address Page Dynamic Logic DONE...
 14. Account Page Done...
+15. user initial state fix DONE...
+15 Cart Db entry flow DONE...
+15. Order Id Generation DONE...
+15. Account->Orders->status Dynamic logic DONE...
+14. Order details page styling DONE...
 
-14. Order details page styling
-15. user initial state fix
+12. Payment Integrate M
 6. Return/refund request
-12. Payment Integrate
-15 Cart Db entry flow
 13. Contact us form
-14. Motion Wrap, Footer, CartDiv show on new pages
+14. Motion Wrap, Footer, CartIcon + Responsive show on new pages
 7. buy Now logic
 8. rating/review
 10. publish in play store
@@ -38,6 +40,7 @@ TODO
 
 1. Submit Testimonial
 3. Razorpay
-4. Mail send
+4. Mail send- Welcome, Order Confirmation, Return/Refund
+6. Self Email-Contact Form
 5. Invoice
 

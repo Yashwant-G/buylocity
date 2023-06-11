@@ -131,7 +131,7 @@ const Navbar = ({ home }) => {
                       alt="profile"
                     />
                   </button>
-                  <div className="dropdown-content text-xs md:text-sm whitespace-nowrap rounded-lg">
+                  <div className="dropdown-content text-sm whitespace-nowrap rounded-lg">
                     <Link to="/account" className="rounded-t-lg">My Account</Link>
                     <button onClick={handleLogout} className="text-[var(--black-color)] hover:text-white pl-3 pb-2 w-full text-left hover:bg-[var(--secondary-color)] rounded-b-lg">Log Out</button>
                   </div>

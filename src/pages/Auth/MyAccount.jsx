@@ -21,7 +21,7 @@ const MyAccount = () => {
   const [ordersDiv, setOrdersDiv] = useState(false);
   const [address, setAddress] = useState([]);
   const [orders, setOrders] = useState([]);
-  const { user,logIn } = useSelector((state) => state.user);
+  const { user, logIn } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -37,6 +37,7 @@ const MyAccount = () => {
       orderId,
       total,
       _createdAt,
+      status->{...},
       allproducts[]{
         ...,
         product->{
@@ -61,7 +62,7 @@ const MyAccount = () => {
   };
 
   useEffect(() => {
-    if(!logIn){
+    if (!logIn) {
       toast.error("Not Logged in");
       navigate("/auth");
     }
@@ -100,7 +101,7 @@ const MyAccount = () => {
 
             {/* profile Details */}
             <div
-              className="h-text font-normal w-3/5  md:w-[50%] mt-8 border bg-[var(--white-color)] hover:border-2
+              className="h-text text-base md:text-lg font-normal w-[90%]  md:w-[50%] mt-8 border bg-[var(--white-color)] hover:border-2
         border-[var(--black-color)] rounded-lg px-4 py-2 cursor-pointer hover:opacity-90 hover:border-blue-500"
             >
               <div
@@ -150,7 +151,7 @@ const MyAccount = () => {
 
             {/* Your Orders */}
             <div
-              className="h-text font-normal w-3/5  md:w-[50%] mt-4 border hover:border-2  bg-[var(--white-color)]
+              className="h-text text-base md:text-lg font-normal w-[90%]  md:w-[50%] mt-4 border hover:border-2  bg-[var(--white-color)]
         border-[var(--black-color)] rounded-lg px-4 py-2 cursor-pointer hover:bg-opacity-90 hover:border-blue-500"
             >
               <div
@@ -162,7 +163,7 @@ const MyAccount = () => {
               {ordersDiv && (
                 <div>
                   {orders.length > 0 ? (
-                    <UserOrders orders={orders}/>
+                    <UserOrders orders={orders} />
                   ) : (
                     <div className="p-text text-base py-4 text-center">
                       No Orders Found
@@ -174,7 +175,7 @@ const MyAccount = () => {
 
             {/* Your Addresses */}
             <div
-              className="h-text font-normal w-3/5 md:w-[50%] mt-4 border hover:border-2 bg-[var(--white-color)]
+              className="h-text text-base md:text-lg font-normal w-[90%] md:w-[50%] mt-4 border hover:border-2 bg-[var(--white-color)]
         border-[var(--black-color)] rounded-lg px-4 py-2 cursor-pointer hover:opacity-90 hover:border-blue-500"
             >
               <div
@@ -200,7 +201,7 @@ const MyAccount = () => {
             {/* Customer Support */}
             <Link
               to="/contact"
-              className="h-text font-normal w-3/5  md:w-[50%] mt-4 border hover:border-2 bg-[var(--white-color)] 
+              className="h-text text-base md:text-lg font-normal w-[90%]  md:w-[50%] mt-4 border hover:border-2 bg-[var(--white-color)] 
         border-[var(--black-color)] rounded-lg px-4 py-2 cursor-pointer hover:opacity-90 hover:border-blue-500"
             >
               <div className="flex justify-between items-center">
@@ -209,10 +210,10 @@ const MyAccount = () => {
             </Link>
 
             {/* Logout */}
-            <div className="w-3/5 md:w-1/2">
+            <div className="w-[90%] md:w-1/2">
               <button
                 onClick={onOpenModal}
-                className="app__flex gap-1 bg-[var(--secondary-color)] text-lg text-white px-3 py-1 rounded-lg mt-4 hover:bg-blue-500"
+                className="app__flex gap-1 bg-[var(--secondary-color)] text-base md:text-lg text-white px-3 py-1 rounded-lg mt-4 hover:bg-blue-500"
               >
                 Log Out
               </button>

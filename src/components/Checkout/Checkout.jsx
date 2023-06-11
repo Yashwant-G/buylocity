@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../redux/slices/loading";
 import { client } from "../../client";
 import { useEffect } from "react";
+import { setOrderAddress, setOrderPayment } from "../../redux/slices/order";
 
 const Checkout = () => {
   const [address, setAddress] = useState("");
   const [addresses, setAddresses] = useState([]);
   const [paymentMode, setPaymentMode] = useState("");
   const { user, logIn } = useSelector((state) => state.user);
+  const { orderStart } = useSelector((state) => state.order);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,7 +30,9 @@ const Checkout = () => {
     if (address === "" || address === "last" || paymentMode === "") {
       toast.error("Please Select Address and Payment Mode!");
       return;
-    }
+    };
+    dispatch(setOrderAddress(address));
+    dispatch(setOrderPayment({mode:paymentMode,transactionId:"TXT12345SMPL",success:true}))
     navigate("/order/1234/success");
   };
 
@@ -48,7 +52,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if(!logIn){
+    if(!logIn || !orderStart){
       toast.error("Please Login first");
       navigate("/auth");
       return;
@@ -85,7 +89,7 @@ const Checkout = () => {
               <div key={index} className="radio-list text-black pr-4 mt-4">
                 <div
                   className={`mb-3 bg-white ${
-                    address === add.name && "border-2 border-[#524eee] "
+                    address === add._id && "border-2 border-[#524eee] "
                   } rounded-md `}
                 >
                   <div className="radio-item">
@@ -93,8 +97,8 @@ const Checkout = () => {
                       type="radio"
                       name="radio"
                       id={add._id}
-                      value={add.name}
-                      checked={address === add.name}
+                      value={add._id}
+                      checked={address === add._id}
                       onChange={handleChange}
                     />
 
@@ -143,7 +147,7 @@ const Checkout = () => {
                     onChange={handleChangePaymentMode}
                   />
 
-                  <label for="radio5">
+                  <label htmlFor="radio5">
                     <div className="h-text text-black text-base">
                       Cash on Delivery
                     </div>

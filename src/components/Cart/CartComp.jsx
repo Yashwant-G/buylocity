@@ -16,9 +16,11 @@ import {
 } from "../../redux/slices/cart";
 import { toast } from "react-hot-toast";
 import CartTree from "./CartTree";
+import { setOrderStart } from "../../redux/slices/order";
 
 const CartComp = () => {
   const { products, total } = useSelector((state) => state.cart);
+  const { logIn } = useSelector((state) => state.user);
   // console.log("Cart Page", products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -241,11 +243,20 @@ const CartComp = () => {
                 <div className="font-bold">Rs{total}</div>
               </div>
               <div>
-                <Link to="/cart/checkout">
-                  <button className="w-full bg-[var(--secondary-color)] text-white py-2 rounded-md">
-                    Checkout
-                  </button>
-                </Link>
+                <button
+                  onClick={() => {
+                    if (!logIn) {
+                      toast.error("Please Login First");
+                      navigate("/auth");
+                      return;
+                    }
+                    dispatch(setOrderStart());
+                    navigate('/cart/checkout')
+                  }}
+                  className="w-full bg-[var(--secondary-color)] text-white py-2 rounded-md"
+                >
+                  Checkout
+                </button>
               </div>
             </div>
           </div>
