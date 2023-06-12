@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import CartTree from "../Cart/CartTree";
 import { MdArrowBackIosNew } from "react-icons/md";
 import "./Checkout.scss";
@@ -17,6 +18,7 @@ const Checkout = () => {
   const [paymentMode, setPaymentMode] = useState("");
   const { user, logIn } = useSelector((state) => state.user);
   const { orderStart } = useSelector((state) => state.order);
+  const { products, total } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -46,13 +48,75 @@ const Checkout = () => {
   const handleChangePaymentMode = (event) => {
     setPaymentMode(event.target.value);
   };
-  const handleSubmit = () => {
+
+  const handleOpenRazorpay = async (data) => {
+    const options = {
+      key: process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+      amount: data.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: data.order.currency,
+      name: "BuyLocity",
+      description: "2 Hours Delivery Service",
+      image:
+        "https://cdn.sanity.io/images/gbzownn8/production/339bbaa5a2d1ac2a78c9bf89a223cf312d6a0d8b-891x465.png",
+      order_id: data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      handler: async function (response) {
+        console.log(response, "response");
+        await axios
+          .post(`https://buylocity-backend.onrender.com/api/v1/order/verify`, {
+            response: response,
+          })
+          .then((res) => {
+            console.log(res);
+            dispatch(setLoading(false));
+            handleSubmit(response.razorpay_payment_id);
+          })
+          .catch((err) => console.log(err));
+      },
+      prefill: {
+        name: user[0].userName,
+        email: user[0].email,
+        contact: user[0].phoneNo.toString(),
+      },
+      theme: {
+        color: "#3399cc",
+      },
+      allow_rotation: false,
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+    rzp.on("payment.failed", function (response) {
+      alert("Payment failed, Try Again");
+      dispatch(setLoading(false));
+    });
+  };
+  const handlePayment = async () => {
     if (address === "" || address === "last" || paymentMode === "") {
       toast.error("Please Select Address and Payment Mode!");
       return;
-    };
+    }
+    dispatch(setLoading(true));
+    await axios
+      .post(`https://buylocity-backend.onrender.com/api/v1/order/create`, { amount: total })
+      .then((res) => {
+        console.log(res.data);
+        handleOpenRazorpay(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSubmit = (paymentId) => {
+    if (address === "" || paymentMode === "") {
+      toast.error("Please Select Address and Payment Mode!");
+      return;
+    }
     dispatch(setOrderAddress(address));
-    dispatch(setOrderPayment({mode:paymentMode,transactionId:"TXT12345SMPL",success:true}))
+    dispatch(
+      setOrderPayment({
+        mode: paymentMode,
+        transactionId: paymentId,
+        success: true,
+      })
+    );
     navigate(`/order/${generateRandomString()}/success`);
   };
 
@@ -72,7 +136,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if(!logIn || !orderStart){
+    if (!logIn || !orderStart) {
       toast.error("Please Login first");
       navigate("/auth");
       return;
@@ -208,21 +272,37 @@ const Checkout = () => {
         </div>
 
         <div className="w-full md:w-[30%] h-fit rounded-lg bg-white flex flex-col px-3 py-6">
-          <div
-            onClick={handleSubmit}
-            className=" cursor-pointer w-full bg-[var(--secondary-color)] text-white text-center py-1.5 rounded-md"
-          >
-            <button>
-              {paymentMode === "cod" || paymentMode === ""
-                ? "Place Order"
-                : "Pay Now"}
-            </button>
-          </div>
+          {paymentMode === "cod" || paymentMode === "" ? (
+            <div
+              onClick={() => handleSubmit("")}
+              className=" cursor-pointer w-full bg-[var(--secondary-color)] text-white text-center py-1.5 rounded-md"
+            >
+              <button>Place Order</button>
+            </div>
+          ) : (
+            <div
+              onClick={() => handlePayment()}
+              className=" cursor-pointer w-full bg-[var(--secondary-color)] text-white text-center py-1.5 rounded-md"
+            >
+              <button>Pay {total}</button>
+            </div>
+          )}
 
           <div className="mt-3 p-text w-full">
             By placing your order, you agree to our company's{" "}
-            <span className="underline">Privacy Policy</span> and{" "}
-            <span className="underline">Terms and Conditions</span>
+            <span
+              onClick={() => navigate("/privacy&policy")}
+              className="underline"
+            >
+              Privacy Policy
+            </span>{" "}
+            and{" "}
+            <span
+              onClick={() => navigate("/terms&conditions")}
+              className="underline"
+            >
+              Terms and Conditions
+            </span>
           </div>
 
           <div className="h-0.5 w-full bg-gray-300 my-6" />
@@ -232,8 +312,8 @@ const Checkout = () => {
           </div>
 
           <div className="flex justify-between items-center mt-4 p-text text-sm">
-            <div>Items(2):</div>
-            <div className="font-semibold">Rs 1500</div>
+            <div>Items ({products.length}):</div>
+            <div className="font-semibold">Rs {total}</div>
           </div>
           <div className="flex justify-between items-center p-text text-sm">
             <div>Delivery Charges:</div>
@@ -242,7 +322,7 @@ const Checkout = () => {
           <div className="h-0.5 w-full bg-gray-300 my-6" />
           <div className="flex justify-between items-center p-text text-sm">
             <div>Order Total:</div>
-            <div className="font-semibold">Rs1500</div>
+            <div className="font-semibold">Rs{total}</div>
           </div>
         </div>
       </div>

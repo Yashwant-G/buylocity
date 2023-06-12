@@ -58,7 +58,7 @@ const Address = ({ address, setAddress }) => {
       let l = -1;
       await client
         .getDocument(user[0]._id)
-        .then((res) => (l = res.orders.length))
+        .then((res) => (l = res.address.length))
         .catch((err) => (l = -1));
 
       if (l > 0) {
