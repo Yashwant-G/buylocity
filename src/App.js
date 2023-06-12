@@ -1,11 +1,14 @@
 import "./App.scss";
 import { useEffect, useLayoutEffect } from "react";
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
 import Home from "./pages/Home";
 
 import Products from "./pages/Products/Products";
 import IndiProduct from "./pages/Products/IndiProduct";
 
+import OrderId from "./pages/OrderId/OrderId";
 import TrackOrder from "./pages/Track/TrackOrder";
 import TrackOrderId from "./pages/Track/TrackOrderId";
 
@@ -17,19 +20,18 @@ import Shipping from "./pages/Formal/Shipping";
 
 import PageNotFound from "./assets/404.png";
 import Spinner from "./components/Spinner/Spinner";
-import { useDispatch, useSelector } from "react-redux";
-import Cart from "./components/Cart/CartComp";
+
 import Wishlist from "./pages/Wishlist/Wishlist";
-import Success from "./pages/Success/Success";
+import Cart from "./components/Cart/CartComp";
 import Checkout from "./components/Checkout/Checkout";
-import Login from "./pages/Auth/Login";
-import { setSignupUser, setUser, verifyUser } from "./redux/slices/user";
+import Success from "./pages/Success/Success";
+
 import Search from "./pages/Search/Search";
-import jwt_decode from "jwt-decode";
-import { client } from "./client";
+import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import MyAccount from "./pages/Auth/MyAccount";
-import OrderId from "./pages/OrderId/OrderId";
+import { setSignupUser, setUser, verifyUser } from "./redux/slices/user";
+import { client } from "./client";
 
 
 function App() {
@@ -93,14 +95,17 @@ function App() {
         <Route path="/order/:id" element={<OrderId />} />
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/track/:id" element={<TrackOrderId />} />
+
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/cart/checkout" element={<Checkout />} />
+        <Route path="/order/:id/success" element={<Success />} />
+        
         <Route path="/auth" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/account" element={<MyAccount />} />
-        <Route path="/cart/checkout" element={<Checkout />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+
         <Route path="/search" element={<Search />} />
-        <Route path="/order/:id/success" element={<Success />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/terms&conditions" element={<Terms />} />
         <Route path="/privacy&policy" element={<Privacy />} />

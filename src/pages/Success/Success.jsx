@@ -14,13 +14,13 @@ import { resetOrderState } from "../../redux/slices/order";
 
 const Success = () => {
   const [bgGreen, setbgGreen] = useState(false);
+  const [id, setId] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.loading);
   const { products, total } = useSelector((state) => state.cart);
   const { user, logIn } = useSelector((state) => state.user);
   const { address, payment, orderStart } = useSelector((state) => state.order);
-  let id = "";
 
   function generateRandomString() {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -44,7 +44,7 @@ const Success = () => {
   }
 
   const saveOrder = async () => {
-    id = generateRandomString();
+    setId(generateRandomString());
     let entry = {
       _type: "trackorder",
       trackId: id,
@@ -79,7 +79,7 @@ const Success = () => {
         size: item.size,
         color: item.color,
         pack: item.pack,
-        quantity: item.quantity,
+        quantity: parseInt(item.quantity),
       })),
       payment: payment,
     };
