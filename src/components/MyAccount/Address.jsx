@@ -55,16 +55,38 @@ const Address = ({ address, setAddress }) => {
         })
         .catch((err) => console.log(err));
 
+      let l = -1;
       await client
-        .patch(user[0]._id)
-        .append("address", [
-          {
-            _key: `new ${adId}`,
-            _type: "reference",
-            _ref: adId,
-          },
-        ])
-        .commit();
+        .getDocument(user[0]._id)
+        .then((res) => (l = res.orders.length))
+        .catch((err) => (l = -1));
+
+      if (l > 0) {
+        await client
+          .patch(user[0]._id)
+          .append("address", [
+            {
+              _key: `new ${adId}`,
+              _type: "reference",
+              _ref: adId,
+            },
+          ])
+          .commit();
+      } else {
+        await client
+          .patch(user[0]._id)
+          .set({
+            address: [
+              {
+                _key: "new" + adId,
+                _type: "reference",
+                _ref: adId,
+              },
+            ],
+          })
+          .commit();
+      }
+
       toast.success("Address Saved");
     } else {
       await client
@@ -89,7 +111,7 @@ const Address = ({ address, setAddress }) => {
   const deleteAdd = async (id) => {
     dispatch(setLoading(true));
     let arr;
-    let ind=-1;
+    let ind = -1;
     const query = `*[_type == "users" && _id == $userId]{address}`;
     const params = { userId: user[0]._id };
     await client.fetch(query, params).then((res) => (arr = res[0].address));

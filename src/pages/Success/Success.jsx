@@ -14,23 +14,23 @@ import { resetOrderState } from "../../redux/slices/order";
 
 const Success = () => {
   const [bgGreen, setbgGreen] = useState(false);
-  const [id, setId] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location=useLocation();
+  const location = useLocation();
+  const id = location.pathname.split("/").at(-2);
   const { loading } = useSelector((state) => state.loading);
   const { products, total } = useSelector((state) => state.cart);
   const { user, logIn } = useSelector((state) => state.user);
   const { address, payment, orderStart } = useSelector((state) => state.order);
 
   const saveOrder = async () => {
-    setId(location.pathname.split('/').at(-2));
     let entry = {
       _type: "trackorder",
       trackId: id,
       orderRecieved: true,
     };
-    let Tid;
+    let Tid = "";
+    let Oid = "";
     await client.create(entry).then((res) => (Tid = res._id));
 
     entry = {
@@ -63,7 +63,6 @@ const Success = () => {
       })),
       payment: payment,
     };
-    let Oid;
     await client.create(entry).then((res) => (Oid = res._id));
     await client
       .patch(Tid)
@@ -74,10 +73,29 @@ const Success = () => {
         },
       })
       .commit();
+    let l = -1;
     await client
-      .patch(user[0]._id)
-      .prepend("orders", [{ _key: "new" + Oid, _type: "reference", _ref: Oid }])
-      .commit();
+      .getDocument(user[0]._id)
+      .then((res) => (l = res.orders.length))
+      .catch((err) => (l = -1));
+    if (l > 0) {
+      await client
+        .patch(user[0]._id)
+        .prepend("orders", [
+          { _key: "new" + Oid, _type: "reference", _ref: Oid },
+        ])
+        .commit();
+    } else {
+      await client.patch(user[0]._id).set({
+        orders: [
+          {
+            _key: "new" + Oid,
+            _type: "reference",
+            _ref: Oid,
+          },
+        ],
+      }).commit();
+    }
 
     dispatch(resetCart());
     dispatch(resetOrderState());
@@ -153,7 +171,9 @@ const Success = () => {
             </div>
           </div>
         ) : (
-          <div className="pt-28 text-center head-text">Confirming your order...</div>
+          <div className="pt-28 text-center head-text">
+            Confirming your order...
+          </div>
         )}
       </div>
     </>
