@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { firework } from "../../api/firework";
 import img from "../../assets/confetti.png";
 import bike from "../../assets/delivery-scooter.gif";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CartTree from "../../components/Cart/CartTree";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../redux/slices/loading";
@@ -17,34 +17,14 @@ const Success = () => {
   const [id, setId] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location=useLocation();
   const { loading } = useSelector((state) => state.loading);
   const { products, total } = useSelector((state) => state.cart);
   const { user, logIn } = useSelector((state) => state.user);
   const { address, payment, orderStart } = useSelector((state) => state.order);
 
-  function generateRandomString() {
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers = "0123456789";
-
-    let randomString = "";
-
-    // Generate first two random alphabets
-    for (let i = 0; i < 2; i++) {
-      const randomIndex = Math.floor(Math.random() * alphabet.length);
-      randomString += alphabet[randomIndex];
-    }
-
-    // Generate last four random numbers
-    for (let i = 0; i < 4; i++) {
-      const randomIndex = Math.floor(Math.random() * numbers.length);
-      randomString += numbers[randomIndex];
-    }
-
-    return randomString;
-  }
-
   const saveOrder = async () => {
-    setId(generateRandomString());
+    setId(location.pathname.split('/').at(-2));
     let entry = {
       _type: "trackorder",
       trackId: id,

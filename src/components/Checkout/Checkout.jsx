@@ -20,6 +20,26 @@ const Checkout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  function generateRandomString() {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+
+    let randomString = "";
+
+    // Generate first two random alphabets
+    for (let i = 0; i < 2; i++) {
+      const randomIndex = Math.floor(Math.random() * alphabet.length);
+      randomString += alphabet[randomIndex];
+    }
+
+    // Generate last four random numbers
+    for (let i = 0; i < 4; i++) {
+      const randomIndex = Math.floor(Math.random() * numbers.length);
+      randomString += numbers[randomIndex];
+    }
+
+    return randomString;
+  }
   const handleChange = (event) => {
     setAddress(event.target.value);
   };
@@ -33,7 +53,7 @@ const Checkout = () => {
     };
     dispatch(setOrderAddress(address));
     dispatch(setOrderPayment({mode:paymentMode,transactionId:"TXT12345SMPL",success:true}))
-    navigate("/order/1234/success");
+    navigate(`/order/${generateRandomString()}/success`);
   };
 
   const fetchEntries = async () => {
